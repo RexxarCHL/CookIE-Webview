@@ -176,9 +176,11 @@
 				<div title='Popular' id="main_Popular_Menus" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" >
 
 					<div id="PopularMenuList" style="background-color:silver">
-						<div class="button-grouped flex" >
-							<a class="button" href="#main_Popular_Recipes">Recipes</a>
-							<a class="button orange" href="#main_Popular_Menus">Menus</a>
+						<div style="background-color:silver;">
+							<div class="button-grouped flex" >
+								<a class="button" href="#main_Popular_Recipes">Recipes</a>
+								<a class="button orange" href="#main_Popular_Menus">Menus</a>
+							</div>
 						</div>
 						<div style="background-color:white;margin:5px" >
 							<h3>Menu title</h3> <i>ratings</i>
@@ -222,50 +224,52 @@
 				</div><!-- #main_Popular_Menu !-->
 
 				<!-- POPULAR RECIPE !-->
-				<div title='Popular' id="main_Popular_Recipes" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true'>
+				<div title='Popular' id="main_Popular_Recipes" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true' >
 					<div class="button-grouped flex" >
 						<a class="button orange" href="#main_Popular_Recipes">Recipes</a>
 						<a class="button" href="#main_Popular_Menus">Menus</a>
 					</div>
-					<div id="PopularRecipeList" style="background-color:silver;">
-						<!-- this is a row -->
-						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                        	<div class="recipeName">Pineapple</div>
-                        	<div class="recipeRating">10</div>
-                        </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div class="recipeName">Pineapple</div>
-                            <div class="recipeRating">10</div>
-                        </div>
-                        <!-- end of a row -->
-                        <!-- this is a row -->
-						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                        	<div class="recipeName">Pineapple</div>
-                        	<div class="recipeRating">10</div>
-                        </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div class="recipeName">Pineapple</div>
-                            <div class="recipeRating">10</div>
-                        </div>
-                        <!-- end of a row -->
-                        <!-- this is a row -->
-						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                        	<div class="recipeName">Pineapple</div>
-                        	<div class="recipeRating">10</div>
-                        </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div class="recipeName">Pineapple</div>
-                            <div class="recipeRating">10</div>
-                        </div>
-                        <!-- end of a row -->
-						<!-- fix to prevent the silver div from collapsing -->
-                        <div id="bottomBar" style="display:block;height:0;clear:both;"> </div> 
+					<div style="width:100%">
+						<div id="PopularRecipeList" style="background-color:silver;">
+							<!-- this is a row -->
+							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <!-- end of a row -->
+	                        <!-- this is a row -->
+							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <!-- end of a row -->
+	                        <!-- this is a row -->
+							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star" style="margin-left:5%;">10</div>
+	                        </div>
+	                        <!-- end of a row -->
+							<!-- fix to prevent the silver div from collapsing -->
+	                        <div id="bottomBar" style="display:block;height:0;clear:both;"> </div> 
+						</div>
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_Popular_Recipes !-->
@@ -309,49 +313,48 @@
 
 				<!-- KITCHEN !-->
 				<div title="Kitchen" id="main_Kitchen_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-                    <br />
-                    <div class="button-grouped flex" >
-                        <a class="button orange" href="#main_Kitchen_Recipes">Recipes</a>
-                        <a class="button" href="#main_Kitchen_Menus">Menus</a>
-                    </div><br />
-                	<div style="background-color:silver;">
-                    <!--this is a row -->
-                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                    <div class="button-grouped flex"> 
+                        <a class="button orange" href="#main_Popular_Recipes">Recipes</a>
+                        <a class="button" href="#main_Popular_Menus">Menus</a>
+                    </div>
+                    <div style="width:100%">
+                    	<!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                    <!--end of a row-->
-                    <!--this is a row -->
-                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                    	<!--end of a row-->
+                    	<!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                    <!--end of a row-->
-                    <!--this is a row -->
-                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                    	<!--end of a row-->
+                    	<!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
-                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
-                            <div>Pineapple</div>
-                            <div>10</div>
+                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                            <div class="icon star" style="margin-left:5%;">10</div>
                         </div>
-                    <!--end of a row-->
-                    <!-- fix to prevent the silver div from collapsing -->
+                    	<!--end of a row-->
+                    	<!-- fix to prevent the silver div from collapsing -->
                         <div style="display:block;height:0;clear:both;"> </div> 
                     </div>
                 </div>
