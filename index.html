@@ -145,6 +145,13 @@
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularList.js"></script>
+        <script>
+        	/* To allow cross domain access in Phonegap */
+			$(document).bind("mobileinit", function(){
+				$.support.cors = true;
+			   	$.mobile.allowCrossDomainPages = true;
+			});
+		</script>
 	</head>
 
     <body>
