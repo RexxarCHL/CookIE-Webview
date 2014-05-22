@@ -145,6 +145,7 @@
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularList.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -171,7 +172,7 @@
 			</div><!-- #header !-->
 			
 			<div id="content">
-				<!-- POPULAR !-->
+				<!-- POPULAR MENU !-->
 				<div title='Popular' id="main_Popular" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" >
 
 					<div id="PopularMenuList" style="background-color:silver">
@@ -220,26 +221,29 @@
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_Popular !-->
 
+				<!-- POPULAR RECIPE !-->
 				<div title='Popular' id="main_Popular_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true'>
 					<div class="button-grouped flex" >
 						<a class="button orange" href="#main_Popular_Recipes">Recipes</a>
 						<a class="button" href="#main_Popular">Menus</a>
 					</div>
-					<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
-						<a><img src="img/love.jpg" style="float: left; width:50%;"></a>
-						<img src="img/love.jpg" style="float: left; width:50%;">
+					<div id="PopularRecipeList">
+						<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
+							<a><img src="img/love.jpg" style="float: left; width:50%;"></a>
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider"> &nbsp;</div>
+						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider">&nbsp; </div>
+						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider">&nbsp; </div>
 					</div>
-					<div class="divider"> &nbsp;</div>
-					<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-					</div>
-					<div class="divider">&nbsp; </div>
-					<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-					</div>
-					<div class="divider">&nbsp; </div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_Popular_Recipes !-->
 
