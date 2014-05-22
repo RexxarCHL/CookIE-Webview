@@ -173,12 +173,12 @@
 			
 			<div id="content">
 				<!-- POPULAR MENU !-->
-				<div title='Popular' id="main_Popular" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" >
+				<div title='Popular' id="main_Popular_Menus" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" >
 
 					<div id="PopularMenuList" style="background-color:silver">
 						<div class="button-grouped flex" >
 							<a class="button" href="#main_Popular_Recipes">Recipes</a>
-							<a class="button orange" href="#Main_Popular">Menus</a>
+							<a class="button orange" href="#main_Popular_Menus">Menus</a>
 						</div>
 						<div style="background-color:white;margin:5px" >
 							<h3>Menu title</h3> <i>ratings</i>
@@ -188,7 +188,7 @@
 								<img src="img/love.jpg" height = "20%">
 							</div>
 							<div style="float:left;width:100%;background-color:white;">
-								<a href="#Cooking"><div class="button red" style="float:right">Cook</div></a>
+								<a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -201,7 +201,7 @@
 								<img src="img/love.jpg" height = "20%">
 							</div>
 							<div style="float:left;width:100%;background-color:white;">
-								<div class="button red" style="float:right">Cook</div>
+								<a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -213,36 +213,59 @@
 								<img src="img/love.jpg" height = "20%">
 							</div>
 							<div style="float:left;width:100%;background-color:white;">
-								<div class="button red" style="float:right">Cook</div>
+								<a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
-				</div><!-- #main_Popular !-->
+				</div><!-- #main_Popular_Menu !-->
 
 				<!-- POPULAR RECIPE !-->
-				<div title='Popular' id="main_Popular_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true'>
+				<div title='Popular' id="main_Popular_Recipes" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true'>
 					<div class="button-grouped flex" >
 						<a class="button orange" href="#main_Popular_Recipes">Recipes</a>
-						<a class="button" href="#main_Popular">Menus</a>
+						<a class="button" href="#main_Popular_Menus">Menus</a>
 					</div>
-					<div id="PopularRecipeList">
-						<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
-							<a><img src="img/love.jpg" style="float: left; width:50%;"></a>
-							<img src="img/love.jpg" style="float: left; width:50%;">
-						</div>
-						<div class="divider"> &nbsp;</div>
-						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-							<img src="img/love.jpg" style="float: left; width:50%;">
-							<img src="img/love.jpg" style="float: left; width:50%;">
-						</div>
-						<div class="divider">&nbsp; </div>
-						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-							<img src="img/love.jpg" style="float: left; width:50%;">
-							<img src="img/love.jpg" style="float: left; width:50%;">
-						</div>
-						<div class="divider">&nbsp; </div>
+					<div id="PopularRecipeList" style="background-color:silver;">
+						<!-- this is a row -->
+						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                        	<div class="recipeName">Pineapple</div>
+                        	<div class="recipeRating">10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div class="recipeName">Pineapple</div>
+                            <div class="recipeRating">10</div>
+                        </div>
+                        <!-- end of a row -->
+                        <!-- this is a row -->
+						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                        	<div class="recipeName">Pineapple</div>
+                        	<div class="recipeRating">10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div class="recipeName">Pineapple</div>
+                            <div class="recipeRating">10</div>
+                        </div>
+                        <!-- end of a row -->
+                        <!-- this is a row -->
+						<div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                        	<img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                        	<div class="recipeName">Pineapple</div>
+                        	<div class="recipeRating">10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div class="recipeName">Pineapple</div>
+                            <div class="recipeRating">10</div>
+                        </div>
+                        <!-- end of a row -->
+						<!-- fix to prevent the silver div from collapsing -->
+                        <div style="display:block;height:0;clear:both;"> </div> 
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_Popular_Recipes !-->
@@ -285,12 +308,59 @@
 				</div><!-- #main_AllCategories !-->
 
 				<!-- KITCHEN !-->
-				<div title="Kitchen" id="main_Kitchen" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-					<br />
-					<div class="button-grouped flex" >
-						<a class="button orange">Recipes</a>
-						<a class="button">Menus</a>
-					</div><br />
+				<div title="Kitchen" id="main_Kitchen_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
+                    <br />
+                    <div class="button-grouped flex" >
+                        <a class="button orange" href="#main_Kitchen_Recipes">Recipes</a>
+                        <a class="button" href="#main_Kitchen_Menus">Menus</a>
+                    </div><br />
+                	<div style="background-color:silver;">
+                    <!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                    <!--end of a row-->
+                    <!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                    <!--end of a row-->
+                    <!--this is a row -->
+                        <div style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                        <div style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">
+                            <img style="max-width:100%;max-height:100%;" src="img/love.jpg">
+                            <div>Pineapple</div>
+                            <div>10</div>
+                        </div>
+                    <!--end of a row-->
+                    <!-- fix to prevent the silver div from collapsing -->
+                        <div style="display:block;height:0;clear:both;"> </div> 
+                    </div>
+                </div>
+                <div title="Kitchen" id="main_Kitchen_Menus" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
+                    <br />
+                    <div class="button-grouped flex" >
+                        <a class="button " href="#main_Kitchen_Recipes">Recipes</a>
+                        <a class="button orange" href="#main_Kitchen_Menus">Menus</a>
+                    </div><br />
 				
 					<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
 						<a href="#RecipeContent"><img src="img/love.jpg" style="float: left; width:50%;"></a>
@@ -377,65 +447,111 @@
 						<h3 align="center" style="background-color:#ADD8E6;">Photos </h3>
 					</div><br />
 				</div><!-- #ReceipeContent !-->
-				<div id="Cooking" class="panel" modal="true" title="28/2 Dinner" style="background-color:silver">
-					<div>
-						<h2><u>Total Time: </u></h2>
-						<i>150 min -> 30 min</i>
-					</div>
-					<div>
-						<h2><u>Steps:</u></h2>
-						draw menus
-					</div>
-					<div class="button-grouped flex"> 
-						<a class="button">Begin </a>	<!-- js to update content !-->
-					</div>
+				<div id="Cooking" class="panel" title="28/2 Dinner" style="background-color:silver">
+                    <p>
+                        <u><h2>Total Time: </h2></u>
+                        <i>150 min -> 30 min</i>
+                    </p>
+                    <p>
+                        <u><h2>Steps:</h2></u>
+                        <h1>append menus</h1>
+                    </p>
+                    <div class="button-grouped flex"> 
+                        <a class="button" href="#Step">Begin </a>   <!-- js to update content !-->
+                    </div>
 				</div><!-- #Cooking !-->
 			
 <!-- AA 5/20 !-->
-				<div id="Step" class="panel" modal="true" title="Step 8 (47%)" style="background-color:silver">
-	                <div style="border:1px solid;width:100%;margin-top:5px;">
-						<div style="border:1px solid; width:100%;height:30px;border-width: 0px 0 1 0px;">
-		                	<div style="width:90%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
-		                	<div style="position:absolute;left:10px;margin-top:5px">Soak mushrooms</div>
-		                	<div style="position:absolute;right:10px;margin-top:5px">29:30</div>
-	                    </div> 
-	                    <div style="border:1px solid; width:100%;height:30px;border-width: 0px 0 1 0px;">
-	                    	<div style="width:60%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
-	                    	<div style="position:absolute;left:10px;margin-top:5px">Cook rice</div>
-	                    	<div style="position:absolute;right:10px;margin-top:5px">44:50</div>
-	                    </div> 
-						
-						<div style="background-color:silver;">
-						  	<div style="background-color:white;margin:2px 13px 2px 13px;" >
-								<div style="background-color:silver;margin:3px 20px 3px 20px;text-align:center;">
-									Saute beef
-								</div>
-								<div style="margin:3px 20px 3px 20px;border:1px solid;">
-									<img src="img/love.jpg" style="height:50%">
-								</div>
-								<div style="margin:3px 20px 3px 20px;">
-									Saute beef with sauce A.
-								</div>
-							</div>
+                <div id="Step" class="panel" modal="true" title="Step 8 (47%)" style="background-color:silver">
+                    <div style="border:1px solid;width:100%;margin-top:5px;">
+                        <div style="border:1px solid; width:100%;height:5%;border-width: 0px 0 1 0px;">
+                            <div style="width:90%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
+                            <div style="position:absolute;left:10px;margin-top:5px">Soak mushrooms</div>
+                            <div style="position:absolute;right:10px;margin-top:5px">29:30</div>
+                        </div> 
+                        <div style="border:1px solid; width:100%;height:5%;border-width: 0px 0 1 0px;">
+                            <div style="width:60%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
+                            <div style="position:absolute;left:10px;margin-top:5px">Cook rice</div>
+                            <div style="position:absolute;right:10px;margin-top:5px">44:50</div>
+                        </div> 
+                                            
+                        <div style="background-color:silver; height:80%;">
+                            <div style="background-color:white;margin:2px 5% 2px 5%;margin-bottom:0px;height:95%" >
+                                <div style="background-color:silver;margin:3px 20px 3px 20px;margin-top:0%;text-align:center;height:5%">
+                                    Saute beef
+                                </div>
+                                <div style="margin:3px 20px 3px 20px;border:1px;">
+                                                          <!--<img src="img/love.jpg" style="min-width:100%;"></img>!-->
+                                    <img src="img/love.jpg" style="height:85%"></img>
+                                </div>
+                                <div style="margin:3px 20px 3px 20px;height:5%">
+                                    Saute beef with sauce A.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div style="border:1px solid; width:100%;height:5%;border-width: 0px 1 1 1px;">
+                        <div style="width:10%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
+                        <div style="position:absolute;left:10px;margin-top:5px;">Stirfry mushroom</div>
+                        <div style="position:absolute;right:10px;margin-top:5px;">2:30</div>
+                    </div> 
+ 
+                    <div class="button-grouped flex" style="height:5%"> 
+                        <a class="button">Prev </a>   <!-- js to update content !-->
+                        <a class="button">Next </a>   <!-- js to update content !-->
+                    </div>
+                </div><!-- #Step !-->   
+                <div id="Collection" title="Lonely Valentines" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
+					<!--images-->
+					<div style="background-color:white; margin:5px 0 5px 0;">
+					<div style="display:inline-block; width:45%; margin: 5px 2% 5px 2%;">
+						<div style="position:absolute; float:left;">Pineapple</div>
+						<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
+					</div>
+					<div style="display:inline-block; width:45%; margin: 5px 2% 5px 2%;">
+						<div style="position:absolute; float:left;">Pineapple</div>
+						<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
+					</div>
+					<div style="display:inline-block; width:45%; margin: 5px 2% 5px 2%;">
+						<div style="position:absolute; float:left;">Pineapple</div>
+						<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
+					</div>
+					</div>
+					<!--description-->
+					<div style="background-color:white; margin:5px 0 5px 0;">
+						4.99 <br />
+						Calories:1382 kcal <br />
+						Time: 1hr
+					</div>
+					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;">
+						<div style="background-color:#5CC;width:100%;">My notes</div>
+						Some text...
+					</div>
+					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;">
+						<div style="background-color:#5CC;width:100%;">Message</div>
+						Some text...
+					</div>
+					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;">
+						<div style="background-color:#5CC;width:100%;">Photos</div>
+						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+							<img src="img/love.jpg" style="max-width:100%;">
 						</div>
+						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+							<img src="img/love.jpg" style="max-width:100%;">
+						</div>
+						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+							<img src="img/love.jpg" style="max-width:100%;">
+						</div>
+						<!-- fix to prevent the silver div from collapsing -->
+						<div style="display:block;height:0;clear:both;"> </div> 
 					</div>
-
-	                <div style="border:1px solid; width:100%;height:30px;border-width: 0px 1 1 1px;">
-	                	<div style="width:10%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:6px;margin-left:2px;">&nbsp;</div>
-	                	<div style="position:absolute;left:10px;margin-top:5px;">Stirfry mushroom</div>
-	                	<div style="position:absolute;right:10px;margin-top:5px;">2:30</div>
-	                </div> 
-
-					<div class="button-grouped flex"> 
-						<a class="button">Prev </a>	<!-- js to update content !-->
-						<a class="button">Next </a>	<!-- js to update content !-->
-					</div>
-				</div><!-- #Step !-->
-			</div><!-- #content !-->
+                </div> <!-- #Collection !-->
+            </div><!-- #content !-->
 			<div id="navbar">
-                <a href="#main_Popular" id='navbar_popular' class='icon home'>Popular</a>
+                <a href="#main_Popular_Menus" id='navbar_popular' class='icon home'>Popular</a>
 				<a href="#main_AllCategories" id='navbar_categories' class="icon target" >Categories</a>
-				<a href="#main_Kitchen" id='navbar_kitchen' class="icon picture" >Kitchen</a>
+				<a href="#main_Kitchen_Menus" id='navbar_kitchen' class="icon picture" >Kitchen</a>
 				<a href="#main_Search" id='navbar_search' class="icon key">Search</a>
 				<a href="#main_User" id='navbar_user' class="icon target">User</a>
 	        </div><!-- #navbar !-->
