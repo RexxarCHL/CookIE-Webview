@@ -14,7 +14,7 @@ $(document).ready(function() {
     clearTimeout(lastId);
     lastId = setTimeout(function() {
       return getPopularRecipe(recipeAjaxd, self);
-    }, 1000);
+    }, 3000);
     return void 0;
   });
 });
@@ -34,6 +34,7 @@ getPopularRecipe = function(times, scrollObj) {
       'times': times
     },
     jsonp: false,
+    timeout: 10000,
     success: function(data) {
       console.log("success");
       console.log(data);
@@ -44,6 +45,8 @@ getPopularRecipe = function(times, scrollObj) {
     error: function(data, status) {
       console.log("error" + status);
       console.log(data);
+      $("#main_Popular_Recipes").find("#infinite").text("Load More");
+      scrollObj.clearInfinite();
       return void 0;
     }
   });
@@ -51,7 +54,7 @@ getPopularRecipe = function(times, scrollObj) {
 };
 
 appendPopularRecipe = function(data, scrollObj) {
-  var count, html, id, recipe, recipeList, url, _i, _len;
+  var count, html, id, name, rating, recipe, recipeList, url, _i, _len;
   if (data.length === 0) {
     $("#main_Popular_Recipes").find("#infinite").text("No more lists");
     scrollObj.clearInfinite();
@@ -63,24 +66,28 @@ appendPopularRecipe = function(data, scrollObj) {
   }
   recipeList = $('#PopularRecipeList');
   count = 0;
-  html = '<div style="position: relative; float: left; width: 100%; border: solid 1px #000">';
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     recipe = data[_i];
+    html = '';
     id = recipe.recipe_id;
+    name = recipe.name;
+    rating = recipe.rating;
     url = recipe.imageUrl;
     url = 'img/love.jpg';
-    html += '<img id="PopularRecipe' + id + '"src="' + url + '" style="float: left; width:50%;">';
-    if (count === data.length - 1) {
-      html += '</div><div class="divider">&nbsp; </div>';
-      recipeList.append(html);
-      html = '';
-    } else if (count % 2) {
-      html += '</div><div class="divider"> &nbsp;</div><div style="position: relative; float: left; width: 100%; border: solid 1px #000">';
-      recipeList.append(html);
-      html = '';
+    if (count % 2 === 0) {
+      html += '<div id="PopularRecipe' + id + '" style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">';
+    } else {
+      html += '<div id="PopularRecipe' + id + '" style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">';
     }
+    html += '<img style="max-width:100%;max-height:100%;" src="' + url + '">';
+    html += '<div class="recipeName">' + name + '</div>';
+    html += '<div class="recipeRating">' + rating + '</div>';
+    html += '</div>';
+    recipeList.append(html);
     count++;
   }
+  recipeList.find("#bottomBar").remove();
+  recipeList.append('<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>');
   $("#main_Popular_Recipes").find("#infinite").text("Load More");
   scrollObj.clearInfinite();
   return void 0;
