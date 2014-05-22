@@ -39,13 +39,14 @@ getPopularMenu = function(times, scrollObj) {
       console.log("success");
       console.log(data);
       appendPopularList(data, scrollObj);
-      return menuAjaxd++;
+      menuAjaxd++;
+      return void 0;
     },
     error: function(data, status) {
       console.log("error" + status);
-      console.log(data);
       $("#main_Popular_Menus").find("#infinite").text("Load More");
-      return scrollObj.clearInfinite();
+      scrollObj.clearInfinite();
+      return void 0;
     }
   });
   return void 0;
@@ -62,6 +63,7 @@ appendPopularList = function(data, scrollObj) {
   menuList = $('#PopularMenuList');
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     list = data[_i];
+    html = '';
     id = list.list_id;
     title = list.name;
     rating = list.rating;
@@ -82,7 +84,6 @@ appendPopularList = function(data, scrollObj) {
     html += '<div style="float:left;width:100%;background-color:white;"><a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
     html += '</div>';
     menuList.append(html);
-    html = '';
   }
   $("#main_Popular_Menus").find("#infinite").text("Load More");
   scrollObj.clearInfinite();
