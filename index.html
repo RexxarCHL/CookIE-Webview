@@ -315,10 +315,10 @@
 				<!-- KITCHEN !-->
 				<div title="Kitchen" id="main_Kitchen_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
                     <div class="button-grouped flex"> 
-                        <a class="button orange" href="#main_Popular_Recipes">Recipes</a>
-                        <a class="button" href="#main_Popular_Menus">Menus</a>
+                        <a class="button orange" href="#main_Kitchen_Recipes">Recipes</a>
+                        <a class="button" href="#main_Kitchen_Menus">Menus</a>
                     </div>
-                    <div style="width:100%">
+                    <div id="KitchenRecipeList" style="width:100%">
                     	<!--this is a row -->
                         <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
                             <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
@@ -356,32 +356,36 @@
                         </div>
                     	<!--end of a row-->
                     	<!-- fix to prevent the silver div from collapsing -->
-                        <div style="display:block;height:0;clear:both;"> </div> 
+                        <div id="bottomBar" style="display:block;height:0;clear:both;"> </div> 
                     </div>
-                </div>
+                    <div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
+                </div><!-- #main_Kitchen_Recipes !-->
                 <div title="Kitchen" id="main_Kitchen_Menus" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
                     <br />
                     <div class="button-grouped flex" >
                         <a class="button " href="#main_Kitchen_Recipes">Recipes</a>
                         <a class="button orange" href="#main_Kitchen_Menus">Menus</a>
                     </div><br />
-				
-					<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
-						<a href="#RecipeContent"><img src="img/love.jpg" style="float: left; width:50%;"></a>
-						<img src="img/love.jpg" style="float: left; width:50%;">
+
+                    <div id="KitchenMenuList">
+						<div style="position: relative; float: left; width: 100%; border: solid 1px #000">
+							<a href="#RecipeContent"><img src="img/love.jpg" style="float: left; width:50%;"></a>
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider"> &nbsp;</div>
+						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider">&nbsp; </div>
+						<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+							<img src="img/love.jpg" style="float: left; width:50%;">
+						</div>
+						<div class="divider">&nbsp; </div>
 					</div>
-					<div class="divider"> &nbsp;</div>
-					<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-					</div>
-					<div class="divider">&nbsp; </div>
-					<div style="position: relative; float: left; width: 100%;border: solid 1px #000">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-						<img src="img/love.jpg" style="float: left; width:50%;">
-					</div>
-					<div class="divider">&nbsp; </div>
-				</div><!-- #main_Kitchen !-->
+					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
+				</div><!-- #main_Kitchen_Menus !-->
 
 				<!-- SEARCH !-->
 				<div title="Search" id="main_Search" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
