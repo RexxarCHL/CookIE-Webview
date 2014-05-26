@@ -144,6 +144,7 @@
             }          
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
+        <link rel="stylesheet" type="text/css" href="css/temp.css"  />
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularList.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
         <script>
@@ -182,9 +183,9 @@
 								<a class="button orange" href="#main_Popular_Menus">Menus</a>
 							</div>
 						</div>
-						<div style="background-color:white;margin:5px" >
+						<div class="menu_box" style="background-color:white;margin:5px" >
 							<h3>Menu title</h3> <i>ratings</i>
-							<div style="float:left; width:100%;background-color:white;">
+							<div class="menu_img" style="float:left; width:100%;background-color:white;">
 								<img src="img/love.jpg" height = "20%">
 								<img src="img/love.jpg" height = "20%">
 								<img src="img/love.jpg" height = "20%">
@@ -203,7 +204,7 @@
 								<img src="img/love.jpg" height = "20%">
 							</div>
 							<div style="float:left;width:100%;background-color:white;">
-								<a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
+								<a class="button red menu_cooking_btn" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -214,8 +215,8 @@
 								<img src="img/love.jpg" height = "20%">
 								<img src="img/love.jpg" height = "20%">
 							</div>
-							<div style="float:left;width:100%;background-color:white;">
-								<a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
+							<div class="menu_cooking_box" style="float:left;width:100%;background-color:white;">
+								<a class="button red menu_cooking_btn" style="float:right;margin-right:5px;" href="#Cooking">Cook</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -232,12 +233,12 @@
 					<div style="width:100%">
 						<div id="PopularRecipeList" style="background-color:silver;">
 							<!-- this is a row -->
-							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
+							<div class="recipe_list_row list_row_left" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                            <img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+	                            <div class="recipe_title" style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+	                            <div class="icon star recipe_rating" style="margin-left:5%;">10</div>
 	                        </div>
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                        <div class="recipe_list_row list_row_right" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
 	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
 	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star" style="margin-left:5%;">10</div>

@@ -67,12 +67,9 @@ appendPopularList = function(data, scrollObj) {
     id = list.list_id;
     title = list.name;
     rating = list.rating;
-    if (rating === '0') {
-      rating = 'no';
-    }
-    html = '<div id="PopularList' + id + '"style="background-color:white;margin:5px" >';
-    html += '<h3>' + title + '</h3> <i>' + rating + ' stars</i>';
-    html += '<div style="float:left; width:100%;background-color:white;">';
+    html = '<div id="PopularList' + id + '" class="menu_box">';
+    html += '<h2 class="menu_title">' + title + '</h2>&nbsp;&nbsp;&nbsp;<i class="icon star">' + rating + ' stars</i>&nbsp;&nbsp;<i class="icon chat">comments</i>';
+    html += '<div class="menu_img">';
     _ref = list.recipes;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       recipe = _ref[_j];
@@ -81,7 +78,7 @@ appendPopularList = function(data, scrollObj) {
       html += '<img src="' + src + '" height="20%">';
     }
     html += '</div>';
-    html += '<div style="float:left;width:100%;background-color:white;"><a class="button red" style="float:right;margin-right:5px;" href="#Cooking">Cook</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
+    html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking">Cook</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
     html += '</div>';
     menuList.append(html);
   }

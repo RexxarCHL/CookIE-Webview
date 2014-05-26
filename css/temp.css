@@ -1,0 +1,59 @@
+.menu_box{
+	background-color: white;
+	margin: 5px;
+}
+
+.menu_img{
+	float:left;
+	width: 100%;
+	background-color: white;
+}
+
+.menu_title{
+	margin-left:5px;
+	color:black;
+}
+
+
+.menu_cooking_box{
+	float:left;
+	width:100%;
+	background-color:white;
+	border-radius:5px;
+}
+
+.menu_cooking_btn{
+	float:right;
+	width:20%;
+	margin-right:5%;
+}
+
+.recipe_list_row{
+	display:inline-block;
+	width:48%;
+	margin:5px 1% 5px 1%;
+	float:right;
+	background-color:white;
+}
+
+.list_row_left{
+	float:left;
+}
+
+.list_row_right{
+	float:right;
+}
+
+.recipe_img{
+	max-width:90%;
+	max-height:95%;
+	margin:3px 5% 0px 5%;
+}
+
+.list_title{
+	margin-left: 5%;
+}
+
+.list_rating{
+	margin-left: 5%;
+}

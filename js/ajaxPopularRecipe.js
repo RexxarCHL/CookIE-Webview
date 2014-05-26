@@ -75,13 +75,13 @@ appendPopularRecipe = function(data, scrollObj) {
     url = recipe.imageUrl;
     url = 'img/love.jpg';
     if (count % 2 === 0) {
-      html += '<div id="PopularRecipe' + id + '" style="display:inline-block; width:48%; margin:5px 1.5% 5px 0.4%; background-color:white;float:left;">';
+      html += '<div class="recipe_list_row list_row_left" id="PopularRecipe' + id + '">';
     } else {
-      html += '<div id="PopularRecipe' + id + '" style="display:inline-block; width:48%; margin:5px 0.4% 5px 1.5%; background-color:white;float:right;">';
+      html += '<div class="recipe_list_row list_row_right" id="PopularRecipe' + id + '">';
     }
-    html += '<img style="max-width:100%;max-height:100%;" src="' + url + '">';
-    html += '<div class="recipeName">' + name + '</div>';
-    html += '<div class="recipeRating">' + rating + '</div>';
+    html += '<img class="recipe_img" src="' + url + '">';
+    html += '<div class="recipe_title">' + name + '</div>';
+    html += '<div class="icon star recipe_rating">' + rating + '</div>';
     html += '</div>';
     recipeList.append(html);
     count++;
