@@ -55,7 +55,7 @@ getPopularMenus = function(times, scrollObj) {
 
 appendPopularMenuList = function(data, scrollObj) {
   var html, id, list, menuList, rating, recipe, src, title, _i, _j, _len, _len1, _ref;
-  if (data.length === 0) {
+  if (data === null || data.length === 0) {
     $("#main_Popular_Menus").find("#infinite").text("No more lists");
     scrollObj.clearInfinite();
     menuAjaxd--;

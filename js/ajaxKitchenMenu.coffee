@@ -1,4 +1,4 @@
-menuAjaxd = 0
+kitchenMenuAjaxd = 0
 lastId = -1
 $(document).ready ->
 	scrollerList = $('#main_Kitchen_Menus').scroller()
@@ -12,7 +12,7 @@ $(document).ready ->
 		#change setTimeout to ajax call
 		clearTimeout lastId
 		lastId = setTimeout(->
-			getKitchenMenus(menuAjaxd, self)
+			getKitchenMenus(kitchenMenuAjaxd, self)
 		,1000)
 		undefined #avoid implicit return values by Coffeescript
 	)
@@ -35,7 +35,7 @@ getKitchenMenus = (times, scrollObj) ->
 			console.log "[SUCCESS]fetch kitchen menu"
 			console.log data
 			appendKitchenMenuList(data, scrollObj)
-			menuAjaxd++
+			kitchenMenuAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen menu: " + status

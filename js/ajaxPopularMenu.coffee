@@ -45,7 +45,7 @@ getPopularMenus = (times, scrollObj) ->
 	undefined #avoid implicit return values by Coffeescript
 
 appendPopularMenuList = (data, scrollObj)->
-	if data.length is 0
+	if data is null or data.length is 0
 		$("#main_Popular_Menus").find("#infinite").text "No more lists"
 		scrollObj.clearInfinite();
 		menuAjaxd--

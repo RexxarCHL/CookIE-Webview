@@ -7,17 +7,17 @@ lastId = -1;
 
 $(document).ready(function() {
   var scrollerList;
-  scrollerList = $("#main_Kitchen_Recipes").scroller();
+  scrollerList = $('#main_Kitchen_Recipes').scroller();
   scrollerList.addInfinite();
-  $.bind(scrollerList, "infinite_scroll", function() {
+  $.bind(scrollerList, "infinite-scroll", function() {
     var self;
-    console.log("kitchen recipe infinite_scroll");
+    console.log("kitchen recipe infinite-scroll");
     self = this;
     $("#main_Kitchen_Recipes").find("#infinite").text("Loading...");
     scrollerList.addInfinite();
     clearTimeout(lastId);
     lastId = setTimeout(function() {
-      return getKitchenRecipes();
+      return getKitchenRecipes(kitchenRecipeAjaxd, self);
     }, 3000);
     return void 0;
   });
@@ -40,7 +40,7 @@ getKitchenRecipes = function(times, scrollObj) {
       console.log("[SUCCESS]fetch kitchen recipes");
       console.log(data);
       appendKitchenRecipeList(data, scrollObj);
-      recipeAjaxd++;
+      kitchenRecipeAjaxd++;
       return void 0;
     },
     error: function(data, status) {
@@ -59,7 +59,7 @@ appendKitchenRecipeList = function(data, scrollObj) {
   if (data.length === 0) {
     $("#main_Kitchen_Recipes").find("#infinite").text("No more recipes");
     scrollObj.clearInfinite();
-    recipeAjaxd--;
+    kitchenRecipeAjaxd--;
     return 1;
   }
   if (data.length % 2) {
@@ -89,7 +89,7 @@ appendKitchenRecipeList = function(data, scrollObj) {
   }
   recipeList.find("#bottomBar").remove();
   recipeList.append('<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>');
-  $("#main_Popular_Recipes").find("#infinite").text("Load More");
+  $("#main_Kitchen_Recipes").find("#infinite").text("Load More");
   scrollObj.clearInfinite();
   return void 0;
 };

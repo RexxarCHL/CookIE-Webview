@@ -1,31 +1,32 @@
 kitchenRecipeAjaxd = 0
 lastId = -1
+
 $(document).ready ->
-	scrollerList = $("#main_Kitchen_Recipes").scroller()
+	scrollerList = $('#main_Kitchen_Recipes').scroller()
 	scrollerList.addInfinite()
-	$.bind(scrollerList, "infinite_scroll", ->
-		console.log "kitchen recipe infinite_scroll"
+	$.bind(scrollerList, "infinite-scroll", ->
+		console.log "kitchen recipe infinite-scroll"
 		self = this
 		$("#main_Kitchen_Recipes").find("#infinite").text "Loading..."
 		scrollerList.addInfinite()
 
+		#change setTimeout to ajax call
 		clearTimeout lastId
 		lastId = setTimeout(->
-			getKitchenRecipes()
-		, 3000)
-		undefined #avoid implicit return values by CoffeeScript
+			getKitchenRecipes(kitchenRecipeAjaxd, self)
+		,3000)
+		undefined #avoid implicit return values by Coffeescript
 	)
-	undefined #avoid implicit return values by CoffeeScript
+	undefined #avoid implicit return values by Coffeescript
 
 getKitchenRecipes = (times, scrollObj) ->
 	$.ajax(
 		type: "GET"
-		#TODO: url to be determined
 		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipes'
+		#url:'./ajaxTest.html'
 		dataType: 'jsonp'
 		crossDomain: true
-		#TODO: data to be determined
-		data:
+		data: 
 			'type': 'popular'
 			'times': times
 		jsonp: false
@@ -34,7 +35,7 @@ getKitchenRecipes = (times, scrollObj) ->
 			console.log "[SUCCESS]fetch kitchen recipes"
 			console.log data
 			appendKitchenRecipeList(data, scrollObj)
-			recipeAjaxd++
+			kitchenRecipeAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen recipes: " + status
@@ -45,11 +46,11 @@ getKitchenRecipes = (times, scrollObj) ->
 	)
 	undefined #avoid implicit return values by Coffeescript
 
-appendKitchenRecipeList = (data, scrollObj) ->
+appendKitchenRecipeList = (data, scrollObj)->
 	if data.length is 0
 		$("#main_Kitchen_Recipes").find("#infinite").text "No more recipes"
 		scrollObj.clearInfinite();
-		recipeAjaxd--
+		kitchenRecipeAjaxd--
 		return 1;
 
 	if data.length%2 then data.length-- # prevent empty image slot
@@ -80,6 +81,7 @@ appendKitchenRecipeList = (data, scrollObj) ->
 
 	recipeList.find("#bottomBar").remove()
 	recipeList.append '<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>'
-	$("#main_Popular_Recipes").find("#infinite").text "Load More"
+	$("#main_Kitchen_Recipes").find("#infinite").text "Load More"
 	scrollObj.clearInfinite();
 	undefined #avoid implicit return values by Coffeescript
+
