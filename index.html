@@ -145,8 +145,10 @@
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <link rel="stylesheet" type="text/css" href="css/temp.css"  />
-        <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularList.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenMenu.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenRecipe.js"></script>
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -389,8 +391,10 @@
 
 				<!-- SEARCH !-->
 				<div title="Search" id="main_Search" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-					<input type="search" placeholder="Search" style="margin-top:40%" result>
-					<br /><br /> <i>Search for recipes, food ingredients ...</i>
+					<input type="search" id="SearchBar" placeholder="Search" style="margin-top:40%" result>
+					<div id="SearchResults">
+						<i>Search for recipes, food ingredients ...</i>
+					</div>
 				</div><!-- #main_Search !-->
 
 				<!-- USER !-->
