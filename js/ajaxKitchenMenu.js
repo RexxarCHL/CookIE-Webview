@@ -6,18 +6,8 @@ kitchenMenuAjaxd = 0;
 lastId = -1;
 
 $(document).ready(function() {
-  var scrollerList;
-  scrollerList = $('#main_Kitchen_Menus').scroller();
-  scrollerList.addInfinite();
-  $.bind(scrollerList, "infinite-scroll", function() {
-    console.log("kitchen menu infinite-scroll");
-    $("#main_Kitchen_Menus").find("#infinite").text("Loading...");
-    scrollerList.addInfinite();
-    clearTimeout(lastId);
-    lastId = setTimeout(function() {
-      return getKitchenMenus(kitchenMenuAjaxd);
-    }, 1000);
-    return void 0;
+  addInfiniteScroll($('#main_Kitchen_Menus'), 1000, function() {
+    return getKitchenMenus(kitchenMenuAjaxd);
   });
   return void 0;
 });

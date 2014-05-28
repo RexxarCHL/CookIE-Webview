@@ -1,20 +1,7 @@
 menuAjaxd = 0
 lastId = -1
 $(document).ready ->
-	scrollerList = $('#main_Popular_Menus').scroller()
-	scrollerList.addInfinite()
-	$.bind(scrollerList, "infinite-scroll", ->
-		console.log "menu infinite-scroll"
-		$("#main_Popular_Menus").find("#infinite").text "Loading..."
-		scrollerList.addInfinite()
-
-		#change setTimeout to ajax call
-		clearTimeout lastId
-		lastId = setTimeout(->
-			getPopularMenus(menuAjaxd)
-		,1000)
-		undefined #avoid implicit return values by Coffeescript
-	)
+	addInfiniteScroll($('#main_Popular_Menus'), 1000, ->getPopularMenus(menuAjaxd))
 	undefined #avoid implicit return values by Coffeescript
 
 getPopularMenus = (times) ->
@@ -48,9 +35,7 @@ getPopularMenus = (times) ->
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status
-			$("#main_Popular_Menus").find("#infinite").text "Load More"
-			scrollerList = $('#main_Popular_Menus').scroller()
-			scrollerList.clearInfinite()
+			$("#main_Popular_Menus").find("#infinite").text "Error. Try Again?"
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript

@@ -6,18 +6,8 @@ recipeAjaxd = 0;
 lastId = -1;
 
 $(document).ready(function() {
-  var scrollerList;
-  scrollerList = $('#main_Popular_Recipes').scroller();
-  scrollerList.addInfinite();
-  $.bind(scrollerList, "infinite-scroll", function() {
-    console.log("recipe infinite-scroll");
-    $("#main_Popular_Recipes").find("#infinite").text("Loading...");
-    scrollerList.addInfinite();
-    clearTimeout(lastId);
-    lastId = setTimeout(function() {
-      return getPopularRecipes(recipeAjaxd);
-    }, 3000);
-    return void 0;
+  addInfiniteScroll($('#main_Popular_Recipes'), 3000, function() {
+    return getPopularRecipes(recipeAjaxd);
   });
   return void 0;
 });

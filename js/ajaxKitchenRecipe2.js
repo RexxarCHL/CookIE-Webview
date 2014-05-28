@@ -6,20 +6,8 @@ kitchenRecipeAjaxd = 0;
 lastId = -1;
 
 $(document).ready(function() {
-  var scrollerList;
-  scrollerList = $('#main_Kitchen_Recipes').scroller();
-  scrollerList.addInfinite();
-  $.bind(scrollerList, "infinite-scroll", function() {
-    var self;
-    console.log("kitchen recipe infinite-scroll");
-    self = this;
-    $("#main_Kitchen_Recipes").find("#infinite").text("Loading...");
-    scrollerList.addInfinite();
-    clearTimeout(lastId);
-    lastId = setTimeout(function() {
-      return getKitchenRecipes(kitchenRecipeAjaxd, self);
-    }, 3000);
-    return void 0;
+  addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, function() {
+    return getKitchenRecipes(kitchenRecipeAjaxd, self);
   });
   return void 0;
 });

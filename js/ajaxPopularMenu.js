@@ -6,18 +6,8 @@ menuAjaxd = 0;
 lastId = -1;
 
 $(document).ready(function() {
-  var scrollerList;
-  scrollerList = $('#main_Popular_Menus').scroller();
-  scrollerList.addInfinite();
-  $.bind(scrollerList, "infinite-scroll", function() {
-    console.log("menu infinite-scroll");
-    $("#main_Popular_Menus").find("#infinite").text("Loading...");
-    scrollerList.addInfinite();
-    clearTimeout(lastId);
-    lastId = setTimeout(function() {
-      return getPopularMenus(menuAjaxd);
-    }, 1000);
-    return void 0;
+  addInfiniteScroll($('#main_Popular_Menus'), 1000, function() {
+    return getPopularMenus(menuAjaxd);
   });
   return void 0;
 });
@@ -51,11 +41,8 @@ getPopularMenus = function(times) {
       return void 0;
     },
     error: function(data, status) {
-      var scrollerList;
       console.log("[ERROR]fetch popular menu: " + status);
-      $("#main_Popular_Menus").find("#infinite").text("Load More");
-      scrollerList = $('#main_Popular_Menus').scroller();
-      scrollerList.clearInfinite();
+      $("#main_Popular_Menus").find("#infinite").text("Error. Try Again?");
       return void 0;
     }
   });

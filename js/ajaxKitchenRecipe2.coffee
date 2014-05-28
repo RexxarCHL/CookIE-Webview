@@ -2,21 +2,7 @@ kitchenRecipeAjaxd = 0
 lastId = -1
 
 $(document).ready ->
-	scrollerList = $('#main_Kitchen_Recipes').scroller()
-	scrollerList.addInfinite()
-	$.bind(scrollerList, "infinite-scroll", ->
-		console.log "kitchen recipe infinite-scroll"
-		self = this
-		$("#main_Kitchen_Recipes").find("#infinite").text "Loading..."
-		scrollerList.addInfinite()
-
-		#change setTimeout to ajax call
-		clearTimeout lastId
-		lastId = setTimeout(->
-			getKitchenRecipes(kitchenRecipeAjaxd, self)
-		,3000)
-		undefined #avoid implicit return values by Coffeescript
-	)
+	addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, ->getKitchenRecipes(kitchenRecipeAjaxd, self))
 	undefined #avoid implicit return values by Coffeescript
 
 getKitchenRecipes = (times, scrollObj) ->

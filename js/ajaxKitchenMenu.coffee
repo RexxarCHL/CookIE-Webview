@@ -1,20 +1,7 @@
 kitchenMenuAjaxd = 0
 lastId = -1
 $(document).ready ->
-	scrollerList = $('#main_Kitchen_Menus').scroller()
-	scrollerList.addInfinite()
-	$.bind(scrollerList, "infinite-scroll", ->
-		console.log "kitchen menu infinite-scroll"
-		$("#main_Kitchen_Menus").find("#infinite").text "Loading..."
-		scrollerList.addInfinite()
-
-		#change setTimeout to ajax call
-		clearTimeout lastId
-		lastId = setTimeout(->
-			getKitchenMenus(kitchenMenuAjaxd)
-		,1000)
-		undefined #avoid implicit return values by Coffeescript
-	)
+	addInfiniteScroll($('#main_Kitchen_Menus'), 1000, ->getKitchenMenus(kitchenMenuAjaxd))
 	undefined #avoid implicit return values by Coffeescript
 
 getKitchenMenus = (times) ->
