@@ -69,6 +69,8 @@ search = (query, times) ->
 			console.log "[SUCCESS]search"
 			console.log data
 
+			searchAjaxd++
+
 			scrollerList = $("#main_Search").scroller()
 			scrollerList.clearInfinite()
 
@@ -83,8 +85,6 @@ search = (query, times) ->
 			scope = $("#main_Search")
 			if type then appendMenuResult(scope, data)
 			else appendRecipeResult(scope, data)
-			
-			searchAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]search: " + status

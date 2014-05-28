@@ -31,6 +31,9 @@ getKitchenMenus = (times) ->
 		success: (data)->
 			console.log "[SUCCESS]fetch kitchen menu"
 			console.log data
+
+			kitchenMenuAjaxd++
+			
 			scrollerList = $('#main_Kitchen_Menus').scroller()
 			scrollerList.clearInfinite()
 
@@ -41,7 +44,6 @@ getKitchenMenus = (times) ->
 
 			scope = $("#main_Kitchen_Menus")
 			appendMenuResult(scope, data)
-			kitchenMenuAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen menu: " + status

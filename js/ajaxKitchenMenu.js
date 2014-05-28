@@ -38,6 +38,7 @@ getKitchenMenus = function(times) {
       var scope, scrollerList;
       console.log("[SUCCESS]fetch kitchen menu");
       console.log(data);
+      kitchenMenuAjaxd++;
       scrollerList = $('#main_Kitchen_Menus').scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
@@ -47,7 +48,6 @@ getKitchenMenus = function(times) {
       }
       scope = $("#main_Kitchen_Menus");
       appendMenuResult(scope, data);
-      kitchenMenuAjaxd++;
       return void 0;
     },
     error: function(data, status) {

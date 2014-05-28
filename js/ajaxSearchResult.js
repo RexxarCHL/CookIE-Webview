@@ -76,6 +76,7 @@ search = function(query, times) {
       var scope, scrollerList;
       console.log("[SUCCESS]search");
       console.log(data);
+      searchAjaxd++;
       scrollerList = $("#main_Search").scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
@@ -92,7 +93,6 @@ search = function(query, times) {
       } else {
         appendRecipeResult(scope, data);
       }
-      searchAjaxd++;
       return void 0;
     },
     error: function(data, status) {

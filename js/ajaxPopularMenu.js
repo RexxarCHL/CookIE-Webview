@@ -38,6 +38,7 @@ getPopularMenus = function(times) {
       var scope, scrollerList;
       console.log("[SUCCESS]fetch popular menu");
       console.log(data);
+      menuAjaxd++;
       scrollerList = $('#main_Popular_Menus').scroller();
       scrollerList.clearInfinite();
       if (data === null || data.length === 0) {
@@ -47,7 +48,6 @@ getPopularMenus = function(times) {
       }
       scope = $("#main_Popular_Menus");
       appendMenuResult(scope, data);
-      menuAjaxd++;
       return void 0;
     },
     error: function(data, status) {

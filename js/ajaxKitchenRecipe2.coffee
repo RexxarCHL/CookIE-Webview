@@ -35,6 +35,8 @@ getKitchenRecipes = (times, scrollObj) ->
 			console.log "[SUCCESS]fetch kitchen recipes"
 			console.log data
 
+			kitchenRecipeAjaxd++
+
 			scrollerList = $('#main_Kitchen_Recipes').scroller()
 			scrollerList.clearInfinite()
 			
@@ -45,7 +47,6 @@ getKitchenRecipes = (times, scrollObj) ->
 
 			scope = $("#main_Kitchen_Recipes")
 			appendRecipeResult(scope, data)
-			kitchenRecipeAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen recipes: " + status

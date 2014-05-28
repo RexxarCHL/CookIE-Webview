@@ -40,6 +40,7 @@ getKitchenRecipes = function(times, scrollObj) {
       var scope, scrollerList;
       console.log("[SUCCESS]fetch kitchen recipes");
       console.log(data);
+      kitchenRecipeAjaxd++;
       scrollerList = $('#main_Kitchen_Recipes').scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
@@ -49,7 +50,6 @@ getKitchenRecipes = function(times, scrollObj) {
       }
       scope = $("#main_Kitchen_Recipes");
       appendRecipeResult(scope, data);
-      kitchenRecipeAjaxd++;
       return void 0;
     },
     error: function(data, status) {

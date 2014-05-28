@@ -33,6 +33,8 @@ getPopularMenus = (times) ->
 			console.log "[SUCCESS]fetch popular menu"
 			console.log data
 
+			menuAjaxd++
+
 			scrollerList = $('#main_Popular_Menus').scroller()
 			scrollerList.clearInfinite()
 
@@ -43,7 +45,6 @@ getPopularMenus = (times) ->
 
 			scope = $("#main_Popular_Menus")
 			appendMenuResult(scope, data)
-			menuAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status

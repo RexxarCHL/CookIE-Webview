@@ -38,6 +38,7 @@ getPopularRecipes = function(times) {
       var scope, scrollerList;
       console.log("[SUCCESS]fetch popular recipes");
       console.log(data);
+      recipeAjaxd++;
       scrollerList = $('#main_Popular_Recipes').scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
@@ -47,7 +48,6 @@ getPopularRecipes = function(times) {
       }
       scope = $("#main_Popular_Recipes");
       appendRecipeResult(scope, data);
-      recipeAjaxd++;
       return void 0;
     },
     error: function(data, status) {

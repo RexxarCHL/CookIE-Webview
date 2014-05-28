@@ -34,6 +34,8 @@ getPopularRecipes = (times) ->
 			console.log "[SUCCESS]fetch popular recipes"
 			console.log data
 
+			recipeAjaxd++
+
 			scrollerList = $('#main_Popular_Recipes').scroller()
 			scrollerList.clearInfinite()
 
@@ -44,7 +46,6 @@ getPopularRecipes = (times) ->
 
 			scope = $("#main_Popular_Recipes")
 			appendRecipeResult(scope, data)
-			recipeAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch popular recipes: " + status
