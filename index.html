@@ -145,11 +145,12 @@
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <link rel="stylesheet" type="text/css" href="css/temp.css"  />
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxSearchResult2.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenRecipe2.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./js/ajaxSearchResult.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxCategory.js">
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -289,44 +290,26 @@
 					<!-- same row !-->
 					<br>
 					<div id="Results">
-						<div style="position: relative; float: left; width: 100%;background-color:white;border-radius:5px;">
-							<h2 style="margin-left:5px;">Popular</h2>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">Most Popular</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
-							<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-									<img src="img/love.jpg" style="float: left; width:100%;">
-									<div style="margin-left:3px">French</div>
-							</div>
+						<div class="category_box" style="position: relative; float: left; width: 100%;background-color:white;border-radius:5px;">
+							<a href="#main_Category">
+								<h2 style="margin-left:5px;">Popular</h2>
+								<div class="category_recipe" style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
+										<img class="category_img" src="img/love.jpg" style="float: left; width:100%;">
+										<div style="margin-left:3px">Most Popular</div>
+								</div>
+								<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
+										<img src="img/love.jpg" style="float: left; width:100%;">
+										<div style="margin-left:3px">French</div>
+								</div>
+								<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
+										<img src="img/love.jpg" style="float: left; width:100%;">
+										<div style="margin-left:3px">French</div>
+								</div>
+								<div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
+										<img src="img/love.jpg" style="float: left; width:100%;">
+										<div style="margin-left:3px">French</div>
+								</div>
+							</a>
 						</div>
 						<div class="divider">&nbsp; </div>
 						<div style="position: relative; float: left; width: 100%;background-color:white;border-radius:5px;">
@@ -372,11 +355,11 @@
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_AllCategories !-->
-				<div title="Default Title" id="main_Categories" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_categories" style="background-color:silver;">
+				<div title="Default Title" id="main_Category" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_categories" style="background-color:silver;">
 					<div id="Results" style="background-color:silver">
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Loading</div>
-				</div>
+				</div><!-- #main_Category !-->
 
 				<!-- KITCHEN RECIPES !-->
 				<div title="Kitchen" id="main_Kitchen_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-pull-scroller='true' data-tab="navbar_kitchen">

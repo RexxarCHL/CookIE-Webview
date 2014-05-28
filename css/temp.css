@@ -64,3 +64,35 @@
 	margin-left:5%;
 	color:black;
 }
+
+#main_AllCategories a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: black;
+}
+
+#main_AllCategories a:visited{
+	color: black;
+}
+
+.category_box{
+	position: relative;
+	float: left;
+	width: 100%;
+	background-color:white;
+	border-radius:5px;
+}
+
+.category_recipe{
+	display:inline-block;
+	width:15%; 
+	margin:5px 1% 5px 1%; 
+	float:left;
+}
+
+.category_img{
+	float: left;
+	width: 100%;
+}
