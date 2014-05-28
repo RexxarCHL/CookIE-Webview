@@ -33,7 +33,18 @@ getPopularMenus = (times, scrollObj) ->
 		success: (data)->
 			console.log "[SUCCESS]fetch popular menu"
 			console.log data
-			appendPopularMenuList(data, scrollObj)
+
+			scrollerList = $('#main_Popular_Menus').scroller()
+			scrollerList.clearInfinite()
+
+			if data is null or data.length is 0
+				$("#main_Popular_Menus").find("#infinite").text "No more menu"
+				scrollObj.clearInfinite();
+				menuAjaxd--
+				return undefined
+
+			scope = $("#main_Popular_Menus")
+			appendMenuResult(scope, data)
 			menuAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
@@ -43,38 +54,3 @@ getPopularMenus = (times, scrollObj) ->
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
-
-appendPopularMenuList = (data, scrollObj)->
-	if data is null or data.length is 0
-		$("#main_Popular_Menus").find("#infinite").text "No more lists"
-		scrollObj.clearInfinite();
-		menuAjaxd--
-		return 1;
-
-	menuList = $('#PopularMenuList')
-	for list in data
-		html = ''
-		id = list.list_id
-		title = list.name
-		rating = list.rating
-		#if rating is '0' then rating = 'no'
-		html = '<div class="menu_box" id="PopularMenu'+id+'">'
-		html += '<h2 class="menu_title">'+title+'</h2>&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+' stars</i>&nbsp;&nbsp;<i class="icon chat">comments</i>'
-
-		html += '<div class="menu_img">'
-		for recipe in list.recipes
-			src = recipe.imageUrl
-			src = 'img/love.jpg' # for test only
-			html += '<img src="'+src+'" height="20%">'
-		html += '</div>'
-		
-		html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking">Cook</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>'
-		html += '</div>'
-		menuList.append html
-		#console.log html
-		#TODO add on click function to cook btn
-
-	$("#main_Popular_Menus").find("#infinite").text "Load More"
-	scrollObj.clearInfinite();
-	undefined #avoid implicit return values by Coffeescript
-

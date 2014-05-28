@@ -34,7 +34,18 @@ getPopularRecipes = (times, scrollObj) ->
 		success: (data)->
 			console.log "[SUCCESS]fetch popular recipes"
 			console.log data
-			appendPopularRecipeList(data, scrollObj)
+
+			scrollerList = $('#main_Popular_Recipes').scroller()
+			scrollerList.clearInfinite()
+
+			if data.length is 0
+				$("#main_Popular_Recipes").find("#infinite").text "No more recipes"
+				recipeAjaxd--
+				return undefined
+
+			scope = $("#main_Popular_Recipes")
+			appendRecipeResult(scope, data)
+			#appendPopularRecipeList(data, scrollObj)
 			recipeAjaxd++
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
@@ -45,43 +56,4 @@ getPopularRecipes = (times, scrollObj) ->
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
-
-appendPopularRecipeList = (data, scrollObj)->
-	if data.length is 0
-		$("#main_Popular_Recipes").find("#infinite").text "No more recipes"
-		scrollObj.clearInfinite();
-		recipeAjaxd--
-		return 1;
-
-	if data.length%2 then data.length-- # prevent empty image slot
-
-	recipeList = $('#PopularRecipeList')
-	count = 0
-	for recipe in data
-		html = ''
-		id = recipe.recipe_id
-		name = recipe.name
-		rating = recipe.rating
-		url = recipe.imageUrl
-		url = 'img/love.jpg' # for test only
-		if count%2 is 0 #left part of the row
-			html += '<div class="recipe_list_row list_row_left" id="PopularRecipe'+id+'">'
-		else
-			html += '<div class="recipe_list_row list_row_right" id="PopularRecipe'+id+'">'
-		
-		html += '<img class="recipe_img" src="'+url+'">'
-		html += '<div class="recipe_title">'+name+'</div>'
-		html += '<div class="icon star recipe_rating">'+rating+'</div>'
-		html += '</div>'
-
-		recipeList.append html
-		#console.log html
-		count++
-		# TODO Add onclick fcn to link to recipe
-
-	recipeList.find("#bottomBar").remove()
-	recipeList.append '<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>'
-	$("#main_Popular_Recipes").find("#infinite").text "Load More"
-	scrollObj.clearInfinite();
-	undefined #avoid implicit return values by Coffeescript
-
+	
