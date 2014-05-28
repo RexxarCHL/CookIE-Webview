@@ -1,12 +1,13 @@
 .menu_box{
-	background-color: white;
-	margin: 5px;
+	background-color:white;
+	margin:5px;
+	border-radius:5px;
 }
 
 .menu_img{
-	float:left;
-	width: 100%;
-	background-color: white;
+	float:left; 
+	background-color:white;
+	margin-left:5px;
 }
 
 .menu_title{
@@ -32,7 +33,6 @@
 	display:inline-block;
 	width:48%;
 	margin:5px 1% 5px 1%;
-	float:right;
 	background-color:white;
 }
 
@@ -50,10 +50,12 @@
 	margin:3px 5% 0px 5%;
 }
 
-.list_title{
-	margin-left: 5%;
+.recipe_title{
+	margin-left:5%;
+	color:black;
 }
 
-.list_rating{
-	margin-left: 5%;
+.recipe_rating{
+	margin-left:5%;
+	color:black;
 }

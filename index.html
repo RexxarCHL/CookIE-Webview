@@ -149,6 +149,7 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenRecipe2.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxSearchResult.js"></script>
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -178,11 +179,11 @@
 				<!-- POPULAR MENU !-->
 				<div title='Popular' id="main_Popular_Menus" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true' style="background-color:silver;">
 
-					<div id="PopularMenuList" style="background-color:silver">
+					<div id="Results" style="background-color:silver">
 						<div style="background-color:silver;">
 							<div class="button-grouped flex" >
-								<a class="button" href="#main_Popular_Recipes">Recipes</a>
-								<a class="button orange" href="#main_Popular_Menus">Menus</a>
+								<a class="button" href="#main_Popular_Recipes" data-transition="fade">Recipes</a>
+								<a class="button orange" href="#main_Popular_Menus" data-transition="fade">Menus</a>
 							</div>
 						</div>
 						<div class="menu_box" style="background-color:white;margin:5px;border-radius:5px;" >
@@ -234,11 +235,11 @@
 				<!-- POPULAR RECIPE !-->
 				<div title='Popular' id="main_Popular_Recipes" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true' style="background-color:silver">
 					<div class="button-grouped flex" >
-						<a class="button orange" href="#main_Popular_Recipes">Recipes</a>
-						<a class="button" href="#main_Popular_Menus">Menus</a>
+						<a class="button orange" href="#main_Popular_Recipes" data-transition="fade">Recipes</a>
+						<a class="button" href="#main_Popular_Menus" data-transition="fade">Menus</a>
 					</div>
 					<div style="width:100%">
-						<div id="PopularRecipeList" style="background-color:silver;">
+						<div id="Results" style="background-color:silver;">
 							<!-- this is a row -->
 							<div class="recipe_list_row list_row_left" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
 	                            <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
@@ -369,14 +370,14 @@
 					<div class="divider">&nbsp; </div>
 				</div><!-- #main_AllCategories !-->
 
-				<!-- KITCHEN !-->
+				<!-- KITCHEN RECIPES !-->
 				<div title="Kitchen" id="main_Kitchen_Recipes" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-pull-scroller='true' data-tab="navbar_kitchen">
                     <div class="button-grouped flex"> 
-                        <a class="button orange" href="#main_Kitchen_Recipes">Recipes</a>
-                        <a class="button" href="#main_Kitchen_Menus">Menus</a>
+                        <a class="button orange" href="#main_Kitchen_Recipes" data-transition="fade">Recipes</a>
+                        <a class="button" href="#main_Kitchen_Menus" data-transition="fade">Menus</a>
                     </div>
                     <div style="width:100%">
-	                    <div id="KitchenRecipeList" style="background-color:silver">
+	                    <div id="Results" style="background-color:silver">
 	                    	<!-- this is a row -->
 							<div class="recipe_list_row list_row_left" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
 	                            <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
@@ -419,16 +420,17 @@
                     </div>
                     <div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
                 </div><!-- #main_Kitchen_Recipes !-->
+                <!-- KITCHEN MENUS !-->
                 <div title="Kitchen" id="main_Kitchen_Menus" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-pull-scroller='true' data-tab="navbar_kitchen">
                 	<div style="background-color:silver">
                 		<div style="background-color:silver">
 		                    <div class="button-grouped flex" >
-		                        <a class="button " href="#main_Kitchen_Recipes">Recipes</a>
-		                        <a class="button orange" href="#main_Kitchen_Menus">Menus</a>
+		                        <a class="button " href="#main_Kitchen_Recipes" data-transition="fade">Recipes</a>
+		                        <a class="button orange" href="#main_Kitchen_Menus" data-transition="fade">Menus</a>
 		                    </div>
 	                    </div>
 
-	                    <div id="KitchenMenuList">
+	                    <div id="Results">
 	                    	<div style="background-color:white;margin:5px;border-radius:5px;" >	
 									<h2 style="margin-left:5px;color:black;">Menu title&nbsp;&nbsp;&nbsp;<i class="icon star">ratings</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2> 
 									<div style="float:left; background-color:white;margin-left:5px;">
@@ -533,17 +535,17 @@
 					</div>
                 </div>
 
-				<!-- SEARCH !-->
+				<!-- SEARCH RECIPES !-->
 				<div title="Search" id="main_Search" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
 					<input type="search" id="SearchBar" placeholder="Search" style="margin-top:40%" result>
 					<div id="SearchSelectTab" class="button-grouped flex">
-						<a class="button orange" href="">Recipes</a>
-                        <a class="button" href="">Menus</a>
+						<a class="button orange" data-transition="fade">Recipes</a>
+                        <a class="button" data-transition="fade">Menus</a>
 					</div>
-					<div id="SearchResults">
-						<i>Search for recipes, food ingredients ...</i>
+					<div id="Results">
 					</div>
-				</div><!-- #main_Search !-->
+					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'><i>Search for recipes, food ingredients ...</i></div>
+				</div><!-- #main_Search_Recipe !-->
 
 				<!-- USER !-->
 				<div title="User" id="main_User" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver"> 
