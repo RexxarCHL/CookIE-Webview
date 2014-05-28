@@ -31,7 +31,7 @@ getKitchenMenus = function(times, scrollObj) {
     dataType: 'jsonp',
     crossDomain: true,
     data: {
-      'type': 'popular',
+      'type': 'favorite',
       'times': times
     },
     jsonp: false,
@@ -47,7 +47,7 @@ getKitchenMenus = function(times, scrollObj) {
         menuAjaxd--;
         return void 0;
       }
-      scope = $("main_Kitchen_Menus");
+      scope = $("#main_Kitchen_Menus");
       appendMenuResult(scope, data);
       kitchenMenuAjaxd++;
       return void 0;

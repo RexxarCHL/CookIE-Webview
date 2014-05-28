@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 initSelectBtn = function() {
   return $("#SearchSelectTab").children().each(function() {
-    $(this).on("click", function() {
+    $(this).on("click", function(evt) {
       var other;
       if ($(this).hasClass('orange')) {
         return void 0;
@@ -44,7 +44,8 @@ initSelectBtn = function() {
       searchAjaxd = 0;
       $("#main_Search").find("#Results").html("");
       $("#main_Search").find("#infinite").html("<i>Search for recipes, food ingredients ...</i>");
-      return $("#SearchBar").trigger("keyup");
+      $("#SearchBar").trigger("keyup");
+      return evt.stopPropagation();
     });
     return void 0;
   });
@@ -160,7 +161,7 @@ appendMenuResult = function(scope, data) {
       html += '<img src="' + src + '" height="20%">';
     }
     html += '</div>';
-    html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking">Cook</a><a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
+    html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking" style="margin-right:5%;">Cook</a><a class="button green menu_view_btn" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
     html += '</div>';
     results.append(html);
   }

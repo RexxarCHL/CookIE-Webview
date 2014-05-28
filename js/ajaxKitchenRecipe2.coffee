@@ -22,14 +22,12 @@ $(document).ready ->
 getKitchenRecipes = (times, scrollObj) ->
 	$.ajax(
 		type: "GET"
-		#TODO: CHECK ACTUAL URL
 		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipes'
 		#url:'./ajaxTest.html'
 		dataType: 'jsonp'
 		crossDomain: true
-		#TODO: CHECK ACTUAL DATA
 		data: 
-			'type': 'popular'
+			'type': 'favorite'
 			'times': times
 		jsonp: false
 		timeout: 10000
@@ -45,7 +43,7 @@ getKitchenRecipes = (times, scrollObj) ->
 				kitchenRecipeAjaxd--
 				return undefined
 
-			scope = $("main_Kitchen_Recipes")
+			scope = $("#main_Kitchen_Recipes")
 			appendRecipeResult(scope, data)
 			kitchenRecipeAjaxd++
 			undefined #avoid implicit return values by Coffeescript

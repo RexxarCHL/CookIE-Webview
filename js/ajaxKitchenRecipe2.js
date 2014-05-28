@@ -31,7 +31,7 @@ getKitchenRecipes = function(times, scrollObj) {
     dataType: 'jsonp',
     crossDomain: true,
     data: {
-      'type': 'popular',
+      'type': 'favorite',
       'times': times
     },
     jsonp: false,
@@ -47,7 +47,7 @@ getKitchenRecipes = function(times, scrollObj) {
         kitchenRecipeAjaxd--;
         return void 0;
       }
-      scope = $("main_Kitchen_Recipes");
+      scope = $("#main_Kitchen_Recipes");
       appendRecipeResult(scope, data);
       kitchenRecipeAjaxd++;
       return void 0;

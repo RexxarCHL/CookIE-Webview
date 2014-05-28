@@ -21,13 +21,11 @@ $(document).ready ->
 getKitchenMenus = (times, scrollObj) ->
 	$.ajax(
 		type: "GET"
-		#TODO: determine url
 		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipelists'
 		dataType: 'jsonp'
 		crossDomain: true
-		#TODO: determine data
 		data: 
-			'type': 'popular'
+			'type': 'favorite'
 			'times': times
 		jsonp: false
 		timeout: 10000
@@ -42,7 +40,7 @@ getKitchenMenus = (times, scrollObj) ->
 				menuAjaxd--
 				return undefined
 
-			scope = $("main_Kitchen_Menus")
+			scope = $("#main_Kitchen_Menus")
 			appendMenuResult(scope, data)
 			kitchenMenuAjaxd++
 			undefined #avoid implicit return values by Coffeescript

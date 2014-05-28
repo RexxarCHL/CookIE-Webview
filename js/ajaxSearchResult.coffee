@@ -26,7 +26,7 @@ $(document).ready ->
 
 initSelectBtn = ->
 	$("#SearchSelectTab").children().each(->
-		$(this).on("click", ->
+		$(this).on("click", (evt)->
 			if $(this).hasClass 'orange'
 				return undefined
 
@@ -38,6 +38,8 @@ initSelectBtn = ->
 			$("#main_Search").find("#Results").html ""
 			$("#main_Search").find("#infinite").html "<i>Search for recipes, food ingredients ...</i>"
 			$("#SearchBar").trigger("keyup")
+
+			evt.stopPropagation()
 		)
 		undefined
 	)
@@ -146,7 +148,7 @@ appendMenuResult = (scope, data)->
 			html += '<img src="'+src+'" height="20%">'
 		html += '</div>'
 		
-		html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking">Cook</a><a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>'
+		html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking" style="margin-right:5%;">Cook</a><a class="button green menu_view_btn" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>'
 		html += '</div>'
 		results.append html
 		#console.log html

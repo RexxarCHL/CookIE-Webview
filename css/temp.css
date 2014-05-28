@@ -29,6 +29,11 @@
 	margin-right:5%;
 }
 
+.menu_view_btn{
+	float:right;
+	width:20%;
+	margin-right:2%;
+}
 .recipe_list_row{
 	display:inline-block;
 	width:48%;
