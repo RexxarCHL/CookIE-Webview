@@ -10,15 +10,16 @@ $(document).ready(function() {
   $("#SearchBar").keyup(function() {
     var lastQuery, query, scrollerList;
     console.log("searchbar keyup");
-    scrollerList = $('#main_Kitchen_Menus').scroller();
-    scrollerList.clearInfinite();
+    scrollerList = $('#main_Search').scroller();
     clearTimeout(lastId);
     query = $("#SearchBar")[0].value;
     if (query === "") {
       searchAjaxd = 0;
+      $("#main_Search").find("#Results").html("");
       $("#main_Search").find("#infinite").html("<i>Search for recipes, food ingredients ...</i>");
       return void 0;
     }
+    scrollerList.clearInfinite();
     $("#main_Search").find("#infinite").text("Searching...");
     lastId = setTimeout(function() {
       search(query, searchAjaxd);
@@ -76,6 +77,12 @@ search = function(query, times) {
       var scope, scrollerList;
       console.log("[SUCCESS]search");
       console.log(data);
+      scope = $("#main_Search");
+      if (searchAjaxd === 0) {
+        addInfiniteScroll(scope, 1000, function() {
+          return $("#SearchBar").trigger("keyup");
+        });
+      }
       searchAjaxd++;
       scrollerList = $("#main_Search").scroller();
       scrollerList.clearInfinite();
@@ -84,10 +91,6 @@ search = function(query, times) {
         searchAjaxd--;
         return void 0;
       }
-      if (searchAjaxd === 0) {
-        addInfiniteScroll();
-      }
-      scope = $("#main_Search");
       if (type) {
         appendMenuResult(scope, data);
       } else {
@@ -169,22 +172,20 @@ appendMenuResult = function(scope, data) {
   return void 0;
 };
 
-addInfiniteScroll = function() {
+addInfiniteScroll = function(scope, delay, callback) {
   var scrollerList;
-  console.log("add infinite-scroll");
-  scrollerList = $("#main_Search").scroller();
+  console.log("add infinite-scroll to scope:" + scope[0].id);
+  scrollerList = scope.scroller();
   scrollerList.clearInfinite();
   scrollerList.addInfinite();
   $.bind(scrollerList, 'infinite-scroll', function() {
-    var self;
-    console.log("search infinite-scroll");
-    self = this;
-    $("#main_Search").find("#infinite").text("Loading more...");
+    console.log(scope[0].id + " infinite-scroll");
+    scope.find("#infinite").text("Loading more...");
     scrollerList.addInfinite();
     clearTimeout(lastId);
     return lastId = setTimeout(function() {
-      return $("#SearchBar").trigger("keyup");
-    }, 1000);
+      return callback();
+    }, delay);
   });
   return void 0;
 };

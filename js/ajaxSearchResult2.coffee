@@ -4,16 +4,17 @@ $(document).ready ->
 	initSelectBtn()
 	$("#SearchBar").keyup(->
 		console.log "searchbar keyup"
-		scrollerList = $('#main_Kitchen_Menus').scroller()
-		scrollerList.clearInfinite()
+		scrollerList = $('#main_Search').scroller()
 		clearTimeout(lastId)
 
 		query =  $("#SearchBar")[0].value
 		if query is ""
 			searchAjaxd = 0
+			$("#main_Search").find("#Results").html ""
 			$("#main_Search").find("#infinite").html "<i>Search for recipes, food ingredients ...</i>"
 			return undefined
 
+		scrollerList.clearInfinite()
 		$("#main_Search").find("#infinite").text "Searching..."
 		lastId = setTimeout(->
 					search query, searchAjaxd
@@ -69,6 +70,10 @@ search = (query, times) ->
 			console.log "[SUCCESS]search"
 			console.log data
 
+			scope = $("#main_Search")
+			if searchAjaxd is 0
+				addInfiniteScroll(scope, 1000, ->$("#SearchBar").trigger("keyup"))
+
 			searchAjaxd++
 
 			scrollerList = $("#main_Search").scroller()
@@ -79,10 +84,6 @@ search = (query, times) ->
 				searchAjaxd--;
 				return undefined
 
-			if searchAjaxd is 0
-				addInfiniteScroll()
-
-			scope = $("#main_Search")
 			if type then appendMenuResult(scope, data)
 			else appendRecipeResult(scope, data)
 			undefined #avoid implicit return values by Coffeescript
@@ -157,20 +158,19 @@ appendMenuResult = (scope, data)->
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return values
 
-addInfiniteScroll = ->
-	console.log "add infinite-scroll"
-	scrollerList = $("#main_Search").scroller()
+addInfiniteScroll = (scope, delay, callback)->
+	console.log "add infinite-scroll to scope:" + scope[0].id
+	scrollerList = scope.scroller()
 	scrollerList.clearInfinite()
 	scrollerList.addInfinite()
 	$.bind(scrollerList, 'infinite-scroll', ->
-		console.log "search infinite-scroll"
-		self = this
-		$("#main_Search").find("#infinite").text "Loading more..."
+		console.log scope[0].id+" infinite-scroll"
+		scope.find("#infinite").text "Loading more..."
 		scrollerList.addInfinite()
 
 		clearTimeout lastId
 		lastId = setTimeout(->
-			$("#SearchBar").trigger("keyup")
-		, 1000)
+			callback()
+		, delay)
 	)
 	undefined #avoid implicit return values
