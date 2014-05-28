@@ -10,21 +10,19 @@ $(document).ready(function() {
   scrollerList = $('#main_Popular_Recipes').scroller();
   scrollerList.addInfinite();
   $.bind(scrollerList, "infinite-scroll", function() {
-    var self;
     console.log("recipe infinite-scroll");
-    self = this;
     $("#main_Popular_Recipes").find("#infinite").text("Loading...");
     scrollerList.addInfinite();
     clearTimeout(lastId);
     lastId = setTimeout(function() {
-      return getPopularRecipes(recipeAjaxd, self);
+      return getPopularRecipes(recipeAjaxd);
     }, 3000);
     return void 0;
   });
   return void 0;
 });
 
-getPopularRecipes = function(times, scrollObj) {
+getPopularRecipes = function(times) {
   $.ajax({
     type: "GET",
     url: 'http://140.114.195.58:8080/CookIEServer/discover_recipes',
@@ -53,10 +51,12 @@ getPopularRecipes = function(times, scrollObj) {
       return void 0;
     },
     error: function(data, status) {
+      var scrollerList;
       console.log("[ERROR]fetch popular recipes: " + status);
       console.log(data);
       $("#main_Popular_Recipes").find("#infinite").text("Load More");
-      scrollObj.clearInfinite();
+      scrollerList = $('#main_Popular_Recipes').scroller();
+      scrollerList.clearInfinite();
       return void 0;
     }
   });

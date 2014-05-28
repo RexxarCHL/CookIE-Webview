@@ -10,21 +10,19 @@ $(document).ready(function() {
   scrollerList = $('#main_Popular_Menus').scroller();
   scrollerList.addInfinite();
   $.bind(scrollerList, "infinite-scroll", function() {
-    var self;
     console.log("menu infinite-scroll");
-    self = this;
     $("#main_Popular_Menus").find("#infinite").text("Loading...");
     scrollerList.addInfinite();
     clearTimeout(lastId);
     lastId = setTimeout(function() {
-      return getPopularMenus(menuAjaxd, self);
+      return getPopularMenus(menuAjaxd);
     }, 1000);
     return void 0;
   });
   return void 0;
 });
 
-getPopularMenus = function(times, scrollObj) {
+getPopularMenus = function(times) {
   $.ajax({
     type: "GET",
     url: 'http://140.114.195.58:8080/CookIEServer/discover_recipelists',
@@ -44,7 +42,6 @@ getPopularMenus = function(times, scrollObj) {
       scrollerList.clearInfinite();
       if (data === null || data.length === 0) {
         $("#main_Popular_Menus").find("#infinite").text("No more menu");
-        scrollObj.clearInfinite();
         menuAjaxd--;
         return void 0;
       }
@@ -54,9 +51,11 @@ getPopularMenus = function(times, scrollObj) {
       return void 0;
     },
     error: function(data, status) {
+      var scrollerList;
       console.log("[ERROR]fetch popular menu: " + status);
       $("#main_Popular_Menus").find("#infinite").text("Load More");
-      scrollObj.clearInfinite();
+      scrollerList = $('#main_Popular_Menus').scroller();
+      scrollerList.clearInfinite();
       return void 0;
     }
   });

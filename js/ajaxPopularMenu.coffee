@@ -5,20 +5,19 @@ $(document).ready ->
 	scrollerList.addInfinite()
 	$.bind(scrollerList, "infinite-scroll", ->
 		console.log "menu infinite-scroll"
-		self = this
 		$("#main_Popular_Menus").find("#infinite").text "Loading..."
 		scrollerList.addInfinite()
 
 		#change setTimeout to ajax call
 		clearTimeout lastId
 		lastId = setTimeout(->
-			getPopularMenus(menuAjaxd, self)
+			getPopularMenus(menuAjaxd)
 		,1000)
 		undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
 
-getPopularMenus = (times, scrollObj) ->
+getPopularMenus = (times) ->
 	$.ajax(
 		type: "GET"
 		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipelists'
@@ -39,7 +38,6 @@ getPopularMenus = (times, scrollObj) ->
 
 			if data is null or data.length is 0
 				$("#main_Popular_Menus").find("#infinite").text "No more menu"
-				scrollObj.clearInfinite();
 				menuAjaxd--
 				return undefined
 
@@ -50,7 +48,8 @@ getPopularMenus = (times, scrollObj) ->
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status
 			$("#main_Popular_Menus").find("#infinite").text "Load More"
-			scrollObj.clearInfinite();
+			scrollerList = $('#main_Popular_Menus').scroller()
+			scrollerList.clearInfinite()
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript

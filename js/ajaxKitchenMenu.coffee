@@ -5,20 +5,19 @@ $(document).ready ->
 	scrollerList.addInfinite()
 	$.bind(scrollerList, "infinite-scroll", ->
 		console.log "kitchen menu infinite-scroll"
-		self = this
 		$("#main_Kitchen_Menus").find("#infinite").text "Loading..."
 		scrollerList.addInfinite()
 
 		#change setTimeout to ajax call
 		clearTimeout lastId
 		lastId = setTimeout(->
-			getKitchenMenus(kitchenMenuAjaxd, self)
+			getKitchenMenus(kitchenMenuAjaxd)
 		,1000)
 		undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
 
-getKitchenMenus = (times, scrollObj) ->
+getKitchenMenus = (times) ->
 	$.ajax(
 		type: "GET"
 		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipelists'
@@ -47,7 +46,8 @@ getKitchenMenus = (times, scrollObj) ->
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen menu: " + status
 			$("#main_Kitchen_Menus").find("#infinite").text "Load More"
-			scrollObj.clearInfinite();
+			scrollerList = $('#main_Kitchen_Menus').scroller()
+			scrollerList.clearInfinite()
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
