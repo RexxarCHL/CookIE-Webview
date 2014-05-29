@@ -8,7 +8,7 @@ $(document).ready ->
 getPopularRecipes = (times) ->
 	$.ajax(
 		type: "GET"
-		url: 'http://140.114.195.58:8080/CookIEServer/discover_recipes'
+		url: 'http://54.178.135.71:8080/CookIEServer/discover_recipes'
 		#url:'./ajaxTest.html'
 		dataType: 'jsonp'
 		crossDomain: true

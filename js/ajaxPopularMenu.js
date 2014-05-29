@@ -15,7 +15,7 @@ $(document).ready(function() {
 getPopularMenus = function(times) {
   $.ajax({
     type: "GET",
-    url: 'http://140.114.195.58:8080/CookIEServer/discover_recipelists',
+    url: 'http://54.178.135.71:8080/CookIEServer/discover_recipelists',
     dataType: 'jsonp',
     crossDomain: true,
     data: {
