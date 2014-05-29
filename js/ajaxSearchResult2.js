@@ -136,9 +136,9 @@ appendRecipeResult = function(scope, data) {
     rating = recipe.rating;
     url = recipe.smallURL;
     if (count % 2 === 0) {
-      html += '<div class="recipe_list_row list_row_left" id="PopularRecipe' + id + '">';
+      html += '<div class="recipe_list_row list_row_left" id="Recipe' + id + '">';
     } else {
-      html += '<div class="recipe_list_row list_row_right" id="PopularRecipe' + id + '">';
+      html += '<div class="recipe_list_row list_row_right" id="Recipe' + id + '">';
     }
     html += '<a href="#RecipeContent"><img class="recipe_img" src="' + url + '"></a>';
     html += '<div class="recipe_title">' + name + '</div>';
@@ -146,7 +146,7 @@ appendRecipeResult = function(scope, data) {
     html += '</div>';
     results.append(html);
     count++;
-    $("#PopularRecipe" + id).find("img")[0].onclick = (function(id) {
+    scope.find("#Recipe" + id).find("img")[0].onclick = (function(id) {
       return function() {
         $("#RecipeContent").find("#Results").hide();
         $("#RecipeContent").find("#Loading").show();
@@ -176,7 +176,7 @@ appendMenuResult = function(scope, data) {
     } else {
       rating += " stars";
     }
-    html = '<div class="menu_box" id="KitchenMenu' + id + '">';
+    html = '<div class="menu_box" id="Menu' + id + '">';
     html += '<h2 class="menu_title" style="margin-left:5px;color:black;">' + title + '&nbsp;&nbsp;&nbsp;<i class="icon star">' + rating + '</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>';
     html += '<div class="menu_img">';
     _ref = list.recipes;
@@ -186,9 +186,17 @@ appendMenuResult = function(scope, data) {
       html += '<img src="' + src + '" height="20%">';
     }
     html += '</div>';
-    html += '<div class="menu_cooking_box"><a class="button red menu_cooking_btn" href="#Cooking" style="margin-right:5%;">Cook</a><a class="button green menu_view_btn" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
+    html += '<div class="menu_cooking_box"><a id="Cook" class="button red menu_cooking_btn" href="#Cooking" style="margin-right:5%;">Cook</a><a id="View" class="button green menu_view_btn" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>';
     html += '</div>';
     results.append(html);
+    scope.find("#Menu" + id).find("#View")[0].onclick = (function(id) {
+      return function() {
+        $("#Collection").find("#Results").hide();
+        $("#Collection").find("#Loading").show();
+        getMenuContent(id);
+        return void 0;
+      };
+    })(id);
   }
   scope.find("#infinite").text("Load More");
   return void 0;

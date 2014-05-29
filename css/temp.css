@@ -96,3 +96,33 @@
 	float: left;
 	width: 100%;
 }
+
+.menu_content_images{
+	display:inline-block;
+	width:40%;
+	margin: 5px auto 5px 10%;
+}
+
+.menu_recipe_title{
+	position:absolute; 
+	float:right;
+}
+
+.menu_recipe_img{
+	max-height:100%;
+	max-width:100%;
+}
+
+.menu_content_photos_title{
+	background-color:#5CC;
+	width:100%;
+	opacity:0.6;
+	border-radius:5px;
+}
+
+.menu_content_photos{
+	display:inline-block;
+	width:33%;
+	padding:2px 2px 2px 2px;
+	float:left;
+}

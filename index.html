@@ -199,8 +199,8 @@
                                 <img src="img/love.jpg" height = "20%">
 							</div>
 							<div style="float:left;width:100%;background-color:white;border-radius:5px;">
-								<a class="button red" style="float:right;width:20%;margin-right:5%;" href="#Cooking">Cook</a>
-                                <a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a>
+								<a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Cooking">Cook</a>
+                                <a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -475,61 +475,66 @@
 						<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 					</div>
 				</div><!-- #main_Kitchen_Menus !-->
-
+                
+                <!-- COLLECTION aka Menu !-->
 				<div title="Lonely Valentines" id="Collection" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-					<!--images-->
-					<div style="background-color:white; margin:5px 0 5px 0;border-radius:5px;">
-						<div style="display:inline-block; width:40%; margin: 5px auto 5px 10%;">
-							<div style="position:absolute; float:right;">A</div>
-							<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
-						</div>
-						<div style="display:inline-block; width:40%; margin: 5px 9% 5px auto;">
-							<div style="position:absolute; float:left;">B</div>
-							<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
-						</div>
-						<div style="display:inline-block; width:40%; margin:5px auto 5px 10%;">
-							<div style="position:absolute; float:left;">C</div>
-							<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
-						</div>
-					</div>
-					<!--description-->
-					<div style="background-color:white; margin:5px 0 5px 0;border-radius:5px;">
-						<div style="margin: 2% 0 2% 2%">
-							<h3 class="icon star">4.99 </h3><br>
-							<h3>Calories:1382 kcal </h3>
-							<h3>Time: 1hr</h3>
-						</div>
-					</div>
-					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;My notes</h3>
-						<h4 style="margin-left:2%;">Some text</h4><br><br><br><br>
-						<h4 style="margin-left:2%;">La la la la</h4>
-					</div>
-					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Messages</h3>
-						<h4 style="margin-left:2%;">Some text</h4>
-					</div>
-					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Photos</h3>
-						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
-							<img src="img/love.jpg" style="max-width:100%;">
-						</div>
-						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
-							<img src="img/love.jpg" style="max-width:100%;">
-						</div>
-						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
-							<img src="img/love.jpg" style="max-width:100%;">
-						</div>
-						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
-							<img src="img/love.jpg" style="max-width:100%;">
-						</div>
-						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
-							<img src="img/love.jpg" style="max-width:100%;">
-						</div>
-						<!-- fix to prevent the silver div from collapsing -->
-						<div style="display:block;height:0;clear:both;"></div> 
-					</div>
-                </div>
+                    <div id="Loading"><h3 align="center">Loading...</h3></div>
+    				<div id="Results">
+                        <!--images-->
+                        <div style="background-color:white; margin:5px 0 5px 0;border-radius:5px;">
+    						<div class="menu_content_images" style="display:inline-block; width:40%; margin: 5px auto 5px 10%;">
+    							<div class="menu_recipe_title" style="position:absolute; float:right;">A</div>
+    							<img class="menu_recipe_img" src="img/love.jpg" style="max-height:100%;max-width:100%;">
+    						</div>
+    						<div style="display:inline-block; width:40%; margin: 5px 9% 5px auto;">
+    							<div style="position:absolute; float:left;">B</div>
+    							<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
+    						</div>
+    						<div style="display:inline-block; width:40%; margin:5px auto 5px 10%;">
+    							<div style="position:absolute; float:left;">C</div>
+    							<img src="img/love.jpg" style="max-height:100%;max-width:100%;">
+    						</div>
+    					</div>
+    					<!--description-->
+    					<div style="background-color:white; margin:5px 0 5px 0;border-radius:5px;">
+    						<div style="margin: 2% 0 2% 2%">
+    							<h3 id="MenuRating" class="icon star">4.99 </h3><br>
+    							<h3 id="MenuCalories">Calories:1382 kcal </h3>
+    							<h3 id="MenuTime">Time: 1hr</h3>
+    						</div>
+    					</div>
+    					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
+    						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;My notes</h3>
+    						<h4 style="margin-left:2%;">Some text</h4><br><br><br><br>
+    						<h4 style="margin-left:2%;">La la la la</h4>
+    					</div>
+    					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
+    						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Messages</h3>
+    						<h4 style="margin-left:2%;">Some text</h4>
+    					</div>
+                        <!-- photos -->
+    					<div id="MenuPhotos" style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
+    						<h3 class="menu_content_photos_title" style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Photos</h3>
+    						<div class="menu_content_photos" style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+    							<img src="img/love.jpg" style="max-width:100%;">
+    						</div>
+    						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+    							<img src="img/love.jpg" style="max-width:100%;">
+    						</div>
+    						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+    							<img src="img/love.jpg" style="max-width:100%;">
+    						</div>
+    						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+    							<img src="img/love.jpg" style="max-width:100%;">
+    						</div>
+    						<div style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
+    							<img src="img/love.jpg" style="max-width:100%;">
+    						</div>
+    						<!-- fix to prevent the silver div from collapsing -->
+    						<div id="bottomBar" style="display:block;height:0;clear:both;"></div> 
+    					</div>
+                    </div>
+                </div><!-- #Collection !-->
 
 				<!-- SEARCH RECIPES !-->
 				<div title="Search" id="main_Search" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
