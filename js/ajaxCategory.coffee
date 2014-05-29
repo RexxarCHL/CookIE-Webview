@@ -51,13 +51,18 @@ appendAllCategoryResult = (data)->
 	results = $("#main_AllCategories").find("#Results")
 	for cat in data
 		if cat.recipes.length is 0 then continue
-		html = '<div class="category_box" id="'+cat.tag.tagId+'">'
+		id = cat.tag.tagId
+		html = '<div class="category_box" id="Category'+id+'">'
 		html += '<a href="#main_Category"><h2 style="margin-left:5px">'+cat.tag.tagName+'</h2>'
 		for recipe in cat.recipes
 			html += '<div class="category_recipe"><img class="category_img" src="'+recipe.smallURL+'"><div style="margin-left:3px">'+recipe.name+'</div></div>'
 		html += '</a></div><div class="divider">&nbsp;</div>'
 
 		results.append html
+
+		$("#Category"+id).find("a")[0].onclick = do(id)->
+			-> # closure
+				getSingleCategory(singleCatAjaxd, id)
 
 	undefined
 
@@ -86,6 +91,7 @@ getSingleCategory = (times, catId)->
 				singleCatAjaxd--
 				return undefined
 
+			#TODO change pageTitle
 			appendRecipeResult($('#main_Category'), data)
 			undefined #avoid implicit rv
 		error: (data, status)->

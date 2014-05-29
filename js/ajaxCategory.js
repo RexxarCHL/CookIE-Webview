@@ -58,7 +58,7 @@ getAllCategory = function(times) {
 };
 
 appendAllCategoryResult = function(data) {
-  var cat, html, recipe, results, _i, _j, _len, _len1, _ref;
+  var cat, html, id, recipe, results, _i, _j, _len, _len1, _ref;
   console.log("append all category result");
   results = $("#main_AllCategories").find("#Results");
   for (_i = 0, _len = data.length; _i < _len; _i++) {
@@ -66,7 +66,8 @@ appendAllCategoryResult = function(data) {
     if (cat.recipes.length === 0) {
       continue;
     }
-    html = '<div class="category_box" id="' + cat.tag.tagId + '">';
+    id = cat.tag.tagId;
+    html = '<div class="category_box" id="Category' + id + '">';
     html += '<a href="#main_Category"><h2 style="margin-left:5px">' + cat.tag.tagName + '</h2>';
     _ref = cat.recipes;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
@@ -75,6 +76,11 @@ appendAllCategoryResult = function(data) {
     }
     html += '</a></div><div class="divider">&nbsp;</div>';
     results.append(html);
+    $("#Category" + id).find("a")[0].onclick = (function(id) {
+      return function() {
+        return getSingleCategory(singleCatAjaxd, id);
+      };
+    })(id);
   }
   return void 0;
 };
