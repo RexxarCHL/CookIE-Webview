@@ -1,3 +1,17 @@
+###
+ajaxSearchResults2.coffee
+	initSelectBtn()
+ 		Initialize the Recipes/Menus tab button functionality.
+ 	search(query, times)
+ 		Search for 'query' in server. Fetch (times*20)th to (times*20+20)th results.
+ 	appendRecipeResult(scope, data)
+ 		Append 'data' to the #Results div in 'scope', in Recipe style.
+ 	appendMenuResult(scope, data)
+ 		Append 'data' to the #Results div in 'scope', in Menu style.
+ 	addInfiniteScroll(scope, delay, callback)
+ 		Add infinite scroll functionality to 'scope'. 'callback' is called after 'delay' miliseconds after infinite-scroll event is fired.
+###
+
 lastId = -1
 searchAjaxd = 0
 $(document).ready ->
@@ -48,10 +62,10 @@ initSelectBtn = ->
 search = (query, times) ->
 	if $("#SearchSelectTab").find('a').hasClass('orange')
 		type = 0
-		url = 'http://140.114.195.58:8080/CookIEServer/discover_recipes'
+		url = 'http://54.178.135.71:8080/CookIEServer/discover_recipes'
 	else
 		type = 1
-		url = 'http://140.114.195.58:8080/CookIEServer/discover_recipelists'
+		url = 'http://54.178.135.71:8080/CookIEServer/discover_recipelists'
 
 	$.ajax(
 		type: "GET"
@@ -119,7 +133,16 @@ appendRecipeResult = (scope, data)->
 		results.append html
 		#console.log html
 		count++
-		# TODO Add onclick fcn to link to recipe
+		
+		#Fetch detailed recipe content on click
+		$("#PopularRecipe"+id).find("img")[0].onclick = do (id)->
+			-> # closure 
+				$("#RecipeContent").find("#Results").hide()
+				$("#RecipeContent").find("#Loading").show()
+				getRecipeContent(id)
+				undefined
+
+		
 
 	results.find("#bottomBar").remove()
 	results.append '<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>'

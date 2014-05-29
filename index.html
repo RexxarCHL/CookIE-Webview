@@ -150,7 +150,8 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenRecipe2.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./js/ajaxCategory.js">
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxCategory.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxRecipeContent.js"></script>
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -199,6 +200,7 @@
 							</div>
 							<div style="float:left;width:100%;background-color:white;border-radius:5px;">
 								<a class="button red" style="float:right;width:20%;margin-right:5%;" href="#Cooking">Cook</a>
+                                <a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -215,6 +217,7 @@
 							</div>
 							<div style="float:left;width:100%;background-color:white;border-radius:5px;">
 								<a class="button red" style="float:right;width:20%;margin-right:5%;" href="#Cooking">Cook</a>
+                                <a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -226,6 +229,7 @@
 							</div>
 							<div style="float:left;width:100%;background-color:white;border-radius:5px;">
 								<a class="button red" style="float:right;width:20%;margin-right:5%;" href="#Cooking">Cook</a>
+                                <a class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a>
 							</div>
 							<div style="display:inline-block;height:0;width:100%;">&nbsp;</div>
 						</div>
@@ -569,51 +573,57 @@
 					</form>
 				</div><!-- #main_User !-->
 				
-				<!-- DEFAULT RECIPE !-->
+				<!-- RECIPE CONTENT !-->
 				<div title="RecipeName" id="RecipeContent" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-					<p align="center" ><img src="img/love.jpg" style="height:50%"></p>
-					<div style="margin-left:2%;">
-						<i>Some Description</i><br>
-						<span>Uploaded By : OOO , 22/1/2014</span><br>
-						<span>Time needed: 24 mins </span><br><br>
-					</div>
-					<div id="ingredients" style="background-color:white;border-radius:5px;" >
-						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Ingredients (for 2)</h3>
-						<br><ul style="margin-left:2%;list-style-type:none;">
-							<li>A .............. 2 包</li>
-							<li>B .............. 65 g</li>
-							<li>C .............. 1/4 tsp</li>
-							<li>D .............. 2 包</li>
-						</ul>
-					<br></div><br>
-					<div id="steps" style="background-color:white;border-radius:5px;" >
-						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Steps </h3>
-						<br>
-						<ul style="margin-left:2%;list-style-type:none;">
-							<li>1. take out the ingredients</li>
-							<li>2. call your mama</li>
-						<br></ul>
-					</div><br>
-					<div id="comments" style="background-color:white;border-radius:5px;" >
-						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Steps </h3>
-						<br>
-						<ul style="margin-left:2%;list-style-type:none;">
-							<li>lalala</li>
-							<li>lallala</li>
-						<br></ul>
-					</div><br>
-					<div id="messages" style="background-color:white;border-radius:5px;" >
-						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Steps </h3>
-						<br>
-						<ul style="margin-left:2%;list-style-type:none;">
-							<li>1. take out the ingredients</li>
-							<li>2. call your mama</li>
-						<br></ul>
-					</div><br>
-					<div id="photos" style="background-color:white;border-radius:5px;" >
-						<h3 align="center" style="background-color:#ADD8E6;">Photos </h3>
-					</div><br>
-				</div>
+                    <div id="Loading"><h3 align="center">Loading...</h3></div>
+                    <div id="Results">
+    					<p align="center" ><img id="RecipeImg" src="img/love.jpg" style="height:50%"></p>
+    					<div style="margin-left:2%;">
+    						<i id="RecipeDescription">Some Description</i><br>
+    						<span id="RecipeUploadInfo">Uploaded By : OOO , 22/1/2014</span><br>
+    						<span id="RecipeTime">Time needed: 24 mins </span><br><br>
+    					</div>
+    					<div id="RecipeIngredients" style="background-color:white;border-radius:5px;" >
+    						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Ingredients (for 2)</h3>
+    						<br><ul id="RecipeIngredientList" style="margin-left:2%;list-style-type:none;">
+    							<li>A .............. 2 包</li>
+    							<li>B .............. 65 g</li>
+    							<li>C .............. 1/4 tsp</li>
+    							<li>D .............. 2 包</li>
+    						</ul>
+    					<br></div><br>
+    					<div id="steps" style="background-color:white;border-radius:5px;" >
+    						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Steps </h3>
+    						<br>
+    						<ul id="RecipeSteps" style="margin-left:2%;list-style-type:none;">
+    							<li>1. take out the ingredients</li>
+    							<li>2. call your mama</li>
+    						<br></ul>
+    					</div><br>
+    					<div id="comments" style="background-color:white;border-radius:5px;" >
+    						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Comments </h3>
+    						<br>
+    						<ul id="RecipeComments" style="margin-left:2%;list-style-type:none;">
+    							<li>lalala</li>
+    							<li>lallala</li>
+    						<br></ul>
+    					</div><br>
+    					<div id="messages" style="background-color:white;border-radius:5px;" >
+    						<h3 align="center" style="background-color:#ADD8E6;border-radius:5px;opacity:0.8;">Messages </h3>
+    						<br>
+    						<ul id="RecipeMessages" style="margin-left:2%;list-style-type:none;">
+    							<li>1. take out the ingredients</li>
+    							<li>2. call your mama</li>
+    						<br></ul>
+    					</div><br>
+    					<div id="photos" style="background-color:white;border-radius:5px;" >
+    				        <h3 align="center" style="background-color:#ADD8E6;">Photos </h3>
+    				        <div id="RecipePhotos"></div>
+                        </div><br>
+                    </div>
+				</div><!-- #RecipeContent !-->
+
+                <!-- COOKING !-->
 				<div id="Cooking" class="panel" title="28/2 Dinner" style="background-color:silver">
 					<p>
 						<u><h2>Total Time: </h2></u>
