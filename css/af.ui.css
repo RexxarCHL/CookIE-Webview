@@ -1350,13 +1350,13 @@ body {
 	border-radius:0px;
 	float:left;
 	border-left:0px solid transparent;
-	border-right: 1px solid #666;
-	border-bottom: 1px solid #666;
-	border-top: 1px solid #666;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
     margin:0;
 }
 #afui .button-grouped > .button:first-child {
-	border-left: 1px solid #666;
+	border-left: 1px solid white;
 	border-top-left-radius: 6px;
 	border-bottom-left-radius: 6px;
 }

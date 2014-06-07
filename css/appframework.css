@@ -12,9 +12,9 @@
 }
 
 #afui .header{
-    background:#FE9A2E;
+    background:#FAAC58;
     border:none;
-    border-bottom:1px solid #FE9A2E;
+    border-bottom:1px solid #FAAC58;
     color:white;
 }
 
@@ -77,9 +77,9 @@
 }
 
 #afui  .footer {
-     background:#FF8000;
+     background:#FE9A2E;
     border:none;
-    border-top:1px solid #FF8000;
+    border-top:1px solid #FE9A2E;
     box-shadow:none;
 }
 
@@ -89,7 +89,7 @@
 
 #afui footer>a.pressed:not(.button) {
     border-radius:0;    
-    background:#DF7401;
+    background:#FF8000;
 }
 
 #afui footer>a.icon.pressed:not(.button):before {

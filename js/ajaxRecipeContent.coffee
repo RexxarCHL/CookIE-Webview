@@ -24,7 +24,7 @@ getRecipeContent = (recipeId)->
 	undefined #avoid implicit rv
 
 loadRecipeContent = (scope, recipe)->
-	$("#pageTitle").html recipe.recipeName
+	$.ui.setTitle recipe.recipeName
 	scope.find("#Results").hide()
 	scope.find("#Loading").show()
 

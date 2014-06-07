@@ -33,7 +33,7 @@ getKitchenMenus = function(times) {
       scrollerList.clearInfinite();
       if (data.length === 0) {
         $("#main_Kitchen_Menus").find("#infinite").text("No more lists");
-        menuAjaxd--;
+        kitchenMenuAjaxd--;
         return void 0;
       }
       scope = $("#main_Kitchen_Menus");

@@ -26,7 +26,7 @@ getKitchenMenus = (times) ->
 
 			if data.length is 0
 				$("#main_Kitchen_Menus").find("#infinite").text "No more lists"
-				menuAjaxd--
+				kitchenMenuAjaxd--
 				return undefined
 
 			scope = $("#main_Kitchen_Menus")

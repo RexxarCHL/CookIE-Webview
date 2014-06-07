@@ -31,7 +31,7 @@ getRecipeContent = function(recipeId) {
 
 loadRecipeContent = function(scope, recipe) {
   var group, html, i, imgList, ingredient, ingredientList, step, stepList, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
-  $("#pageTitle").html(recipe.recipeName);
+  $.ui.setTitle(recipe.recipeName);
   scope.find("#Results").hide();
   scope.find("#Loading").show();
   scope.find("#RecipeImg").attr("src", recipe.image);
@@ -55,7 +55,7 @@ loadRecipeContent = function(scope, recipe) {
   _ref2 = recipe.stepDigests;
   for (i = _k = 0, _len2 = _ref2.length; _k < _len2; i = ++_k) {
     step = _ref2[i];
-    html = '<li>' + (i+1) + '. ' + step.digest + '</li>';
+    html = '<li>' + i + '. ' + step.digest + '</li>';
     stepList.append(html);
   }
   imgList = scope.find("#RecipePhotos");

@@ -3,7 +3,7 @@ var getMenuContent, loadMenuContent;
 
 getMenuContent = function(scope, menuId) {
   console.log("fetch menu#" + menuId);
-  return $.ajax({
+  $.ajax({
     type: 'GET',
     url: 'http://54.178.135.71:8080/CookIEServer/recipelist',
     dataType: 'jsonp',
@@ -25,9 +25,34 @@ getMenuContent = function(scope, menuId) {
       return void 0;
     }
   });
+  return void 0;
 };
 
-loadMenuContent = function(scope, data) {
+loadMenuContent = function(scope, menu) {
+  var html, imgHolder, recipe, _i, _len, _ref;
   console.log("load for scope: " + scope[0].id);
+  $.ui.setTitle(menu.listName);
+  scope.find("#Results").hide();
+  scope.find("#Loading").show();
+  imgHolder = scope.find(".menuContent_imgHolder");
+  imgHolder.html("");
+  _ref = menu.recipes;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    recipe = _ref[_i];
+    html = '<div class="menuContent_imgWrapper_left">';
+    html += '<div class="menuContent_imgText_left">' + recipe.name + '</div>';
+    html += '<img class="menuContent_img" src="' + recipe.smallURL + '">';
+    html += '</div>';
+    imgHolder.append(html);
+  }
+  if (menu.rating === 0) {
+    menu.rating = 'No rating';
+  }
+  scope.find("#MenuRating").html(menu.rating);
+  scope.find("#MenuByUser").html("By: " + menu.userName);
+  scope.find("#MenuTime").html("Time: " + menu.costTime);
+  scope.find("#MenuDescription").html(menu.description);
+  scope.find("#Loading").hide();
+  scope.find("#Results").show();
   return void 0;
 };
