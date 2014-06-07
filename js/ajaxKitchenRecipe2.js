@@ -38,6 +38,11 @@ getKitchenRecipes = function(times, scrollObj) {
       }
       scope = $("#main_Kitchen_Recipes");
       appendRecipeResult(scope, data);
+      scope.find(".new").forEach(function(ele) {
+        return $(ele).click(function() {
+          return $(this).toggleClass('chosen');
+        });
+      });
       return void 0;
     },
     error: function(data, status) {

@@ -112,6 +112,7 @@ appendRecipeResult = (scope, data)->
 	if data.length%2 and data.length isnt 1 then data.length-- #prevent empty slot
 
 	results = scope.find "#Results"
+	results.find('.new').removeClass('new')
 	count = 0
 	for recipe in data
 		html = ''
@@ -121,9 +122,9 @@ appendRecipeResult = (scope, data)->
 		url = recipe.smallURL
 		#url = 'img/love.jpg' # for test only
 		if count%2 is 0 #left part of the row
-			html += '<div class="recipe_item left" id="Recipe'+id+'">'
+			html += '<div class="recipe_item left new" id="Recipe'+id+'">'
 		else
-			html += '<div class="recipe_item right" id="Recipe'+id+'">'
+			html += '<div class="recipe_item right new" id="Recipe'+id+'">'
 		
 		html += '<a href="#RecipeContent"><img class="recipe_image_wrapper" src="'+url+'"></a>'
 		html += '<div class="recipe_descrip">'+name+'</div>'
@@ -142,17 +143,18 @@ appendRecipeResult = (scope, data)->
 				getRecipeContent(id)
 				undefined
 
-		
-
 	results.find("#bottomBar").remove()
 	results.append '<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>'
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return value
 
+###
 appendMenuResult = (scope, data)->
 	console.log "append menu for scope: " + scope[0].id
 
 	results = scope.find "#Results"
+	results.find(".new").removeClass "new"
+
 	for list in data
 		html = ''
 		id = list.list_id
@@ -162,7 +164,7 @@ appendMenuResult = (scope, data)->
 		if rating is 0 then rating = 'No rating'
 		else rating += " stars"
 		
-		html = '<div class="menu_wrapper" id="Menu'+id+'">'
+		html = '<div class="menu_wrapper new" id="Menu'+id+'">'
 		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
 
 		html += '<div class="menu_img_wrapper">'
@@ -178,17 +180,20 @@ appendMenuResult = (scope, data)->
 		#console.log html
 		#TODO add on click function to cook btn
 
-		### !!! TODO MODIFY FROM COLLECTION TO MENUCONTENT !!! ###
+		#!!! TODO MODIFY FROM COLLECTION TO MENUCONTENT !!!
 		#Fetch detailed menu content on click
+		##
 		scope.find("#Menu"+id).find("#View")[0].onclick = do(id)->
 			-> # closure
 				$("#Collection").find("#Results").hide()
 				$("#Collection").find("#Loading").show()
 				getMenuContent(id)
 				undefined
+		#
 
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return values
+###
 
 addInfiniteScroll = (scope, delay, callback)->
 	console.log "add infinite-scroll to scope:" + scope[0].id

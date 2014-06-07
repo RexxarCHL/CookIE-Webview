@@ -31,7 +31,7 @@ getPopularMenus = (times) ->
 				return undefined
 
 			scope = $("#main_Popular_Menus")
-			appendMenuResult(scope, data)
+			appendPopularMenuResult(scope, data)
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status
@@ -39,3 +39,47 @@ getPopularMenus = (times) ->
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
+
+appendPopularMenuResult = (scope, data)->
+	console.log "append menu for scope: " + scope[0].id
+
+	results = scope.find "#Results"
+	results.find(".new").removeClass "new"
+
+	for list in data
+		html = ''
+		id = list.list_id
+		title = list.name
+		rating = list.rating
+
+		if rating is 0 then rating = 'No rating'
+		else rating += " stars"
+		
+		html = '<div class="menu_wrapper new" id="Menu'+id+'">'
+		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
+
+		html += '<div class="menu_img_wrapper">'
+		for recipe in list.recipes
+			src = recipe.smallURL
+			#src = 'img/love.jpg' # for test only
+			html += '<img class="menu_img" src="'+src+'">'
+		html += '</div>'
+		
+		html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>'
+		html += '</div>'
+		results.append html
+		#console.log html
+		#TODO add on click function to cook btn
+
+		#Fetch detailed menu content on click
+		##
+		scope.find("#Menu"+id).find("#View")[0].onclick = do(id)->
+			-> # closure
+				$("#MenuContent").find("#Results").hide()
+				$("#MenuContent").find("#Loading").show()
+				getMenuContent($("#MenuContent"), id)
+				undefined
+		#
+
+	scope.find("#infinite").text "Load More"
+	undefined #avoid implicit return values

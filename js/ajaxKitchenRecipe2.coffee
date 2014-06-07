@@ -33,6 +33,11 @@ getKitchenRecipes = (times, scrollObj) ->
 
 			scope = $("#main_Kitchen_Recipes")
 			appendRecipeResult(scope, data)
+			# add onclick selector
+			scope.find(".new").forEach (ele)->
+				$(ele).click ->
+					$(this).toggleClass('chosen');
+
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen recipes: " + status
