@@ -1,4 +1,4 @@
-/* Bg #33B5E5
+/* Bg #FF8000
 
 /* Font header #C6C6C6
  * reg white-space:
@@ -23,7 +23,7 @@
 #afui.android  .header {
     background:inherit;
     color:inherit;
-    border-color:#33B5E5;
+    border-color:#FF8000;
 }
 
 #afui.android .header .button {
@@ -49,7 +49,7 @@
 #afui.android .footer {
     box-shadow: none;
  	background:inherit;
- 	border-top:2px solid #33B5E5;
+ 	border-top:2px solid #FF8000;
     border-bottom:none;
     padding:0;
 }
@@ -61,7 +61,7 @@
 
 #afui.android .footer>footer>a.pressed:not(.button) {
  	border:0px;
- 	border-top:4px solid #33B5E5;
+ 	border-top:4px solid #FF8000;
  	border-radius:0px;
  	background:none;
 }
@@ -134,7 +134,7 @@
 #afui.android label { color:inherit; }
 
 #afui.android input[type="radio"]:checked+label:before,#afui.android input[type="checkbox"]:checked+label:before {
-	background: #33B5E5;
+	background: #FF8000;
 }
 
 #afui.android > #aside_menu,
@@ -186,8 +186,8 @@
 
 #afui.android .button.pressed,
 #afui.android  .header .button-grouped > .button.pressed {
-	background:#33B5E5;
-	border-color:#33B5E5;
+	background:#FF8000;
+	border-color:#FF8000;
 }
 
 #afui.android .button.previous::after {
@@ -286,7 +286,7 @@
 
 #afui.android #af_actionsheet {
     border: #666 1px solid;
-    border-top: #33B5E5 3px solid;
+    border-top: #FF8000 3px solid;
     background:#555;
     color:inherit;
     margin:-20px 20px 0 20px;
@@ -295,7 +295,7 @@
 
 #afui.android.light #af_actionsheet {
     border: #bbb 1px solid;
-    border-top: #33B5E5 3px solid;
+    border-top: #FF8000 3px solid;
     background:#bbb;
 }
 

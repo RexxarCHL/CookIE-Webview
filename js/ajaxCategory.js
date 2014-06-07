@@ -72,7 +72,7 @@ appendAllCategoryResult = function(data) {
     _ref = cat.recipes;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       recipe = _ref[_j];
-      html += '<div class="category_recipe"><img class="category_img" src="' + recipe.smallURL + '"><div style="margin-left:3px">' + recipe.name + '</div></div>';
+      html += '<div class="cat_wrapper"><img class="cat_img" src="' + recipe.smallURL + '"><div class="cat_text">' + recipe.name + '</div></div>';
     }
     html += '</a></div><div class="divider">&nbsp;</div>';
     results.append(html);

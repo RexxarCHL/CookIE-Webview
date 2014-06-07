@@ -1,4 +1,4 @@
-/* blue #0190d6
+/* orange #0190d6
 
  */
 
@@ -12,9 +12,9 @@
 }
 
 #afui .header{
-    background:#0088D1;
+    background:#FE9A2E;
     border:none;
-    border-bottom:1px solid #0088D1;
+    border-bottom:1px solid #FE9A2E;
     color:white;
 }
 
@@ -77,9 +77,9 @@
 }
 
 #afui  .footer {
-     background:#0088D1;
+     background:#FF8000;
     border:none;
-    border-top:1px solid #0088D1;
+    border-top:1px solid #FF8000;
     box-shadow:none;
 }
 
@@ -89,7 +89,7 @@
 
 #afui footer>a.pressed:not(.button) {
     border-radius:0;    
-    background:#00AEEF;
+    background:#DF7401;
 }
 
 #afui footer>a.icon.pressed:not(.button):before {
@@ -118,7 +118,7 @@
     background:inherit;
 }
 
-#afui .panel h2 { color:#0088D1;}
+#afui .panel h2 { color:#FF8000;}
 
 #afui .collapsed:after {border-top: 6px solid;}
 #afui .collapsed:before {border:2px solid;}
@@ -177,7 +177,7 @@
 
 #afui #aside_menu .list .divider,
 #afui #menu .list .divider {
-    background:#0088D1;
+    background:#FF8000;
     color:inherit;
     font-size: 1em;
 }
@@ -200,7 +200,7 @@
 }
 
 #afui .list > li > a:after{
-    color:#0088D1;
+    color:#FF8000;
 }
 
 #afui .button.pressed {
@@ -270,7 +270,7 @@
 }
 
 #afui .afPopup {
-    border: solid 1px #33B5E5;
+    border: solid 1px #FF8000;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background:inherit;

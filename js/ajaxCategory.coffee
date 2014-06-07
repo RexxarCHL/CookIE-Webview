@@ -55,7 +55,7 @@ appendAllCategoryResult = (data)->
 		html = '<div class="category_box" id="Category'+id+'">'
 		html += '<a href="#main_Category"><h2 style="margin-left:5px">'+cat.tag.tagName+'</h2>'
 		for recipe in cat.recipes
-			html += '<div class="category_recipe"><img class="category_img" src="'+recipe.smallURL+'"><div style="margin-left:3px">'+recipe.name+'</div></div>'
+			html += '<div class="cat_wrapper"><img class="cat_img" src="'+recipe.smallURL+'"><div class="cat_text">'+recipe.name+'</div></div>'
 		html += '</a></div><div class="divider">&nbsp;</div>'
 
 		results.append html

@@ -125,9 +125,9 @@ appendRecipeResult = (scope, data)->
 		else
 			html += '<div class="recipe_item right" id="Recipe'+id+'">'
 		
-		html += '<a href="#RecipeContent"><img class="recipe_img" src="'+url+'"></a>'
-		html += '<div class="recipe_title">'+name+'</div>'
-		html += '<div class="icon star recipe_rating">'+rating+'</div>'
+		html += '<a href="#RecipeContent"><img class="recipe_image_wrapper" src="'+url+'"></a>'
+		html += '<div class="recipe_descrip">'+name+'</div>'
+		html += '<div class="icon star recipe_descrip">'+rating+'</div>'
 		html += '</div>'
 
 		results.append html
@@ -162,22 +162,23 @@ appendMenuResult = (scope, data)->
 		if rating is 0 then rating = 'No rating'
 		else rating += " stars"
 		
-		html = '<div class="menu_box" id="Menu'+id+'">'
-		html += '<h2 class="menu_title" style="margin-left:5px;color:black;">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
+		html = '<div class="menu_wrapper" id="Menu'+id+'">'
+		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
 
-		html += '<div class="menu_img">'
+		html += '<div class="menu_img_wrapper">'
 		for recipe in list.recipes
 			src = recipe.smallURL
 			#src = 'img/love.jpg' # for test only
-			html += '<img src="'+src+'" height="20%">'
+			html += '<img class="menu_img" src="'+src+'">'
 		html += '</div>'
 		
-		html += '<div class="menu_cooking_box"><a id="Cook" class="button red menu_cooking_btn" href="#Cooking" style="margin-right:5%;">Cook</a><a id="View" class="button green menu_view_btn" style="float:right;width:20%;margin-right:2%;" href="#Collection">View</a></div><div style="display:inline-block;height:0;width:100%;">&nbsp;</div>'
+		html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red menu_cooking_btn" href="#Ingredients</span>">Cook</a><a id="View" class="button green menu_view_btn" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>'
 		html += '</div>'
 		results.append html
 		#console.log html
 		#TODO add on click function to cook btn
 
+		### !!! TODO MODIFY FROM COLLECTION TO MENUCONTENT !!! ###
 		#Fetch detailed menu content on click
 		scope.find("#Menu"+id).find("#View")[0].onclick = do(id)->
 			-> # closure
