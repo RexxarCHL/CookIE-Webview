@@ -1,4 +1,6 @@
 getMenuContent = (scope, menuId)->
+	scope.find("#Results").hide()
+	scope.find("#Loading").show()
 	console.log "fetch menu#"+menuId
 	$.ajax(
 		type: 'GET'
@@ -12,7 +14,6 @@ getMenuContent = (scope, menuId)->
 		success: (data)->
 			console.log "[SUCCESS]fetch menu #"+menuId
 			console.log data
-
 			setTimeout(loadMenuContent(scope, data), 1000)
 			undefined #avoid implicit rv
 		error: (data, status)->
@@ -27,12 +28,10 @@ loadMenuContent = (scope, menu)->
 	console.log "load for scope: "+scope[0].id
 
 	$.ui.setTitle menu.listName
-	scope.find("#Results").hide()
-	scope.find("#Loading").show()
 
 	# image
 	imgHolder = scope.find ".menuContent_imgHolder"
-	imgHolder.html ""
+	imgHolder.html "" #remove previous content
 	for recipe in menu.recipes
 		html = '<div class="menuContent_imgWrapper_left">'
 		html += '<div class="menuContent_imgText_left">'+recipe.name+'</div>'
@@ -49,8 +48,12 @@ loadMenuContent = (scope, menu)->
 	# messages
 	scope.find("#MenuDescription").html menu.description
 
-	# notes
-	# do something
+	# ingredients
+	ingredientList = scope.find "#MenuIngredientList"
+	ingredientList.html "" #remove previous content
+	for ingredient in menu.ingList
+		html = '<li>'+ingredient.ingredientName+" .............. "+ingredient.amount+" "+ingredient.unitName
+		ingredientList.append html
 
 	# photos
 	# do something

@@ -2,6 +2,8 @@
 var getMenuContent, loadMenuContent;
 
 getMenuContent = function(scope, menuId) {
+  scope.find("#Results").hide();
+  scope.find("#Loading").show();
   console.log("fetch menu#" + menuId);
   $.ajax({
     type: 'GET',
@@ -29,11 +31,9 @@ getMenuContent = function(scope, menuId) {
 };
 
 loadMenuContent = function(scope, menu) {
-  var html, imgHolder, recipe, _i, _len, _ref;
+  var html, imgHolder, ingredient, ingredientList, recipe, _i, _j, _len, _len1, _ref, _ref1;
   console.log("load for scope: " + scope[0].id);
   $.ui.setTitle(menu.listName);
-  scope.find("#Results").hide();
-  scope.find("#Loading").show();
   imgHolder = scope.find(".menuContent_imgHolder");
   imgHolder.html("");
   _ref = menu.recipes;
@@ -52,6 +52,14 @@ loadMenuContent = function(scope, menu) {
   scope.find("#MenuByUser").html("By: " + menu.userName);
   scope.find("#MenuTime").html("Time: " + menu.costTime);
   scope.find("#MenuDescription").html(menu.description);
+  ingredientList = scope.find("#MenuIngredientList");
+  ingredientList.html("");
+  _ref1 = menu.ingList;
+  for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+    ingredient = _ref1[_j];
+    html = '<li>' + ingredient.ingredientName + " .............. " + ingredient.amount + " " + ingredient.unitName;
+    ingredientList.append(html);
+  }
   scope.find("#Loading").hide();
   scope.find("#Results").show();
   return void 0;
