@@ -29,7 +29,7 @@ loadRecipeContent = (scope, recipe)->
 	scope.find("#Loading").show()
 
 	# Info
-	scope.find("#RecipeImg").attr("src", recipe.images[0][2])
+	scope.find("#RecipeImg").attr("src", recipe.image)
 	scope.find("#RecipeDescription").text recipe.description
 	scope.find("#RecipeUploadInfo").text "Uploaded by: "+recipe.authorName+", "+(new Date(recipe.date))
 	#scope.find("#RecipeTime").text "Time needed: "+recipe.timeNeeded

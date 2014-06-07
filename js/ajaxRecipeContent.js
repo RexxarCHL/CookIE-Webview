@@ -34,7 +34,7 @@ loadRecipeContent = function(scope, recipe) {
   $("#pageTitle").html(recipe.recipeName);
   scope.find("#Results").hide();
   scope.find("#Loading").show();
-  scope.find("#RecipeImg").attr("src", recipe.images[0][2]);
+  scope.find("#RecipeImg").attr("src", recipe.image);
   scope.find("#RecipeDescription").text(recipe.description);
   scope.find("#RecipeUploadInfo").text("Uploaded by: " + recipe.authorName + ", " + (new Date(recipe.date)));
   ingredientList = scope.find("#RecipeIngredientList");

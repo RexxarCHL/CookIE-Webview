@@ -186,7 +186,7 @@ appendMenuResult = function(scope, data) {
       html += '<img class="menu_img" src="' + src + '">';
     }
     html += '</div>';
-    html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red menu_cooking_btn" href="#Ingredients</span>">Cook</a><a id="View" class="button green menu_view_btn" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>';
+    html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>';
     html += '</div>';
     results.append(html);
 

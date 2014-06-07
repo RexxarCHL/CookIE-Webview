@@ -208,6 +208,7 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxKitchenRecipe2.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxCategory.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxRecipeContent.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/ajaxMenuContent.js"></script>
         <script>
         	/* To allow cross domain access in Phonegap */
 			$(document).bind("mobileinit", function(){
@@ -263,37 +264,6 @@
 							</div>
 							<div class="aDivider">&nbsp;</div>
 						</div>
-						<div class="menu_wrapper">
-                            <h2 class="menu_title"style="margin-left:5px;color:black;">Menu title&nbsp;&nbsp;&nbsp;<i class="icon star">ratings</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>
-                            <div class="menu_img_wrapper">
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                            </div>
-                            <div style="float:left;width:100%;background-color:white;border-radius:5px;">
-                                <a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients">Cook</a>
-                                <a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a>
-                            </div>
-                            <div class="aDivider">&nbsp;</div>
-                        </div>
-                        <div class="menu_wrapper">
-                            <h2 class="menu_title"style="margin-left:5px;color:black;">Menu title&nbsp;&nbsp;&nbsp;<i class="icon star">ratings</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>
-                            <div class="menu_img_wrapper">
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                                <img class="menu_img" src="img/love.jpg" >
-                            </div>
-                            <div style="float:left;width:100%;background-color:white;border-radius:5px;">
-                                <a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients">Cook</a>
-                                <a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a>
-                            </div>
-                            <div class="aDivider">&nbsp;</div>
-                        </div>
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_Popular_Menu !-->
@@ -380,19 +350,19 @@
 						<div class="category_box" style="position: relative; float: left; width: 100%;background-color:white;border-radius:5px;">
                             <a href="#main_Category">
                                 <h2 style="margin-left:5px;">Popular</h2>
-                                <div class="cat_wrapper" style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-                                        <img class="cat_img" src="img/love.jpg" style="float: left; width:100%;">
+                                <div class="cat_wrapper">
+                                        <img class="cat_img" src="img/love.jpg">
                                         <div class="cat_text">Most Popular</div>
                                 </div>
-                                <div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-                                        <img src="img/love.jpg" style="float: left; width:100%;">
+                                <div class="cat_wrapper">
+                                        <img src="img/love.jpg" class="cat_img">
                                         <div style="margin-left:3px">French</div>
                                 </div>
-                                <div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
-                                        <img src="img/love.jpg" style="float: left; width:100%;">
+                                <div class="cat_wrapper">
+                                        <img src="img/love.jpg" class="cat_img">
                                         <div style="margin-left:3px">French</div>
                                 </div>
-                                <div style="display:inline-block; width:15%; margin:5px 1% 5px 1%; float:left;">
+                                <div class="cat_wrapper">
                                         <img src="img/love.jpg" style="float: left; width:100%;">
                                         <div style="margin-left:3px">French</div>
                                 </div>
@@ -611,7 +581,7 @@
 
 				<!-- SEARCH RECIPES !-->
 				<div title="Search" id="main_Search" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver">
-					<input type="search" id="SearchBar" placeholder="Search" style="margin-top:40%" result>
+					<input type="search" id="SearchBar" placeholder="Search" style="margin-top:3%" result>
 					<div id="SearchSelectTab" class="button-grouped flex">
 						<a class="button orange" data-transition="fade">Recipes</a>
                         <a class="button" data-transition="fade">Menus</a>
