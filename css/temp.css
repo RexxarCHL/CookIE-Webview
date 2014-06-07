@@ -88,6 +88,10 @@ border-radius: 3px;
   background-color: #DF7401;
   opacity:0.8;
 }
+.recipe_item.chosen {
+  background-color: #DF7401;
+  opacity:0.8;
+}
 .recipe_descrip{
   margin-left:5%;
   color:black;
