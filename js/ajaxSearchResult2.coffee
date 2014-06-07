@@ -14,6 +14,7 @@ ajaxSearchResults2.coffee
 
 lastId = -1
 searchAjaxd = 0
+mode = 0 # Used for kitchen
 $(document).ready ->
 	initSelectBtn()
 	$("#SearchBar").keyup(->
@@ -122,11 +123,11 @@ appendRecipeResult = (scope, data)->
 		url = recipe.smallURL
 		#url = 'img/love.jpg' # for test only
 		if count%2 is 0 #left part of the row
-			html += '<div class="recipe_item left new" id="Recipe'+id+'">'
+			html += '<div class="recipe_item left new" id="Recipe'+id+'" recipe-id="'+id+'">'
 		else
-			html += '<div class="recipe_item right new" id="Recipe'+id+'">'
+			html += '<div class="recipe_item right new" id="Recipe'+id+'" recipe-id="'+id+'">'
 		
-		html += '<a href="#RecipeContent"><img class="recipe_image_wrapper" src="'+url+'"></a>'
+		html += '<img class="recipe_image_wrapper" src="'+url+'">'
 		html += '<div class="recipe_descrip">'+name+'</div>'
 		html += '<div class="icon star recipe_descrip">'+rating+'</div>'
 		html += '</div>'
@@ -136,8 +137,14 @@ appendRecipeResult = (scope, data)->
 		count++
 		
 		#Fetch detailed recipe content on click
-		scope.find("#Recipe"+id).find("img")[0].onclick = do (id)->
+		scope.find("#Recipe"+id)[0].onclick = do (id)->
 			-> # closure 
+				# TODO add inspect/select in kitchen
+				if mode
+					$(this).toggleClass 'chosen'
+					return undefined
+
+				$.ui.loadContent("#RecipeContent")
 				$("#RecipeContent").find("#Results").hide()
 				$("#RecipeContent").find("#Loading").show()
 				getRecipeContent(id)

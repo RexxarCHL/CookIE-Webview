@@ -46,8 +46,8 @@ loadRecipeContent = (scope, recipe)->
 	# Steps
 	stepList = scope.find("#RecipeSteps")
 	stepList.html "" #remove previous content
-	for step in recipe.stepDigests
-		html = '<li>'+step.stepId+'. '+step.digest+'</li>'
+	for step, i in recipe.stepDigests
+		html = '<li>'+i+'. '+step.digest+'</li>'
 		stepList.append html
 
 	# Comments

@@ -68,7 +68,7 @@ appendKitchenMenuResult = function(scope, data) {
     } else {
       rating += " stars";
     }
-    html = '<div class="menu_wrapper new" id="Menu' + id + '">';
+    html = '<div class="menu_wrapper new" id="Menu' + id + '" menu-id="' + id + '">';
     html += '<h2 class="menu_title">' + title + '&nbsp;&nbsp;&nbsp;<i class="icon star">' + rating + '</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>';
     html += '<div class="menu_img_wrapper">';
     _ref = list.recipes;

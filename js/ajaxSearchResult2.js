@@ -13,11 +13,13 @@ ajaxSearchResults2.coffee
  	addInfiniteScroll(scope, delay, callback)
  		Add infinite scroll functionality to 'scope'. 'callback' is called after 'delay' miliseconds after infinite-scroll event is fired.
  */
-var addInfiniteScroll, appendRecipeResult, initSelectBtn, lastId, search, searchAjaxd;
+var addInfiniteScroll, appendRecipeResult, initSelectBtn, lastId, mode, search, searchAjaxd;
 
 lastId = -1;
 
 searchAjaxd = 0;
+
+mode = 0;
 
 $(document).ready(function() {
   initSelectBtn();
@@ -137,18 +139,23 @@ appendRecipeResult = function(scope, data) {
     rating = recipe.rating;
     url = recipe.smallURL;
     if (count % 2 === 0) {
-      html += '<div class="recipe_item left new" id="Recipe' + id + '">';
+      html += '<div class="recipe_item left new" id="Recipe' + id + '" recipe-id="' + id + '">';
     } else {
-      html += '<div class="recipe_item right new" id="Recipe' + id + '">';
+      html += '<div class="recipe_item right new" id="Recipe' + id + '" recipe-id="' + id + '">';
     }
-    html += '<a href="#RecipeContent"><img class="recipe_image_wrapper" src="' + url + '"></a>';
+    html += '<img class="recipe_image_wrapper" src="' + url + '">';
     html += '<div class="recipe_descrip">' + name + '</div>';
     html += '<div class="icon star recipe_descrip">' + rating + '</div>';
     html += '</div>';
     results.append(html);
     count++;
-    scope.find("#Recipe" + id).find("img")[0].onclick = (function(id) {
+    scope.find("#Recipe" + id)[0].onclick = (function(id) {
       return function() {
+        if (mode) {
+          $(this).toggleClass('chosen');
+          return void 0;
+        }
+        $.ui.loadContent("#RecipeContent");
         $("#RecipeContent").find("#Results").hide();
         $("#RecipeContent").find("#Loading").show();
         getRecipeContent(id);
