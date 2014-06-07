@@ -145,6 +145,19 @@
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <link rel="stylesheet" type="text/css" href="css/temp.css"  />
+        <link rel="stylesheet" type="text/css" href="css">
+        <script>
+            $(document).ready(function() {
+                $('.kitchen_recipe_item').forEach(function(elem) {
+                    $(elem).click(function () {
+                        $(this).toggleClass('chosen');
+                    });
+                });
+                $('#header_search_btn').click(function() {
+                    $('.popup_btn').toggle();
+                });
+            });
+        </script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxSearchResult2.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
@@ -163,20 +176,23 @@
 
     <body>
         <div id="afui">
-            <!--splashscreen
             <div id="splashscreen" class='ui-loader heavy'>
                 CookIE
                 <br /><br />
                 <span class='ui-icon ui-icon-loading spin'></span>
                 <h1>Starting app</h1>
-            </div> !-->
+            </div>
 			<!-- TOP LEFT CONRNER !-->
 			<div id="header">
 				<a id="backButton" onclick="$.ui.goBack()" class='button' style='visibility:visible'>Back</a>
                 <a class="button icon settings" style="float:right">Search</a>
 				<h1 id="headerText"></h1>
 			</div><!-- #header !-->
-			
+
+            <!-- POP-UP BTN !-->
+			<div id="popup_btn_trash" class="popup_btn" style="display:none;">&nbsp;<a class="icon trash big"></a></div>
+            <div id="popup_btn_edit" class="popup_btn" style="display:none;">&nbsp;<a class="icon pencil big"></a></div>
+
 			<div id="content">
 				<!-- POPULAR MENU !-->
 				<div title='Popular' id="main_Popular_Menus" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true' style="background-color:silver;">
@@ -244,43 +260,43 @@
 						<a class="button" href="#main_Popular_Menus" data-transition="fade">Menus</a>
 					</div>
 					<div style="width:100%">
-						<div id="Results" style="background-color:silver;">
+						<div id="Results">
 							<!-- this is a row -->
-							<div class="recipe_list_row list_row_left" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
+							<div class="recipe_item left">
 	                            <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
 	                            <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
 	                        </div>
-	                        <div class="recipe_list_row list_row_right" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                        <div class="recipe_item right">
 	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
 	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star" style="margin-left:5%;">10</div>
 	                        </div>
 	                        <!-- end of a row -->
 	                        <!-- this is a row -->
-							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
-	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <!-- end of a row -->
-	                        <!-- this is a row -->
-							<div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
-	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <!-- end of a row -->
+                            <div class="recipe_item left">
+                                <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
+                                <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
+                            </div>
+                            <div class="recipe_item right">
+                                <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                                <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star" style="margin-left:5%;">10</div>
+                            </div>
+                            <!-- end of a row -->
+                            <!-- this is a row -->
+                            <div class="recipe_item left">
+                                <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
+                                <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
+                            </div>
+                            <div class="recipe_item right">
+                                <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                                <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star" style="margin-left:5%;">10</div>
+                            </div>
+                            <!-- end of a row -->
 							<!-- fix to prevent the silver div from collapsing -->
 	                        <div id="bottomBar" style="display:block;height:0;clear:both;"> </div> 
 						</div>
@@ -292,7 +308,7 @@
 				<!-- CATEGORIES !-->
 				<div title="All Categories" id="main_AllCategories" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_categories" style="background-color:silver;">
 					<!-- same row !-->
-					<br>
+					<br />
 					<div id="Results">
 						<div class="category_box" style="position: relative; float: left; width: 100%;background-color:white;border-radius:5px;">
 							<a href="#main_Category">
@@ -359,6 +375,8 @@
 					</div>
 					<div id='infinite' style='height:60px;line-height:60px;font-weight:bold;text-align:center'>Load More</div>
 				</div><!-- #main_AllCategories !-->
+
+                <!-- SINGLE CATEGORY !-->
 				<div title="Default Title" id="main_Category" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_categories" style="background-color:silver;">
 					<div id="Results" style="background-color:silver">
 					</div>
@@ -374,41 +392,41 @@
                     <div style="width:100%">
 	                    <div id="Results" style="background-color:silver">
 	                    	<!-- this is a row -->
-							<div class="recipe_list_row list_row_left" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:left;background-color:white;">
+							<div class="kitchen_recipe_item left">
 	                            <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
 	                            <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
 	                        </div>
-	                        <div class="recipe_list_row list_row_right" style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
+	                        <div class="kitchen_recipe_item right">
 	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
 	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star" style="margin-left:5%;">10</div>
 	                        </div>
 	                        <!-- end of a row -->
-	                    	<!--this is a row -->
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                    	<!--end of a row-->
-	                    	<!--this is a row -->
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                        <div style="display:inline-block; width:48%; margin:5px 1% 5px 1%; float:right;background-color:white;">
-	                            <img style="max-width:90%;max-height:100%;margin:3px 5% 0px 5%;" src="img/love.jpg">
-	                            <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
-	                            <div class="icon star" style="margin-left:5%;">10</div>
-	                        </div>
-	                    	<!--end of a row-->
+	                    	<!-- this is a row -->
+                            <div class="kitchen_recipe_item left">
+                                <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
+                                <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
+                            </div>
+                            <div class="kitchen_recipe_item right">
+                                <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                                <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star" style="margin-left:5%;">10</div>
+                            </div>
+                            <!-- end of a row -->
+                            <!-- this is a row -->
+                            <div class="kitchen_recipe_item left">
+                                <a href="#RecipeContent"><img class="recipe_img" style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg"></a>
+                                <div class="recipe_title" style="margin-left:5%;color:black;">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star recipe_rating" style="margin-left:5%;color:black;">10</div>
+                            </div>
+                            <div class="kitchen_recipe_item right">
+                                <img style="max-width:90%;max-height:95%;margin:3px 5% 0px 5%;" src="img/love.jpg">
+                                <div style="margin-left:5%">Pineapple</div>    <!-- center by screen width! !-->
+                                <div class="icon star" style="margin-left:5%;">10</div>
+                            </div>
+                            <!-- end of a row -->
 	                    	<!-- fix to prevent the silver div from collapsing -->
 	                        <div id="bottomBar" style="display:block;height:0;clear:both;"> </div> 
 	                    </div>
@@ -504,17 +522,17 @@
     						</div>
     					</div>
     					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-    						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;My notes</h3>
+    						<h3 style="background-color:#ADD8E6;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;My notes</h3>
     						<h4 style="margin-left:2%;">Some text</h4><br><br><br><br>
     						<h4 style="margin-left:2%;">La la la la</h4>
     					</div>
     					<div style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-    						<h3 style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Messages</h3>
+    						<h3 style="background-color:#ADD8E6;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Messages</h3>
     						<h4 style="margin-left:2%;">Some text</h4>
     					</div>
                         <!-- photos -->
     					<div id="MenuPhotos" style="background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;">
-    						<h3 class="menu_content_photos_title" style="background-color:#5CC;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Photos</h3>
+    						<h3 class="menu_content_photos_title" style="background-color:#ADD8E6;width:100%;opacity:0.6;border-radius:5px;">&nbsp;&nbsp;&nbsp;Photos</h3>
     						<div class="menu_content_photos" style="display:inline-block;width:33%;padding:2px 2px 2px 2px;float:left;">
     							<img src="img/love.jpg" style="max-width:100%;">
     						</div>
@@ -631,128 +649,164 @@
                 <!-- COOKING !-->
 				<div id="Cooking" class="panel" title="28/2 Dinner" style="background-color:silver">
 					<p>
-						<u><h2>Total Time: </h2></u>
-						<i>150 min -> 30 min</i>
-					</p>
-					<p>
-						<u><h2>Steps:</h2></u>
-						<h1>append menus</h1>
-					</p>
-					<div class="button-grouped flex"> 
-						<a class="button" href="#Step">Begin </a>	<!-- js to update content !-->
-					</div>
+                        <u><h2>Total Time: </h2></u>
+                        <i>150 min -> 30 min</i>
+                    </p>
+                    <p>
+                        <u><h2>Steps:</h2></u>
+                        <div style="background-color:white;border-radius:5px;height:10%;margin-top:2%;"> 
+                            <img src="img/love.jpg" height="90%" style="float:left;margin-left:5px;"></img>
+                            <h3 style="margin-left:13%;">1. Do something</h3>
+                        </div>
+                        <div style="background-color:white;border-radius:5px;height:10%;margin-top:2%;"> 
+                            <img src="img/love.jpg" height="90%" style="float:left;margin-left:5px;"></img>
+                            <h3 style="margin-left:13%;">2. Do somethingDo somethingDo somethingDo somethingDo somethingDo somethingDo something</h3>
+                        </div>
+                        <div style="background-color:white;border-radius:5px;height:10%;margin-top:2%;"> 
+                            <img src="img/love.jpg" height="90%" style="float:left;margin-left:5px;"></img>
+                            <h3 style="margin-left:13%;">3. Do something</h3>
+                        </div>
+                        <div style="background-color:white;border-radius:5px;height:10%;margin-top:2%;"> 
+                            <img src="img/love.jpg" height="90%" style="float:left;margin-left:5px;"></img>
+                            <h3 style="margin-left:13%;">4. Do something</h3>
+                        </div>      
+                    </p>
+                    <div class="button-grouped flex" style="position:fixed;bottom:0px;margin-bottom:1%;width:95%;"> 
+                        <a class="button" href="#Step">Begin </a>   <!-- js to update content !-->
+                    </div>
 				</div><!-- #Cooking !-->
+
+                <!-- INGREDIENTS !-->
+                <div id="Ingredients" class="panel" title="28/2 Dinner" style="background-color:silver">
+                    <div style="background-color:white;width:100%;height:100%;">
+                        <h2  style="margin-top:1%;margin-left:5%;">Ingredients</h2>
+                      <input type="checkbox" name="asdfasdf" value="2"><label for="bbbbb"><b>一顆</b>  雞蛋</label>
+                      <input type="checkbox" name="asdfasdf" value="3"><label for="ccccc"><b>1/4tsp</b>  沙拉油</label>
+                      <input type="checkbox" name="asdfasdf" value="3"><label for="dddd"><b>1/2把</b>  芹菜</label>
+                      <input type="checkbox" name="asdfasdf" value="2"><label for="bbbbb">雞蛋</label>
+                      <input type="checkbox" name="asdfasdf" value="3"><label for="ccccc">沙拉油</label>
+                      <input type="checkbox" name="asdfasdf" value="3"><label for="dddd">芹菜</label>
+                    </div>
+                
+                    <div class="button-grouped flex" style="position:fixed;width:95%;margin-bottom:2px;bottom:0;"> 
+                        <a class="button" href="#Cooking">Begin </a>    <!-- js to update content !-->
+                    </div>
+                </div><!-- #Ingredients !-->
 			
+                <!-- STEP !-->
                 <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:silver;" data-footer='none'>
 
-					<!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
-					<div id="steps_container" style="border:0px 1px 0px 1px solid silver; height:95%;">
+                    <!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
+                    <div id="steps_container" style="border:0px 1px 0px 1px solid silver; height:95%;">
                                         &nbsp;
-						<div style="border:1px solid; width:100%;height:5%;border-width: 1px;border-color:silver;">
-							<div style="width:90%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-left:2px;margin-top:1%;">&nbsp;</div>
-							<h4 style="position:absolute;left:10px;margin-top:1%;">Soak mushrooms</h4>
-							<h4 style="position:absolute;right:10px;margin-top:1%;">29:30</h4>
-						</div> 
-						<div style="border:1px solid; width:100%;height:5%;border-width: 1px;border-color:silver;">
-							<div style="width:60%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:1%;margin-left:2px;">&nbsp;</div>
-							<h4 style="position:absolute;left:10px;margin-top:1%;">Cook rice</h4>
-							<h4 style="position:absolute;right:10px;margin-top:1%;">44:50</h4>
-						</div> 
-											
-						<div style="background-color:silver; height:75%; border: 1px solid;border-color:silver;">
-							<div style="background-color:white;margin:2px 5% 2px 5%;margin-bottom:0px;height:95%" >
-								<br>
-								<h3 style="background-color:silver;margin:3px 20px 3px 20px;margin-top:0%;text-align:center;height:5%">
-									Saute beef
-								</h3>
-								<div style="margin:3px 20px 3px 20px;border:1px;border-color:silver;">
-									<img src="img/love.jpg" style="height:80%"></img>
-								</div>
-								<div style="margin:3px 20px 3px 20px;height:5%">
-									Saute beef with sauce A.
-								</div>
-							</div>
-						</div>
+                        <div style="border:1px solid; width:100%;height:5%;border-width: 1px;border-color:silver;">
+                            <div style="width:90%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-left:2px;margin-top:1%;">&nbsp;</div>
+                            <h4 style="position:absolute;left:10px;margin-top:1%;">Soak mushrooms</h4>
+                            <h4 style="position:absolute;right:10px;margin-top:1%;">29:30</h4>
+                        </div> 
+                        <div style="border:1px solid; width:100%;height:5%;border-width: 1px;border-color:silver;">
+                            <div style="width:60%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:1%;margin-left:2px;">&nbsp;</div>
+                            <h4 style="position:absolute;left:10px;margin-top:1%;">Cook rice</h4>
+                            <h4 style="position:absolute;right:10px;margin-top:1%;">44:50</h4>
+                        </div> 
+                                            
+                        <div style="background-color:silver; height:75%; border: 1px solid;border-color:silver;">
+                            <div style="background-color:white;margin:2px 8% 2px 8%;margin-bottom:0px;height:95%;border-radius:3px;" >
+                                <br>
+                                <h3 style="background-color:silver;margin:3px 20px 3px 20px;margin-top:0%;text-align:center;height:6%;border-radius:3px;">
+                                    Saute beef
+                                </h3>
+                                <div style="margin:3px 20px 3px 20px;border:1px;border-color:silver;">
+                                    <img src="img/love.jpg" style="height:80%;margin-left:15%;" ></img>
+                                </div>
+                                <h3 style="margin:3px 20px 3px 20px;height:5%" align="center">
+                                    Saute beef with sauce A.
+                                </h3>
+                            </div>
+                        </div>
                             <div style="border:1px solid; width:100%;height:5%;border-color:silver;">
                                 <div style="width:10%;opacity:0.4;background-color:#6699CA;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:1%;margin-left:2px;">&nbsp;</div>
                                 <h4 style="position:absolute;left:10px;margin-top:1%;">Stirfry mushroom</h4>
                                 <h4 style="position:absolute;right:10px;margin-top:1%;">2:30</h4>
                             </div> 
-					</div>
-					<div class="button-grouped flex" style="height:7%;position:fixed;width:95%;margin-bottom:2px;bottom:0;"> 
-						<a class="button">Prev </a>	<!-- js to update content !-->
-						<a class="button">Next </a>	<!-- js to update content !-->
-					</div>
-				</div><!-- #Step !-->   
-                	<div title="整體評分" id="Finish" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-footer='none'>
-					<div style="background-color:white;height:100%;">
-						<div style="margin-left:2%;">
-							<h2><u>所需時間</u></h2>
-								<div>150 min -> 26 min !!</div>
-							<h2><u>整體評分</u></h2>
-								<div class="icon star" style="display:inline-block;"></div>
-								<div class="icon star" style="display:inline-block;"></div>
-								<div class="icon star" style="display:inline-block;"></div>
-								<div class="icon star" style="display:inline-block;"></div>
-								<div class="icon star" style="display:inline-block;"></div>	
-							<h2><u>筆記/評論</u></h2>
-								<input type="text" placeholder="lalala"></input>
-						</div>
-						<a href="#Rate">
-							<div class="button" style="width:90%;margin-left:4%;position:fixed;height:8%;margin-bottom:1%;bottom:0px;">Continue</div>
-						</a>
-					</div>
-				</div>
-				<div title="個別評分" id="Rate" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-footer='none'>
-					<div style="background-color:white;border-radius:3px;">
-						<div style="margin:1% 2% 1% 2%;">
-							<img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
-							<h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
-							<div style="margin-left:5%;">
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>	
-							<br><br>
-							<h3>筆記/評論</h3>
-								<input type="text" placeholder="lalala"></input>
-							</div>
-						</div>
-					</div>
-					<div style="background-color:white;border-radius:3px;">
-						<div style="margin:1% 2% 1% 2%;">
-							<img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
-							<h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
-							<div style="margin-left:5%;">
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>	
-							<br><br>
-							<h3>筆記/評論</h3>
-								<input type="text" placeholder="lalala"></input>
-							</div>
-						</div>
-					</div>
-					<div style="background-color:white;border-radius:3px;">
-						<div style="margin:1% 2% 1% 2%;">
-							<img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
-							<h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
-							<div style="margin-left:5%;">
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>
-							<div class="icon star" style="display:inline-block;"></div>	
-							<br><br>
-							<h3>筆記/評論</h3>
-								<input type="text" placeholder="lalala"></input>
-							</div>
-						</div>
-					</div>
-				</div>
+                    </div>
+                    <div class="button-grouped flex" style="height:6%;position:fixed;width:95%;margin-bottom:2px;bottom:0;"> <!-- needs to be centered !-->
+                        <a class="button">Prev </a> <!-- js to update content !-->
+                        <a class="button" href="#Finish">Next </a>  <!-- js to update content !-->
+                    </div>
+                </div><!-- #Step !-->
+
+                <!-- FINISH !-->
+                <div title="整體評分" id="Finish" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-footer='none'>
+                    <div style="background-color:white;height:100%;">
+                        <div style="margin-left:2%;">
+                            <h2><u>所需時間</u></h2>
+                                <div>150 min -> 26 min !!</div>
+                            <h2><u>整體評分</u></h2>
+                                <div class="icon star" style="display:inline-block;"></div>
+                                <div class="icon star" style="display:inline-block;"></div>
+                                <div class="icon star" style="display:inline-block;"></div>
+                                <div class="icon star" style="display:inline-block;"></div>
+                                <div class="icon star" style="display:inline-block;"></div> 
+                            <h2><u>筆記/評論</u></h2>
+                                <input type="text" placeholder="lalala"></input>
+                        </div>
+                        <a href="#Rate">
+                            <div class="button" style="width:90%;margin-left:4%;position:fixed;height:8%;margin-bottom:1%;bottom:0px;">Continue</div>
+                        </a>
+                    </div>
+                </div><!-- #Finish !-->
+                <!-- RATE !-->
+                <div title="個別評分" id="Rate" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:silver" data-footer='none'>
+                    <div style="background-color:white;border-radius:3px;">
+                        <div style="margin:1% 2% 1% 2%;">
+                            <img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
+                            <h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
+                            <div style="margin-left:5%;">
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div> 
+                            <br><br>
+                            <h3>筆記/評論</h3>
+                                <input type="text" placeholder="lalala"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:white;border-radius:3px;">
+                        <div style="margin:1% 2% 1% 2%;">
+                            <img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
+                            <h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
+                            <div style="margin-left:5%;">
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div> 
+                            <br><br>
+                            <h3>筆記/評論</h3>
+                                <input type="text" placeholder="lalala"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:white;border-radius:3px;">
+                        <div style="margin:1% 2% 1% 2%;">
+                            <img src="img/love.jpg" width="10%" style="display:inline-block;"></img>
+                            <h2 width="30%" style="display:inline-block;margin-left:5%;">黯然消魂飯</h2><br>
+                            <div style="margin-left:5%;">
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div>
+                            <div class="icon star" style="display:inline-block;"></div> 
+                            <br><br>
+                            <h3>筆記/評論</h3>
+                                <input type="text" placeholder="lalala"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- #Rate !-->
             </div><!-- #content !-->
 			<div id="navbar">
                 <a href="#main_Popular_Menus" id='navbar_popular' class='icon home'>Popular</a>

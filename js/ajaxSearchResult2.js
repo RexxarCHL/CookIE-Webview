@@ -136,9 +136,9 @@ appendRecipeResult = function(scope, data) {
     rating = recipe.rating;
     url = recipe.smallURL;
     if (count % 2 === 0) {
-      html += '<div class="recipe_list_row list_row_left" id="Recipe' + id + '">';
+      html += '<div class="recipe_item left" id="Recipe' + id + '">';
     } else {
-      html += '<div class="recipe_list_row list_row_right" id="Recipe' + id + '">';
+      html += '<div class="recipe_item right" id="Recipe' + id + '">';
     }
     html += '<a href="#RecipeContent"><img class="recipe_img" src="' + url + '"></a>';
     html += '<div class="recipe_title">' + name + '</div>';

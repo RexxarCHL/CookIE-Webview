@@ -15,7 +15,6 @@
 	color:black;
 }
 
-
 .menu_cooking_box{
 	float:left;
 	width:100%;
@@ -34,15 +33,20 @@
 	width:20%;
 	margin-right:2%;
 }
-.recipe_list_row{
-	display:inline-block;
-	width:48%;
-	margin:5px 1% 5px 1%;
-	background-color:white;
+
+.recipe_item {
+  display:inline-block; 
+  width:48%; 
+  margin:5px 1% 5px 1%; 
+  background-color:white;
+  border-radius: 3px;
 }
 
-.list_row_left{
-	float:left;
+.recipe_item.left {
+  float:left;
+}
+.recipe_item.right {
+  float:right;
 }
 
 .list_row_right{
@@ -114,7 +118,7 @@
 }
 
 .menu_content_photos_title{
-	background-color:#5CC;
+	background-color:#ADD8E6;
 	width:100%;
 	opacity:0.6;
 	border-radius:5px;
@@ -125,4 +129,63 @@
 	width:33%;
 	padding:2px 2px 2px 2px;
 	float:left;
+}
+
+.recipe_item {
+  display:inline-block; 
+  width:48%; 
+  margin:5px 1% 5px 1%; 
+  background-color:white;
+  border-radius: 3px;
+}
+.kitchen_recipe_item{
+  display:inline-block; 
+  width:48%; 
+  margin:5px 1% 5px 1%; 
+  background-color:white;
+border-radius: 3px;
+  }
+.kitchen_recipe_item.left{
+  float:left;
+}
+.kitchen_recipe_item.right{
+  float:right;
+}
+.recipe_item.left {
+  float:left;
+}
+.recipe_item.right {
+  float:right;
+}
+.kitchen_recipe_item.chosen {
+  /*
+  border: solid orange;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 0.5%;
+  border-right-width: 0.5%;
+  margin: 3px 0.5% 3px 0.5%;
+  */
+  background-color: #DF7401;
+  opacity:0.8;
+}
+.popup_btn {
+  display: block;
+  position: fixed;
+  background-color: #0080FF;
+  z-index: 10000;
+  width:32px;
+  height:32px;
+  border-radius:15px;
+  color: white;
+  text-align: center;
+  opacity: 0.85;
+}
+#popup_btn_trash {
+  top: 5px;
+  right: 80px;
+}
+#popup_btn_edit {
+  top: 50px;
+  right: 50px;
 }
