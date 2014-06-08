@@ -2,6 +2,7 @@ $(document).ready ->
 	$('body').find('.popup_btn').forEach (elem)->
 		$(elem).click ->
 			utilityDetect(this)
+		undefined # avoid implicit rv
 
 	undefined
 
@@ -43,6 +44,7 @@ utilityEdit = ->
 
 	undefined
 
+kitchenRecipesAjaxd = 0 #DEBUG
 utilityTrash = ->
 	console.log 'popup trash'
 	window.mode = 1
@@ -52,14 +54,17 @@ utilityTrash = ->
 	utilBtn.html 'Delete selected recipe.'
 
 	utilBtn.click ->
+		selectedId = findChosenRecipeId()
+		if selectedId.length is 0 then return undefined
+
 		ans = confirm "Deleteing recipes from Kitchen. Are you sure?"
 		if ans is false then return undefined
-
-		selectedId = findChosenRecipeId()
 
 		data = 
 			'type': 'recipe'
 			'recipe_id': selectedId
+		console.log data
+		data = JSON.stringify(data)
 		console.log data
 		
 		$.ajax(
@@ -71,10 +76,15 @@ utilityTrash = ->
 			data: data
 			timeout: 10000
 			success: (data)->
-				data = JSON.parse(data)
+				#data = JSON.parse(data)
 				console.log "[SUCCESS] deleting recipes #"+selectedId
 				console.log data
 				
+				scope = $("#main_Kitchen_Recipes")
+				scope.find("#Results").html ""
+				scope.find("#infinite").text "Reloading..."
+				kitchenRecipesAjaxd = 0
+				getKitchenRecipes(kitchenRecipesAjaxd)
 				undefined # avoid implicit rv
 			error: (data, status)->
 				console.log "[ERROR] deleting recipes #"+selectedId
@@ -94,3 +104,4 @@ findChosenRecipeId = ->
 		recipeSelectedId.push elem.getAttribute 'data-recipe-id'
 	console.log recipeSelectedId
 	return recipeSelectedId
+
