@@ -64,7 +64,7 @@
                   case "main_AllCategories":
                     $('#headerBtn').attr( "class", "icon magnifier big" ) ;
                     $('#headerBtn').bind("click",function(){
-                        alert("go to search");
+                        $.ui.loadContent("#main_Search");
                     }); 
                     break;
                   case "main_Kitchen_Recipes":
@@ -869,9 +869,9 @@
                 </div><!-- #Rate !-->
             </div><!-- #content !-->
 			<footer id="navbar">
-                <a href="#main_Popular_Menus" id='navbar_popular' class='icon home'>Popular</a>
+                <a href="#main_Popular_Recipes" id='navbar_popular' class='icon home'>Popular</a>
 				<a href="#main_AllCategories" id='navbar_categories' class="icon target" >Categories</a>
-				<a href="#main_Kitchen_Menus" id='navbar_kitchen' class="icon picture" >Kitchen</a>
+				<a href="#main_Kitchen_Recipes" id='navbar_kitchen' class="icon picture" >Kitchen</a>
 				<a href="#main_Search" id='navbar_search' class="icon key">Search</a>
 				<a href="#main_User" id='navbar_user' class="icon target">User</a>
 	        </footer><!-- #navbar !-->
