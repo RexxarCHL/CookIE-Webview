@@ -11,7 +11,7 @@ $(document).ready ->
 getAllCategory = (times) ->
 	$.ajax(
 		type: "GET"
-		url: "http://54.178.135.71:8080/CookIEServer/discover_tags"
+		url: "http://54.178.135.71:8080/CookIEServer/discover_category"
 		dataType: 'jsonp'
 		crossDomain: true
 		data:
@@ -32,6 +32,7 @@ getAllCategory = (times) ->
 				allCatAjaxd--
 				return undefined
 
+			$("#main_AllCategories").find("#infinite").text "Load more"
 			appendAllCategoryResult(data)
 			undefined #avoid implicit rv
 		error: (data)->
@@ -49,37 +50,40 @@ appendAllCategoryResult = (data)->
 	console.log "append all category result"
 
 	results = $("#main_AllCategories").find("#Results")
-	for cat in data
-		if cat.recipes.length is 0 then continue
-		id = cat.tag.tagId
-		html = '<div class="category_box" id="Category'+id+'">'
-		html += '<a href="#main_Category"><h2 style="margin-left:5px">'+cat.tag.tagName+'</h2>'
-		for recipe in cat.recipes
-			html += '<div class="cat_wrapper"><img class="cat_img" src="'+recipe.smallURL+'"><div class="cat_text">'+recipe.name+'</div></div>'
-		html += '</a></div><div class="divider">&nbsp;</div>'
+	results.find(".new").removeClass("new")
 
+	for tagGroup in data
+		if tagGroup.tagWithRecipe.length is 0 then continue
+		html = '<div class="category_box" id="TagFilter'+tagGroup.tagfilter.filterId+'"><h2 style="margin-left:5px;">'+tagGroup.tagfilter.filterName+'</h2>'
+		for tag in tagGroup.tagWithRecipe
+			id = tag.tag.tagId
+			html += '<div id="Tag'+id+'" class="cat_wrapper new" data-tag-id="'+id+'" data-times="0"><img class="cat_img" src="'+tag.mostPopularRecipe.smallURL+'"><div class="cat_text">'+tag.tag.tagName+'</div></div>'
+	
+		html += '</div><div class="divider">&nbsp;</div>'
 		results.append html
 
-		$("#Category"+id).find("a")[0].onclick = do(id)->
-			-> # closure
-				getSingleCategory(singleCatAjaxd, id)
+	results.find(".new").forEach (elem)->
+		$(elem).click ->
+			$.ui.loadContent "#main_Category"
+			times = this.getAttribute 'data-times'
+			getSingleCategory times, this.getAttribute 'data-tag-id'
+			this.setAttribute 'data-times', times+1
+	
+	undefined #avoid implicit rv
 
-	undefined
-
-getSingleCategory = (times, catId)->
+getSingleCategory = (times, tagId)->
 	$.ajax(
 		type: "GET"
-		url: "http://54.178.135.71:8080/CookIEServer/discover_recipes"	
+		url: "http://54.178.135.71:8080/CookIEServer/get_tag"	
 		dataType: 'jsonp'
 		crossDomain: true
 		data:
-			'type': 'category'
-			'category': catId
 			'times': times
+			'tag_id': tagId
 		jsonp: false
 		timeout: 10000
 		success: (data)->
-			console.log "[SUCCESS]fetch cat #"+catId
+			console.log "[SUCCESS]fetch cat #"+tagId
 			console.log data
 
 			singleCatAjaxd++
@@ -92,12 +96,15 @@ getSingleCategory = (times, catId)->
 				return undefined
 
 			#TODO change pageTitle
-			appendRecipeResult($('#main_Category'), data)
+			$.ui.setTitle data.tag.tagName
+			scope = $('#main_Category')
+			scope.find("#Results").html ""
+			appendRecipeResult(scope, data.recipes)
 			undefined #avoid implicit rv
 		error: (data, status)->
-			console.log "[ERROR]fetch cat #"+catId
+			console.log "[ERROR]fetch cat #"+tagId
 			$("#main_Category").find("#infinite").html "Error. Try Again?"
 			undefined #avoid implicit rv
 	)
-
+	
 	undefined #avoid implicit rv

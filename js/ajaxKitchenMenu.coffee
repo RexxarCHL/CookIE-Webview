@@ -56,7 +56,7 @@ appendKitchenMenuResult = (scope, data)->
 		if rating is 0 then rating = 'No rating'
 		else rating += " stars"
 		
-		html = '<div class="menu_wrapper new" id="Menu'+id+'" menu-id="'+id+'">'
+		html = '<div class="menu_wrapper new" id="Menu'+id+'" data-menu-id="'+id+'">'
 		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
 
 		html += '<div class="menu_img_wrapper">'
@@ -72,7 +72,6 @@ appendKitchenMenuResult = (scope, data)->
 		#console.log html
 		#TODO add on click function to cook btn
 
-		#!!! TODO MODIFY FROM COLLECTION TO Collection_MenuContent !!!
 		#Fetch detailed menu content on click
 		scope.find("#Menu"+id).find("#View")[0].onclick = do(id)->
 			-> # closure

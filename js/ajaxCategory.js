@@ -22,7 +22,7 @@ $(document).ready(function() {
 getAllCategory = function(times) {
   $.ajax({
     type: "GET",
-    url: "http://54.178.135.71:8080/CookIEServer/discover_tags",
+    url: "http://54.178.135.71:8080/CookIEServer/discover_category",
     dataType: 'jsonp',
     crossDomain: true,
     data: {
@@ -42,6 +42,7 @@ getAllCategory = function(times) {
         allCatAjaxd--;
         return void 0;
       }
+      $("#main_AllCategories").find("#infinite").text("Load more");
       appendAllCategoryResult(data);
       return void 0;
     },
@@ -58,49 +59,52 @@ getAllCategory = function(times) {
 };
 
 appendAllCategoryResult = function(data) {
-  var cat, html, id, recipe, results, _i, _j, _len, _len1, _ref;
+  var html, id, results, tag, tagGroup, _i, _j, _len, _len1, _ref;
   console.log("append all category result");
   results = $("#main_AllCategories").find("#Results");
+  results.find(".new").removeClass("new");
   for (_i = 0, _len = data.length; _i < _len; _i++) {
-    cat = data[_i];
-    if (cat.recipes.length === 0) {
+    tagGroup = data[_i];
+    if (tagGroup.tagWithRecipe.length === 0) {
       continue;
     }
-    id = cat.tag.tagId;
-    html = '<div class="category_box" id="Category' + id + '">';
-    html += '<a href="#main_Category"><h2 style="margin-left:5px">' + cat.tag.tagName + '</h2>';
-    _ref = cat.recipes;
+    html = '<div class="category_box" id="TagFilter' + tagGroup.tagfilter.filterId + '"><h2 style="margin-left:5px;">' + tagGroup.tagfilter.filterName + '</h2>';
+    _ref = tagGroup.tagWithRecipe;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-      recipe = _ref[_j];
-      html += '<div class="cat_wrapper"><img class="cat_img" src="' + recipe.smallURL + '"><div class="cat_text">' + recipe.name + '</div></div>';
+      tag = _ref[_j];
+      id = tag.tag.tagId;
+      html += '<div id="Tag' + id + '" class="cat_wrapper new" data-tag-id="' + id + '" data-times="0"><img class="cat_img" src="' + tag.mostPopularRecipe.smallURL + '"><div class="cat_text">' + tag.tag.tagName + '</div></div>';
     }
-    html += '</a></div><div class="divider">&nbsp;</div>';
+    html += '</div><div class="divider">&nbsp;</div>';
     results.append(html);
-    $("#Category" + id).find("a")[0].onclick = (function(id) {
-      return function() {
-        return getSingleCategory(singleCatAjaxd, id);
-      };
-    })(id);
   }
+  results.find(".new").forEach(function(elem) {
+    return $(elem).click(function() {
+      var times;
+      $.ui.loadContent("#main_Category");
+      times = this.getAttribute('data-times');
+      getSingleCategory(times, this.getAttribute('data-tag-id'));
+      return this.setAttribute('data-times', times + 1);
+    });
+  });
   return void 0;
 };
 
-getSingleCategory = function(times, catId) {
+getSingleCategory = function(times, tagId) {
   $.ajax({
     type: "GET",
-    url: "http://54.178.135.71:8080/CookIEServer/discover_recipes",
+    url: "http://54.178.135.71:8080/CookIEServer/get_tag",
     dataType: 'jsonp',
     crossDomain: true,
     data: {
-      'type': 'category',
-      'category': catId,
-      'times': times
+      'times': times,
+      'tag_id': tagId
     },
     jsonp: false,
     timeout: 10000,
     success: function(data) {
-      var scrollerList;
-      console.log("[SUCCESS]fetch cat #" + catId);
+      var scope, scrollerList;
+      console.log("[SUCCESS]fetch cat #" + tagId);
       console.log(data);
       singleCatAjaxd++;
       scrollerList = $('#main_Category').scroller();
@@ -110,11 +114,14 @@ getSingleCategory = function(times, catId) {
         singleCatAjaxd--;
         return void 0;
       }
-      appendRecipeResult($('#main_Category'), data);
+      $.ui.setTitle(data.tag.tagName);
+      scope = $('#main_Category');
+      scope.find("#Results").html("");
+      appendRecipeResult(scope, data.recipes);
       return void 0;
     },
     error: function(data, status) {
-      console.log("[ERROR]fetch cat #" + catId);
+      console.log("[ERROR]fetch cat #" + tagId);
       $("#main_Category").find("#infinite").html("Error. Try Again?");
       return void 0;
     }
