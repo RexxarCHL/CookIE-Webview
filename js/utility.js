@@ -87,12 +87,10 @@ utilityTrash = function() {
       type: 'DELETE',
       url: 'http://54.178.135.71:8080/CookIEServer/favorite',
       dataType: 'application/json',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://54.178.135.71:8080/CookIEServer/'
-      },
       data: data,
       timeout: 10000,
       success: function(data) {
+        data = JSON.parse(data);
         console.log("[SUCCESS] deleting recipes #" + selectedId);
         console.log(data);
         return void 0;

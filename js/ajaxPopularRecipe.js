@@ -14,16 +14,15 @@ getPopularRecipes = function(times) {
   $.ajax({
     type: "GET",
     url: 'http://54.178.135.71:8080/CookIEServer/discover_recipes',
-    dataType: 'jsonp',
-    crossDomain: true,
+    dataType: 'application/json',
     data: {
       'type': 'popular',
       'times': times
     },
-    jsonp: false,
     timeout: 10000,
     success: function(data) {
       var scope, scrollerList;
+      data = JSON.parse(data);
       console.log("[SUCCESS]fetch popular recipes");
       console.log(data);
       recipeAjaxd++;

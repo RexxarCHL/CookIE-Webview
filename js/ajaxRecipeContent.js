@@ -5,15 +5,14 @@ getRecipeContent = function(recipeId) {
   $.ajax({
     type: 'GET',
     url: 'http://54.178.135.71:8080/CookIEServer/recipedigest',
-    dataType: 'jsonp',
-    crossDomain: true,
+    dataType: 'application/json',
     data: {
       'recipe_id': recipeId
     },
-    jsonp: false,
     timeout: 10000,
     success: function(data) {
       var scope;
+      data = JSON.parse(data);
       console.log("[SUCCESS]fetch recipe #" + recipeId);
       console.log(data);
       scope = $("#RecipeContent");

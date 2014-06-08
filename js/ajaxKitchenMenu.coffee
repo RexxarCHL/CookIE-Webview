@@ -7,14 +7,17 @@ getKitchenMenus = (times) ->
 	$.ajax(
 		type: "GET"
 		url: 'http://54.178.135.71:8080/CookIEServer/discover_recipelists'
-		dataType: 'jsonp'
-		crossDomain: true
+		#dataType: 'jsonp'
+		#crossDomain: true
+		#jsonp: false
+		dataType: 'application/json'
 		data: 
 			'type': 'favorite'
 			'times': times
-		jsonp: false
+		
 		timeout: 10000
 		success: (data)->
+			data = JSON.parse(data)
 			console.log "[SUCCESS]fetch kitchen menu"
 			console.log data
 

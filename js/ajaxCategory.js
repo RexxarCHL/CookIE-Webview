@@ -21,15 +21,14 @@ getAllCategory = function(times) {
   $.ajax({
     type: "GET",
     url: "http://54.178.135.71:8080/CookIEServer/discover_category",
-    dataType: 'jsonp',
-    crossDomain: true,
+    dataType: 'application/json',
     data: {
       'times': times
     },
-    jsonp: false,
     timeout: 10000,
     success: function(data) {
       var scrollerList;
+      data = JSON.parse(data);
       console.log("[SUCCESS]fetch categories");
       console.log(data);
       allCatAjaxd++;
@@ -92,16 +91,14 @@ getSingleCategory = function(times, tagId) {
   $.ajax({
     type: "GET",
     url: "http://54.178.135.71:8080/CookIEServer/get_tag",
-    dataType: 'jsonp',
-    crossDomain: true,
+    dataType: 'application/json',
     data: {
       'times': times,
       'tag_id': tagId
     },
-    jsonp: false,
-    timeout: 10000,
     success: function(data) {
       var scope, scrollerList;
+      data = JSON.parse(data);
       console.log("[SUCCESS]fetch cat #" + tagId);
       console.log(data);
       singleCatAjaxd++;

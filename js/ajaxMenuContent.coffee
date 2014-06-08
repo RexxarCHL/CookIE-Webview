@@ -5,13 +5,15 @@ getMenuContent = (scope, menuId)->
 	$.ajax(
 		type: 'GET'
 		url: 'http://54.178.135.71:8080/CookIEServer/recipelist'
-		dataType: 'jsonp'
-		crossDomain: true
+		#dataType: 'jsonp'
+		#crossDomain: true
+		#jsonp: false
+		dataType: 'application/json'
 		data:
 			'list_id': menuId
-		jsonp: false
 		timeout: 10000
 		success: (data)->
+			data = JSON.parse(data)
 			console.log "[SUCCESS]fetch menu #"+menuId
 			console.log data
 			setTimeout(loadMenuContent(scope, data), 1000)

@@ -11,13 +11,16 @@ getAllCategory = (times) ->
 	$.ajax(
 		type: "GET"
 		url: "http://54.178.135.71:8080/CookIEServer/discover_category"
-		dataType: 'jsonp'
-		crossDomain: true
+		#dataType: 'jsonp'
+		#crossDomain: true
+		#jsonp: false
+		dataType: 'application/json'
 		data:
 			'times': times
-		jsonp: false
+		
 		timeout: 10000
 		success: (data)->
+			data = JSON.parse(data)
 			console.log "[SUCCESS]fetch categories"
 			console.log data
 
@@ -74,14 +77,15 @@ getSingleCategory = (times, tagId)->
 	$.ajax(
 		type: "GET"
 		url: "http://54.178.135.71:8080/CookIEServer/get_tag"	
-		dataType: 'jsonp'
-		crossDomain: true
+		dataType: 'application/json'
+		#crossDomain: true
 		data:
 			'times': times
 			'tag_id': tagId
-		jsonp: false
-		timeout: 10000
+		#jsonp: false
+		#timeout: 10000
 		success: (data)->
+			data = JSON.parse(data)
 			console.log "[SUCCESS]fetch cat #"+tagId
 			console.log data
 

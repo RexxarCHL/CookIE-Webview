@@ -67,18 +67,18 @@ search = (query, times) ->
 
 	$.ajax(
 		type: "GET"
-		#TODO: determine search url
 		url: url
-		dataType: 'jsonp'
-		crossDomain: true
-		#TODO: determine data
+		#dataType: 'jsonp'
+		#crossDomain: true
+		#jsonp: false
+		dataType: 'application/json'
 		data: 
 			'type': 'search'
 			'name': query
 			'times': searchAjaxd
-		jsonp: false
 		timeout: 10000
 		success: (data)->
+			data = JSON.parse(data)
 			console.log "[SUCCESS]search"
 			console.log data
 
@@ -155,7 +155,6 @@ appendRecipeResult = (scope, data)->
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return value
 
-###
 appendMenuResult = (scope, data)->
 	console.log "append menu for scope: " + scope[0].id
 
@@ -200,7 +199,6 @@ appendMenuResult = (scope, data)->
 
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return values
-###
 
 addInfiniteScroll = (scope, delay, callback)->
 	console.log "add infinite-scroll to scope:" + scope[0].id
