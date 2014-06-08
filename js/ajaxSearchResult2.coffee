@@ -123,9 +123,9 @@ appendRecipeResult = (scope, data)->
 		url = recipe.smallURL
 		#url = 'img/love.jpg' # for test only
 		if count%2 is 0 #left part of the row
-			html += '<div class="recipe_item left new" id="Recipe'+id+'" recipe-id="'+id+'">'
+			html += '<div class="recipe_item left new" id="Recipe'+id+'" data-recipe-id="'+id+'">'
 		else
-			html += '<div class="recipe_item right new" id="Recipe'+id+'" recipe-id="'+id+'">'
+			html += '<div class="recipe_item right new" id="Recipe'+id+'" data-recipe-id="'+id+'">'
 		
 		html += '<img class="recipe_image_wrapper" src="'+url+'">'
 		html += '<div class="recipe_descrip">'+name+'</div>'

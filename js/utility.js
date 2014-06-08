@@ -39,6 +39,7 @@ utilityDetect = function(elem) {
 
 resetUtilBtn = function() {
   var utilBtn;
+  $("#main_Kitchen_Recipes").find(".chosen").removeClass("chosen");
   utilBtn = $("#kitchenUtilityBtn");
   utilBtn.unbind('click');
   utilBtn.html = "Tap on the Cog to begin.";
@@ -50,6 +51,7 @@ utilityEdit = function() {
   console.log('popup edit');
   window.mode = 1;
   utilBtn = $("#kitchenUtilityBtn");
+  utilBtn;
   utilBtn.click(function() {
     return alert("edit");
   });
