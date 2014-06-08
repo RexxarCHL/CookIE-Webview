@@ -92,6 +92,7 @@ border-radius: 3px;
   background-color: #DF7401;
   opacity:0.8;
 }
+
 .recipe_descrip{
   margin-left:5%;
   color:black;
@@ -140,6 +141,10 @@ float:left; background-color:white;margin-left:5px;
   text-align: center;
   opacity: 0.85;
 }
+.popup_btn.chosen {
+  background-color: red;
+}
+
 #popup_btn_edit {
   top: 5px;
   right: 80px;
@@ -148,6 +153,7 @@ float:left; background-color:white;margin-left:5px;
   top: 50px;
   right: 50px;
 }
+
 .menuContent_Container{
 background-color:white; margin:5px 0 5px 0; padding:2px 2px 2px 2px;border-radius:5px;
 }
