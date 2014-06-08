@@ -12,7 +12,11 @@ $(document).ready(function() {
     return getAllCategory(allCatAjaxd);
   });
   addInfiniteScroll($("#main_Category"), 1000, function() {
-    return getSingleCategory(singleCatAjaxd, singleCatId);
+    var tag, times;
+    tag = $("#Tag" + singleCatId);
+    times = tag.attr("data-times");
+    getSingleCategory(singleCatAjaxd, singleCatId);
+    return void 0;
   });
   return void 0;
 });
@@ -79,8 +83,10 @@ appendAllCategoryResult = function(data) {
     return $(elem).click(function() {
       var times;
       $.ui.loadContent("#main_Category");
-      times = this.getAttribute('data-times');
-      getSingleCategory(times, this.getAttribute('data-tag-id'));
+      times = parseInt(this.getAttribute('data-times'));
+      id = this.getAttribute('data-tag-id');
+      getSingleCategory(times, id);
+      singleCatId = id;
       return this.setAttribute('data-times', times + 1);
     });
   });
@@ -99,12 +105,12 @@ getSingleCategory = function(times, tagId) {
     success: function(data) {
       var scope, scrollerList;
       data = JSON.parse(data);
-      console.log("[SUCCESS]fetch cat #" + tagId);
+      console.log("[SUCCESS]fetch cat " + tagId + " for " + times + " times");
       console.log(data);
       singleCatAjaxd++;
       scrollerList = $('#main_Category').scroller();
       scrollerList.clearInfinite();
-      if (data.length === 0) {
+      if (data.recipes.length === 0) {
         $("#main_Category").find("#infinite").html("No more recipes.");
         singleCatAjaxd--;
         return void 0;

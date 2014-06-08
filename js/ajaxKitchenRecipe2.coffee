@@ -3,7 +3,7 @@ $(document).ready ->
 	addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, ->getKitchenRecipes(kitchenRecipeAjaxd, self))
 	undefined #avoid implicit return values by Coffeescript
 
-getKitchenRecipes = (times, scrollObj) ->
+getKitchenRecipes = (times) ->
 	$.ajax(
 		type: "GET"
 		url: 'http://54.178.135.71:8080/CookIEServer/discover_recipes'

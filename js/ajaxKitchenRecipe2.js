@@ -10,7 +10,7 @@ $(document).ready(function() {
   return void 0;
 });
 
-getKitchenRecipes = function(times, scrollObj) {
+getKitchenRecipes = function(times) {
   $.ajax({
     type: "GET",
     url: 'http://54.178.135.71:8080/CookIEServer/discover_recipes',

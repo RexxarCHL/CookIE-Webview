@@ -3,7 +3,12 @@ allCatAjaxd = 0
 singleCatAjaxd = 0
 $(document).ready ->
 	addInfiniteScroll($("#main_AllCategories"), 1000, -> getAllCategory(allCatAjaxd))
-	addInfiniteScroll($("#main_Category"), 1000, -> getSingleCategory(singleCatAjaxd, singleCatId))
+	addInfiniteScroll($("#main_Category"), 1000, ->
+		tag = $("#Tag#{singleCatId}")
+		times = tag.attr("data-times") 
+		getSingleCategory(singleCatAjaxd, singleCatId)
+		undefined
+	)
 
 	undefined #prevent implicit rv
 
@@ -67,8 +72,10 @@ appendAllCategoryResult = (data)->
 	results.find(".new").forEach (elem)->
 		$(elem).click ->
 			$.ui.loadContent "#main_Category"
-			times = this.getAttribute 'data-times'
-			getSingleCategory times, this.getAttribute 'data-tag-id'
+			times = parseInt this.getAttribute 'data-times'
+			id = this.getAttribute 'data-tag-id'
+			getSingleCategory times, id
+			singleCatId = id
 			this.setAttribute 'data-times', times+1
 	
 	undefined #avoid implicit rv
@@ -86,14 +93,14 @@ getSingleCategory = (times, tagId)->
 		#timeout: 10000
 		success: (data)->
 			data = JSON.parse(data)
-			console.log "[SUCCESS]fetch cat #"+tagId
+			console.log "[SUCCESS]fetch cat #{tagId} for #{times} times"
 			console.log data
 
 			singleCatAjaxd++
 
 			scrollerList = $('#main_Category').scroller()
 			scrollerList.clearInfinite()
-			if data.length is 0
+			if data.recipes.length is 0
 				$("#main_Category").find("#infinite").html "No more recipes."
 				singleCatAjaxd--
 				return undefined
