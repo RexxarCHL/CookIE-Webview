@@ -1,5 +1,4 @@
 menuAjaxd = 0
-lastId = -1
 $(document).ready ->
 	addInfiniteScroll($('#main_Popular_Menus'), 1000, ->getPopularMenus(menuAjaxd))
 	undefined #avoid implicit return values by Coffeescript

@@ -11,16 +11,13 @@ ajaxSearchResults2.coffee
  	addInfiniteScroll(scope, delay, callback)
  		Add infinite scroll functionality to 'scope'. 'callback' is called after 'delay' miliseconds after infinite-scroll event is fired.
 ###
-
-lastId = -1
 searchAjaxd = 0
-mode = 0 # Used for kitchen
 $(document).ready ->
 	initSelectBtn()
 	$("#SearchBar").keyup(->
 		console.log "searchbar keyup"
 		scrollerList = $('#main_Search').scroller()
-		clearTimeout(lastId)
+		clearTimeout(window.lastId)
 
 		query =  $("#SearchBar")[0].value
 		if query is ""
@@ -31,7 +28,7 @@ $(document).ready ->
 
 		scrollerList.clearInfinite()
 		$("#main_Search").find("#infinite").text "Searching..."
-		lastId = setTimeout(->
+		window.lastId = setTimeout(->
 					search query, searchAjaxd
 					undefined #avoid implicit return value
 				, 1500)
@@ -95,7 +92,10 @@ search = (query, times) ->
 			scrollerList.clearInfinite()
 
 			if data.length is 0
-				$("#main_Search").find("#infinite").html "<i>No result. Try another query?</i>"
+				if searchAjaxd > 0
+					$("#main_Search").find("#infinite").html "<i>No more results.</i>"
+				else
+					$("#main_Search").find("#infinite").html "<i>No result. Try another query?</i>"
 				searchAjaxd--;
 				return undefined
 
@@ -212,8 +212,8 @@ addInfiniteScroll = (scope, delay, callback)->
 		scope.find("#infinite").text "Loading more..."
 		scrollerList.addInfinite()
 
-		clearTimeout lastId
-		lastId = setTimeout(->
+		clearTimeout window.lastId
+		window.lastId = setTimeout(->
 			callback()
 		, delay)
 	)

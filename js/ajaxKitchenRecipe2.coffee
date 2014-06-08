@@ -1,6 +1,4 @@
 kitchenRecipeAjaxd = 0
-lastId = -1
-
 $(document).ready ->
 	addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, ->getKitchenRecipes(kitchenRecipeAjaxd, self))
 	undefined #avoid implicit return values by Coffeescript

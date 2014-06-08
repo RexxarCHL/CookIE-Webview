@@ -13,13 +13,9 @@ ajaxSearchResults2.coffee
  	addInfiniteScroll(scope, delay, callback)
  		Add infinite scroll functionality to 'scope'. 'callback' is called after 'delay' miliseconds after infinite-scroll event is fired.
  */
-var addInfiniteScroll, appendRecipeResult, initSelectBtn, lastId, mode, search, searchAjaxd;
-
-lastId = -1;
+var addInfiniteScroll, appendRecipeResult, initSelectBtn, search, searchAjaxd;
 
 searchAjaxd = 0;
-
-mode = 0;
 
 $(document).ready(function() {
   initSelectBtn();
@@ -27,7 +23,7 @@ $(document).ready(function() {
     var lastQuery, query, scrollerList;
     console.log("searchbar keyup");
     scrollerList = $('#main_Search').scroller();
-    clearTimeout(lastId);
+    clearTimeout(window.lastId);
     query = $("#SearchBar")[0].value;
     if (query === "") {
       searchAjaxd = 0;
@@ -37,7 +33,7 @@ $(document).ready(function() {
     }
     scrollerList.clearInfinite();
     $("#main_Search").find("#infinite").text("Searching...");
-    lastId = setTimeout(function() {
+    window.lastId = setTimeout(function() {
       search(query, searchAjaxd);
       return void 0;
     }, 1500);
@@ -103,7 +99,11 @@ search = function(query, times) {
       scrollerList = $("#main_Search").scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
-        $("#main_Search").find("#infinite").html("<i>No result. Try another query?</i>");
+        if (searchAjaxd > 0) {
+          $("#main_Search").find("#infinite").html("<i>No more results.</i>");
+        } else {
+          $("#main_Search").find("#infinite").html("<i>No result. Try another query?</i>");
+        }
         searchAjaxd--;
         return void 0;
       }
@@ -224,8 +224,8 @@ addInfiniteScroll = function(scope, delay, callback) {
     console.log(scope[0].id + " infinite-scroll");
     scope.find("#infinite").text("Loading more...");
     scrollerList.addInfinite();
-    clearTimeout(lastId);
-    return lastId = setTimeout(function() {
+    clearTimeout(window.lastId);
+    return window.lastId = setTimeout(function() {
       return callback();
     }, delay);
   });

@@ -1,5 +1,4 @@
 recipeAjaxd = 0
-lastId = -1
 
 $(document).ready ->
 	addInfiniteScroll($('#main_Popular_Recipes'), 3000, ->getPopularRecipes(recipeAjaxd))

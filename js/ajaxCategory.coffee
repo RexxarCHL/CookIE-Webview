@@ -1,7 +1,6 @@
+singleCatId = 26 #DEBUG
 allCatAjaxd = 0
 singleCatAjaxd = 0
-singleCatId = 26
-lastId = -1
 $(document).ready ->
 	addInfiniteScroll($("#main_AllCategories"), 1000, -> getAllCategory(allCatAjaxd))
 	addInfiniteScroll($("#main_Category"), 1000, -> getSingleCategory(singleCatAjaxd, singleCatId))

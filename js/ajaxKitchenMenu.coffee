@@ -1,5 +1,4 @@
 kitchenMenuAjaxd = 0
-lastId = -1
 $(document).ready ->
 	addInfiniteScroll($('#main_Kitchen_Menus'), 1000, ->getKitchenMenus(kitchenMenuAjaxd))
 	undefined #avoid implicit return values by Coffeescript
