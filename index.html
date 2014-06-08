@@ -78,7 +78,7 @@
                   case "RecipeContent":             
                     $('#headerBtn').attr( "class", "icon add big" ) ;
                     $('#headerBtn').bind("click",function(){
-                        alert("add to Collection")
+                        alert("add to Collection");
                     });
                     break;  
                   case "Collection_MenuContent":
@@ -102,6 +102,7 @@
             }
             function unloadedPanel(what) {
                 console.log("unloaded " + what.id);
+                $('.popup_btn').hide();
                 $('#headerBtn').unbind();
             }
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
@@ -197,6 +198,7 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxCategory.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxRecipeContent.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxMenuContent.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/utility.js"></script>
         <script>
             /* To allow cross domain access in Phonegap */
             $(document).bind("mobileinit", function(){
@@ -243,8 +245,8 @@
 			</div><!-- #header !-->
 
             <!-- POP-UP BTN !-->
-			<div id="popup_btn_trash" class="popup_btn" style="display:none;">&nbsp;<a class="icon trash big"></a></div>
-            <div id="popup_btn_edit" class="popup_btn" style="display:none;">&nbsp;<a class="icon pencil big"></a></div>
+			<div id="popup_btn_edit" class="popup_btn" style="display:none;" data-function="edit">&nbsp;<a class="icon pencil big"></a></div>
+            <div id="popup_btn_trash" class="popup_btn" style="display:none;" data-function="trash">&nbsp;<a class="icon trash big"></a></div>
 
 			<div id="content">
 				<!-- POPULAR MENU !-->
@@ -385,6 +387,9 @@
                     <div class="button-grouped flex"> 
                         <a class="button orange" href="#main_Kitchen_Recipes" data-transition="fade">Recipes</a>
                         <a class="button" href="#main_Kitchen_Menus" data-transition="fade">Menus</a>
+                    </div>
+                    <div style="width:100%" align="center">
+                        <div class="button flex" style="width:80%;">Tap on the Cog to begin.</div>
                     </div>
                     <div style="width:100%">
 	                    <div id="Results">

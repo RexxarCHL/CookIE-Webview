@@ -43,7 +43,7 @@ loadRecipeContent = function(scope, recipe) {
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     group = _ref[_i];
     html = '';
-    _ref1 = group.recipeIngredient;
+    _ref1 = group.ingredients;
     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       ingredient = _ref1[_j];
       html += '<li>' + ingredient.ingredientName + " .............. " + ingredient.amount + " " + ingredient.unitName;
