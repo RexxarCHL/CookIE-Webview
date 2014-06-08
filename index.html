@@ -102,7 +102,13 @@
             }
             function unloadedPanel(what) {
                 console.log("unloaded " + what.id);
+
+                // kitchen utility btn
                 $('.popup_btn').hide();
+                $('#popup_btn_trash').removeClass('selected');
+                $('#popup_btn_edit').removeClass('selected');
+                resetUtilBtn();
+
                 $('#headerBtn').unbind();
             }
             if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
@@ -396,7 +402,7 @@
                     <div style="width:100%">
 	                    <div id="Results">
 	                    	<!-- this is a row -->
-							<div class="kitchen_recipe_item left">
+							<div class="kitchen_recipe_item left" data-recipe-id="0">
 	                            <img class="recipe_image_wrapper" src="img/love.jpg">
 	                            <div class="recipe_descrip">Pineapple</div>    <!-- center by screen width! !-->
 	                            <div class="icon star recipe_descrip" >10</div>

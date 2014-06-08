@@ -141,7 +141,7 @@ float:left; background-color:white;margin-left:5px;
   text-align: center;
   opacity: 0.85;
 }
-.popup_btn.chosen {
+.popup_btn.selected {
   background-color: red;
 }
 
@@ -240,4 +240,12 @@ margin-left:5%;width:30%;display:inline-block;
 }
 .rate_img{
 width:10%;display:inline-block;
+}
+
+#kitchenUtilityBtn.trash{
+  background-color: red;
+}
+
+#kitchenUtilityBtn.edit{
+  background-color: blue;
 }
