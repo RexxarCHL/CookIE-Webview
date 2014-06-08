@@ -95,7 +95,7 @@ search = (query, times) ->
 			scrollerList.clearInfinite()
 
 			if data.length is 0
-				$("#main_Search").find("#infinite").html "<i>No more results.</i>"
+				$("#main_Search").find("#infinite").html "<i>No result. Try another query?</i>"
 				searchAjaxd--;
 				return undefined
 
@@ -110,7 +110,7 @@ search = (query, times) ->
 
 appendRecipeResult = (scope, data)->
 	console.log "append recipe for scope: " + scope[0].id
-	if data.length%2 and data.length isnt 1 then data.length-- #prevent empty slot
+	#if data.length%2 and data.length isnt 1 then data.length-- #prevent empty slot
 
 	results = scope.find "#Results"
 	results.find('.new').removeClass('new')

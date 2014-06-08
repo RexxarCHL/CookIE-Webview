@@ -103,7 +103,7 @@ search = function(query, times) {
       scrollerList = $("#main_Search").scroller();
       scrollerList.clearInfinite();
       if (data.length === 0) {
-        $("#main_Search").find("#infinite").html("<i>No more results.</i>");
+        $("#main_Search").find("#infinite").html("<i>No result. Try another query?</i>");
         searchAjaxd--;
         return void 0;
       }
@@ -125,9 +125,6 @@ search = function(query, times) {
 appendRecipeResult = function(scope, data) {
   var count, html, id, name, rating, recipe, results, url, _i, _len;
   console.log("append recipe for scope: " + scope[0].id);
-  if (data.length % 2 && data.length !== 1) {
-    data.length--;
-  }
   results = scope.find("#Results");
   results.find('.new').removeClass('new');
   count = 0;
