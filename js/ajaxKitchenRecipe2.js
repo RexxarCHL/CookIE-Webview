@@ -48,7 +48,7 @@ getKitchenRecipes = function(times, scrollObj) {
       console.log("[ERROR]fetch kitchen recipes: " + status);
       console.log(data);
       $("#main_Kitchen_Recipes").find("#infinite").text("Load More");
-      scrollObj.clearInfinite();
+      $('#main_Kitchen_Recipes').scroller().clearInfinite();
       return void 0;
     }
   });
