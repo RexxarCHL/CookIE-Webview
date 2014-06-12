@@ -156,14 +156,16 @@
 #afui .button.red {
 	color:#fff;
 	text-shadow:0 -1px 0 #666;
-	background:#B20000;
-	border-color:#666;
+	background:#DF3A01;
+	border-color:#E6E6E6;
+	opacity: .6;
 }
 
 #afui .button.green {
 	color:#fff;
 	text-shadow:0 -1px 0 #666;
-	background:#00FF40;
+	background:#088A85;
+	opacity: .7;
 	border-color:#E6E6E6;
 }
 
