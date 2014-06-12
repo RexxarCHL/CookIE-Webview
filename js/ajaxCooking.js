@@ -52,6 +52,30 @@ loadIngredientList = function(scope, list, recipeIds) {
 };
 
 getScheduledRecipe = function(recipeIds) {
+  var data, id, _i, _len;
   console.log("schedule_recipe #" + recipeIds);
+  data = '';
+  for (_i = 0, _len = recipeIds.length; _i < _len; _i++) {
+    id = recipeIds[_i];
+    data += 'recipes=' + id + '&';
+  }
+  $.ajax({
+    type: 'GET',
+    url: 'http://54.178.135.71:8080/CookIEServer/schedule_recipe?' + data,
+    success: function(data) {
+      var scope;
+      data = JSON.parse(data);
+      console.log('[SUCCESS] fetching #' + recipeIds);
+      console.log(data);
+      scope = $('#Cooking');
+      loadIngredientList(scope, data, recipeIds);
+      return void 0;
+    },
+    error: function(data, status) {
+      console.log('[ERROR] fetching #' + recipeIds);
+      console.log(data);
+      return void 0;
+    }
+  });
   return void 0;
 };

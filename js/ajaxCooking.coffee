@@ -47,4 +47,28 @@ loadIngredientList = (scope, list, recipeIds)->
 
 getScheduledRecipe = (recipeIds)->
 	console.log "schedule_recipe #"+recipeIds
+
+	data = ''
+	#recipeIds = JSON.parse(recipeIds)
+	for id in recipeIds
+		data += 'recipes='+id+'&'
+	$.ajax(
+			type: 'GET'
+			url: 'http://54.178.135.71:8080/CookIEServer/schedule_recipe?'+data
+			#timeout: 10000
+			success: (data)->
+				data = JSON.parse(data)
+				console.log '[SUCCESS] fetching #'+recipeIds
+				console.log data
+
+				scope = $('#Cooking')
+				loadIngredientList(scope, data, recipeIds)
+
+				undefined # avoid implicit rv
+			error: (data, status)->
+				console.log '[ERROR] fetching #'+recipeIds
+				console.log data
+
+				undefined # avoid implicit rv
+	)
 	undefined

@@ -86,6 +86,15 @@ appendPopularMenuResult = function(scope, data) {
         return void 0;
       };
     })(id);
+    scope.find("#Menu" + id).find("#Cook")[0].onclick = (function(id) {
+      return function() {
+        $("#Ingredients").find("#Results").hide();
+        $("#Ingredients").find("#Loading").show();
+        $.ui.loadContent("#Ingredients");
+        getCookingIngredientList(scope.find("#Menu" + id).attr("data-recipe-ids"));
+        return void 0;
+      };
+    })(id);
   }
   scope.find("#infinite").text("Load More");
   return void 0;

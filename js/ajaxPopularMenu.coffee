@@ -75,13 +75,20 @@ appendPopularMenuResult = (scope, data)->
 		#TODO add on click function to cook btn
 
 		#Fetch detailed menu content on click
-		##
 		scope.find("#Menu"+id).find("#View")[0].onclick = do(id)->
 			-> # closure
 				$("#MenuContent").find("#Results").hide()
 				$("#MenuContent").find("#Loading").show()
 				getMenuContent($("#MenuContent"), id)
 				undefined
+				
+		scope.find("#Menu"+id).find("#Cook")[0].onclick = do(id)->
+			-> # closure
+				$("#Ingredients").find("#Results").hide()
+				$("#Ingredients").find("#Loading").show()
+				$.ui.loadContent("#Ingredients")
+				getCookingIngredientList scope.find("#Menu#{id}").attr("data-recipe-ids")
+				undefined # avoid implicit rv
 		#
 
 	scope.find("#infinite").text "Load More"
