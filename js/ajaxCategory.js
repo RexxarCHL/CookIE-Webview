@@ -12,9 +12,6 @@ $(document).ready(function() {
     return getAllCategory(allCatAjaxd);
   });
   addInfiniteScroll($("#main_Category"), 1000, function() {
-    var tag, times;
-    tag = $("#Tag" + singleCatId);
-    times = tag.attr("data-times");
     getSingleCategory(singleCatAjaxd, singleCatId);
     return void 0;
   });
@@ -85,9 +82,9 @@ appendAllCategoryResult = function(data) {
       $.ui.loadContent("#main_Category");
       times = parseInt(this.getAttribute('data-times'));
       id = this.getAttribute('data-tag-id');
-      getSingleCategory(times, id);
       singleCatId = id;
-      return this.setAttribute('data-times', times + 1);
+      singleCatAjaxd = times;
+      return getSingleCategory(singleCatAjaxd, singleCatId);
     });
   });
   return void 0;

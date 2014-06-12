@@ -4,8 +4,6 @@ singleCatAjaxd = 0
 $(document).ready ->
 	addInfiniteScroll($("#main_AllCategories"), 1000, -> getAllCategory(allCatAjaxd))
 	addInfiniteScroll($("#main_Category"), 1000, ->
-		tag = $("#Tag#{singleCatId}")
-		times = tag.attr("data-times") 
 		getSingleCategory(singleCatAjaxd, singleCatId)
 		undefined
 	)
@@ -74,9 +72,10 @@ appendAllCategoryResult = (data)->
 			$.ui.loadContent "#main_Category"
 			times = parseInt this.getAttribute 'data-times'
 			id = this.getAttribute 'data-tag-id'
-			getSingleCategory times, id
 			singleCatId = id
-			this.setAttribute 'data-times', times+1
+			singleCatAjaxd = times
+			getSingleCategory singleCatAjaxd, singleCatId
+			# this.setAttribute 'data-times', times+1
 	
 	undefined #avoid implicit rv
 
