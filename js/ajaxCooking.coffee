@@ -13,7 +13,7 @@ getCookingIngredientList = (recipeIds)->
 				console.log data
 
 				scope = $('#Ingredients')
-				loadIngredientList(scope, data)
+				loadIngredientList(scope, data, recipeIds)
 
 				undefined # avoid implicit rv
 			error: (data, status)->
@@ -24,7 +24,7 @@ getCookingIngredientList = (recipeIds)->
 	)
 	undefined # avoid implicit rv
 
-loadIngredientList = (scope, list)->
+loadIngredientList = (scope, list, recipeIds)->
 	listContent = scope.find('#ListContent')
 	listContent.html ""
 
@@ -33,5 +33,18 @@ loadIngredientList = (scope, list)->
 		html += "<b>#{ingredient.amount}#{ingredient.unitName}</b> #{ingredient.ingredientName}</label>"
 		listContent.append html
 
+
+
+	scope.find("#Next").unbind 'click'
+	scope.find("#Next").click( do(list)->
+		-> #closure
+			getScheduledRecipe(recipeIds)
+	)
+
+
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
+
+getScheduledRecipe = (recipeIds)->
+	console.log "schedule_recipe #"+recipeIds
+	undefined
