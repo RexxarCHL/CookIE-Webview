@@ -59,7 +59,21 @@ utilityEdit = function() {
   utilBtn.html('Start Cooking.');
   utilBtn.click(function() {
     var selectedId;
-    return selectedId = findChosenRecipeId();
+    selectedId = findChosenRecipeId();
+    return $.ui.popup({
+      title: '為Menu命名',
+      message: '<input type="text"><label>公開</label><input id="toggle2" type="checkbox" name="toggle2" value="1" class="toggle"><label for="toggle2" data-on="私密" data-off="公開"><span></span></label><br>',
+      cancelText: "Cancel",
+      cancelCallback: function() {
+        console.log("cancelled");
+        return void 0;
+      },
+      doneText: "Done",
+      doneCallback: function() {
+        return console.log("Done for!");
+      },
+      cancelOnly: false
+    });
   });
   return void 0;
 };

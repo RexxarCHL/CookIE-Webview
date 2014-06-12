@@ -41,6 +41,19 @@ utilityEdit = ->
 
 	utilBtn.click ->
 		selectedId = findChosenRecipeId()
+		$.ui.popup(
+			title: '為Menu命名'
+			message: '<input type="text"><label>公開</label><input id="toggle2" type="checkbox" name="toggle2" value="1" class="toggle"><label for="toggle2" data-on="私密" data-off="公開"><span></span></label><br>'
+			cancelText:"Cancel"
+			cancelCallback: ->
+				console.log "cancelled"
+				undefined
+			doneText:"Done"
+			doneCallback: ->
+				console.log "Done for!"
+			cancelOnly:false
+		)
+
 
 	undefined
 
