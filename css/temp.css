@@ -148,7 +148,7 @@ margin-left:5px;color:black;
 .popup_btn {
   display: block;
   position: fixed;
-  background-color: ##013ADF;
+  background-color: #013ADF;
   z-index: 10000;
   width:32px;
   height:32px;
