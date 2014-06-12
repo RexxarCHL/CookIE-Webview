@@ -104,6 +104,7 @@ search = (query, times) ->
 			undefined #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]search: " + status
+			$("#main_Search").scroller().clearInfinite()
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript

@@ -21,13 +21,12 @@ getPopularMenus = function(times) {
     },
     timeout: 10000,
     success: function(data) {
-      var scope, scrollerList;
+      var scope;
       data = JSON.parse(data);
       console.log("[SUCCESS]fetch popular menu");
       console.log(data);
       menuAjaxd++;
-      scrollerList = $('#main_Popular_Menus').scroller();
-      scrollerList.clearInfinite();
+      $('#main_Popular_Menus').scroller().clearInfinite();
       if (data === null || data.length === 0) {
         $("#main_Popular_Menus").find("#infinite").text("No more menu");
         menuAjaxd--;
@@ -40,6 +39,7 @@ getPopularMenus = function(times) {
     error: function(data, status) {
       console.log("[ERROR]fetch popular menu: " + status);
       $("#main_Popular_Menus").find("#infinite").text("Error. Try Again?");
+      $('#main_Popular_Menus').scroller().clearInfinite();
       return void 0;
     }
   });

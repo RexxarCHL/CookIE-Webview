@@ -115,6 +115,7 @@ search = function(query, times) {
     },
     error: function(data, status) {
       console.log("[ERROR]search: " + status);
+      $("#main_Search").scroller().clearInfinite();
       return void 0;
     }
   });

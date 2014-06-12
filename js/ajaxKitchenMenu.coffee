@@ -23,8 +23,7 @@ getKitchenMenus = (times) ->
 
 			kitchenMenuAjaxd++
 			
-			scrollerList = $('#main_Kitchen_Menus').scroller()
-			scrollerList.clearInfinite()
+			$('#main_Kitchen_Menus').scroller().clearInfinite()
 
 			if data.length is 0
 				$("#main_Kitchen_Menus").find("#infinite").text "No more lists"
@@ -37,8 +36,7 @@ getKitchenMenus = (times) ->
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen menu: " + status
 			$("#main_Kitchen_Menus").find("#infinite").text "Load More"
-			scrollerList = $('#main_Kitchen_Menus').scroller()
-			scrollerList.clearInfinite()
+			$('#main_Kitchen_Menus').scroller().clearInfinite()
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
@@ -83,7 +81,16 @@ appendKitchenMenuResult = (scope, data)->
 				$("#Collection_MenuContent").find("#Results").hide()
 				$("#Collection_MenuContent").find("#Loading").show()
 				getMenuContent($("#Collection_MenuContent"), id)
-				undefined
+				undefined # avoid implicit rv
+
+		scope.find("#Menu"+id).find("#Cook")[0].onclick = do(id)->
+			-> # closure
+				$("#Cooking").find("#Results").hide()
+				$("#Cooking").find("#Loading").show()
+				getCookingIngredientList scope.find("#Menu#{id}").attr("data-recipe-ids")
+				undefined # avoid implicit rv
+
+
 
 	scope.find("#infinite").text "Load More"
 	undefined #avoid implicit return values

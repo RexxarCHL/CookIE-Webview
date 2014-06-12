@@ -22,8 +22,7 @@ getPopularMenus = (times) ->
 
 			menuAjaxd++
 
-			scrollerList = $('#main_Popular_Menus').scroller()
-			scrollerList.clearInfinite()
+			$('#main_Popular_Menus').scroller().clearInfinite()
 
 			if data is null or data.length is 0
 				$("#main_Popular_Menus").find("#infinite").text "No more menu"
@@ -36,6 +35,7 @@ getPopularMenus = (times) ->
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status
 			$("#main_Popular_Menus").find("#infinite").text "Error. Try Again?"
+			$('#main_Popular_Menus').scroller().clearInfinite()
 			undefined #avoid implicit return values by Coffeescript
 	)
 	undefined #avoid implicit return values by Coffeescript
