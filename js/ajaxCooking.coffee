@@ -1,9 +1,9 @@
 getCookingIngredientList = (recipeIds)->
-	recipeIds = JSON.parse recipeIds
 	$.ajax(
-		type: "GET"
+		type: "POST"
 		url: "http://54.178.135.71:8080/CookIEServer/list_ingredient"
-		dataType: "application/json"
+		contentType: "application/json"
+		origin: "http://54.178.135.71:8080/CookIEServer/"
 		data:
 			recipes: recipeIds
 		timeout: 10000

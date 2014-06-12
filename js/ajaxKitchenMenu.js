@@ -64,20 +64,20 @@ appendKitchenMenuResult = function(scope, data) {
     }
     html = '<div class="menu_wrapper new" id="Menu' + id + '" data-menu-id="' + id + '">';
     html += '<h2 class="menu_title">' + title + '&nbsp;&nbsp;&nbsp;<i class="icon star">' + rating + '</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>';
-    idString = "";
+    idString = [];
     html += '<div class="menu_img_wrapper">';
     _ref = list.recipes;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       recipe = _ref[_j];
       src = recipe.smallURL;
       html += '<img class="menu_img" src="' + src + '">';
-      idString += recipe.recipe_id + ",";
+      idString.push(recipe.recipe_id);
     }
     html += '</div>';
     html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>';
     html += '</div>';
     results.append(html);
-    scope.find("#Menu" + id).attr("data-recipe-ids", idString);
+    scope.find("#Menu" + id).attr("data-recipe-ids", JSON.stringify(idString));
     scope.find("#Menu" + id).find("#View")[0].onclick = (function(id) {
       return function() {
         $("#Collection_MenuContent").find("#Results").hide();

@@ -174,19 +174,19 @@ appendMenuResult = (scope, data)->
 		html = '<div class="menu_wrapper new" id="Menu'+id+'">'
 		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
 
-		idString = ""
+		idString = []
 		html += '<div class="menu_img_wrapper">'
 		for recipe in list.recipes
 			src = recipe.smallURL
 			#src = 'img/love.jpg' # for test only
 			html += '<img class="menu_img" src="'+src+'">'
-			idString += recipe.recipe_id+","
+			idString.push recipe.recipe_id
 		html += '</div>'
 		
 		html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>'
 		html += '</div>'
 		results.append html
-		scope.find("#Menu"+id).attr 'data-recipe-ids', idString
+		scope.find("#Menu"+id).attr 'data-recipe-ids', JSON.stringify idString
 		#console.log html
 		#TODO add on click function to cook btn
 
