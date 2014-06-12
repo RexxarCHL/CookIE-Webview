@@ -82,7 +82,7 @@ display:inline-block; width:20%; margin:5px 1% 5px 3%; float:left;
 margin-left:5px;color:black;
 }
 .menu_img{
-border-radius:5px;border-radius:5px;max-height:20%;margin-left:1px;
+border-radius:5px;border-radius:5px;max-height:20%;margin-left:3px;
 }
 .menu_wrapper{
 background-color:white;margin:5px;border-radius:5px;

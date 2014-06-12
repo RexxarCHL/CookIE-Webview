@@ -37,12 +37,13 @@ loadRecipeContent = (scope, recipe)->
 	#scope.find("#RecipeTime").text "Time needed: "+recipe.timeNeeded
 
 	# Ingredients
-	ingredientList = scope.find("#RecipeIngredientList")
+	ingredientList = scope.find("#RecipeIngredientListLeft")
 	ingredientList.html "" #remove previous content
 	for group in recipe.ingredientGroup
 		html = ''
 		for ingredient in group.ingredients
 			html += '<li>'+ingredient.ingredientName+" .............. "+ingredient.amount+" "+ingredient.unitName
+		html += '<br />'
 		ingredientList.append html
 
 	# Steps
@@ -51,6 +52,7 @@ loadRecipeContent = (scope, recipe)->
 	for step, i in recipe.stepDigests
 		html = '<li>'+i+'. '+step.digest+'</li>'
 		stepList.append html
+	stepList.append '<br />'
 
 	# Comments
 		# do something

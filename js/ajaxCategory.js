@@ -71,7 +71,7 @@ appendAllCategoryResult = function(data) {
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       tag = _ref[_j];
       id = tag.tag.tagId;
-      html += '<div id="Tag' + id + '" class="cat_wrapper new" data-tag-id="' + id + '" data-times="0"><img class="cat_img" src="' + tag.mostPopularRecipe.smallURL + '"><div class="cat_text">' + tag.tag.tagName + '</div></div>';
+      html += '<div id="Tag' + id + '" class="cat_wrapper new" data-tag-id="' + id + '" data-times="0"><img class="cat_icon" src="' + tag.mostPopularRecipe.smallURL + '"><div class="cat_text">' + tag.tag.tagName + '</div></div>';
     }
     html += '</div><div class="divider">&nbsp;</div>';
     results.append(html);

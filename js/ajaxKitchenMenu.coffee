@@ -57,7 +57,7 @@ appendKitchenMenuResult = (scope, data)->
 		else rating += " stars"
 		
 		html = '<div class="menu_wrapper new" id="Menu'+id+'" data-menu-id="'+id+'">'
-		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>'
+		html += '<h2 class="menu_title">'+title+'&nbsp;&nbsp;&nbsp;<i class="icon star h5">'+rating+'</i>&nbsp;&nbsp;<i class="icon chat h5">comments</i></h2>'
 
 		idString = []
 		html += '<div class="menu_img_wrapper">'
@@ -68,7 +68,7 @@ appendKitchenMenuResult = (scope, data)->
 			idString.push recipe.recipe_id
 		html += '</div>'
 		
-		html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#MenuContent">View</a></div><div class="aDivider">&nbsp;</div>'
+		html += '<div style="float:left;width:100%;background-color:white;border-radius:5px;"><a id="Cook" class="button red" style="float:right;width:20%;margin-right:5%;" href="#Ingredients</span>">Cook</a><a id="View" class="button green" style="float:right;width:20%;margin-right:2%;" href="#Collection_MenuContent">View</a></div><div class="aDivider">&nbsp;</div>'
 		html += '</div>'
 		results.append html
 		scope.find("#Menu"+id).attr "data-recipe-ids", JSON.stringify idString
@@ -85,8 +85,9 @@ appendKitchenMenuResult = (scope, data)->
 
 		scope.find("#Menu"+id).find("#Cook")[0].onclick = do(id)->
 			-> # closure
-				$("#Cooking").find("#Results").hide()
-				$("#Cooking").find("#Loading").show()
+				$("#Ingredients").find("#Results").hide()
+				$("#Ingredients").find("#Loading").show()
+				$.ui.loadContent("#Ingredients")
 				getCookingIngredientList scope.find("#Menu#{id}").attr("data-recipe-ids")
 				undefined # avoid implicit rv
 

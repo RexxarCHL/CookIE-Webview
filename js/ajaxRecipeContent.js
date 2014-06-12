@@ -36,7 +36,7 @@ loadRecipeContent = function(scope, recipe) {
   scope.find("#RecipeImg").attr("src", recipe.image);
   scope.find("#RecipeDescription").text(recipe.description);
   scope.find("#RecipeUploadInfo").text("Uploaded by: " + recipe.authorName + ", " + (new Date(recipe.date)));
-  ingredientList = scope.find("#RecipeIngredientList");
+  ingredientList = scope.find("#RecipeIngredientListLeft");
   ingredientList.html("");
   _ref = recipe.ingredientGroup;
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -47,6 +47,7 @@ loadRecipeContent = function(scope, recipe) {
       ingredient = _ref1[_j];
       html += '<li>' + ingredient.ingredientName + " .............. " + ingredient.amount + " " + ingredient.unitName;
     }
+    html += '<br />';
     ingredientList.append(html);
   }
   stepList = scope.find("#RecipeSteps");
@@ -57,6 +58,7 @@ loadRecipeContent = function(scope, recipe) {
     html = '<li>' + i + '. ' + step.digest + '</li>';
     stepList.append(html);
   }
+  stepList.append('<br />');
   imgList = scope.find("#RecipePhotos");
   scope.find("#Loading").hide();
   scope.find("#Results").show();

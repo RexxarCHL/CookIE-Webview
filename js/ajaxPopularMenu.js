@@ -63,7 +63,7 @@ appendPopularMenuResult = function(scope, data) {
       rating += " stars";
     }
     html = '<div class="menu_wrapper new" id="Menu' + id + '" menu-id="' + id + '">';
-    html += '<h2 class="menu_title">' + title + '&nbsp;&nbsp;&nbsp;<i class="icon star">' + rating + '</i>&nbsp;&nbsp;<i class="icon chat">comments</i></h2>';
+    html += '<h2 class="menu_title">' + title + '&nbsp;&nbsp;&nbsp;<i class="icon star h5">' + rating + '</i>&nbsp;&nbsp;<i class="icon chat h5">comments</i></h2>';
     idString = [];
     html += '<div class="menu_img_wrapper">';
     _ref = list.recipes;
