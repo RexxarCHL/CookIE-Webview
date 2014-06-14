@@ -47,6 +47,7 @@ loadIngredientList = (scope, list, recipeIds)->
 
 getScheduledRecipe = (recipeIds)->
 	console.log "schedule_recipe #"+recipeIds
+	$.ui.showMask "Loading data from server..."
 
 	data = ''
 	#recipeIds = JSON.parse(recipeIds)
@@ -62,7 +63,8 @@ getScheduledRecipe = (recipeIds)->
 				console.log data
 
 				scope = $('#Cooking')
-				loadIngredientList(scope, data, recipeIds)
+				window.cooking = data
+				appendSteps scope, data
 
 				undefined # avoid implicit rv
 			error: (data, status)->
@@ -71,4 +73,30 @@ getScheduledRecipe = (recipeIds)->
 
 				undefined # avoid implicit rv
 	)
+	undefined
+
+parseTimeToMinutes = (time)->
+	time = time.split ":"
+	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
+
+appendSteps = (scope, data)->
+	console.log "append steps"
+	$.ui.showMask "Processing Data"
+
+	# append time
+	scope.find("#totalCookingTime").html "<b>"+parseTimeToMinutes(data.originTime)+" mins -> "+parseTimeToMinutes(data.scheduledTime)+" min</b>"
+
+	# append step list
+	stepsList = scope.find "#stepsList"
+	stepsList.html '<h2 style="margin-left:5%;">Steps:</h2>'
+	html = ""
+	for step in data.steps
+		html = '<div class="overview_stepWrapper">'
+		if steps.imageURL isnt undefined
+			html += '<img src="'+steps.imageURL+'" class="overview_stepImg"></img>'
+		html += '<h3 class="overview_stepText">'+(_i + 1)+'. '+step.digest+'</h3>'
+		html += '</div>'
+		stepsList.append html
+
+	$.ui.hideMask();
 	undefined
