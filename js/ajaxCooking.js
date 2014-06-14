@@ -2,7 +2,15 @@
 var appendSteps, getCookingIngredientList, getScheduledRecipe, loadIngredientList;
 
 getCookingIngredientList = function(recipeIds) {
-  var data, id, _i, _len;
+  var ans, data, id, _i, _len;
+  if (window.cookingData !== void 0) {
+    ans = confirm("You have a cooking in progress. Resume?");
+    if (ans === true) {
+      $.ui.loadContent("Step");
+    } else {
+      window.cookingData = void 0;
+    }
+  }
   data = '';
   recipeIds = JSON.parse(recipeIds);
   for (_i = 0, _len = recipeIds.length; _i < _len; _i++) {

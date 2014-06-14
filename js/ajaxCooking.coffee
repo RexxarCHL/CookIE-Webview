@@ -1,4 +1,8 @@
 getCookingIngredientList = (recipeIds)->
+	if window.cookingData isnt undefined
+		ans = confirm "You have a cooking in progress. Resume?"
+		if ans is yes then $.ui.loadContent("Step") else window.cookingData = undefined
+
 	data = ''
 	recipeIds = JSON.parse(recipeIds)
 	for id in recipeIds
