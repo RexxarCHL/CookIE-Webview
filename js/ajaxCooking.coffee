@@ -33,14 +33,11 @@ loadIngredientList = (scope, list, recipeIds)->
 		html += "<b>#{ingredient.amount}#{ingredient.unitName}</b> #{ingredient.ingredientName}</label>"
 		listContent.append html
 
-
-
 	scope.find("#Next").unbind 'click'
 	scope.find("#Next").click( do(list)->
 		-> #closure
 			getScheduledRecipe(recipeIds)
 	)
-
 
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
@@ -63,7 +60,7 @@ getScheduledRecipe = (recipeIds)->
 				console.log data
 
 				scope = $('#Cooking')
-				window.cooking = data
+				window.cookingData = data
 				appendSteps scope, data
 
 				undefined # avoid implicit rv
@@ -74,10 +71,6 @@ getScheduledRecipe = (recipeIds)->
 				undefined # avoid implicit rv
 	)
 	undefined
-
-parseTimeToMinutes = (time)->
-	time = time.split ":"
-	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
 
 appendSteps = (scope, data)->
 	console.log "append steps"

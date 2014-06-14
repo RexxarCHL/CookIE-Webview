@@ -118,3 +118,6 @@ findChosenRecipeId = ->
 	console.log recipeSelectedId
 	return recipeSelectedId
 
+parseTimeToMinutes = (time)->
+	time = time.split ":"
+	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
