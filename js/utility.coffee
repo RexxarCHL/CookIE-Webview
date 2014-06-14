@@ -121,3 +121,7 @@ findChosenRecipeId = ->
 parseTimeToMinutes = (time)->
 	time = time.split ":"
 	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
+
+parseTimeToSeconds = (time)->
+	time = time.split ":"
+	time = parseInt(time[0])*3600 + parseInt(time[1])*60 + parseInt(time[2])

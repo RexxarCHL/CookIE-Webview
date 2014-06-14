@@ -88,6 +88,8 @@ appendSteps = (scope, data)->
 		if steps.imageURL isnt undefined
 			html += '<img src="'+steps.imageURL+'" class="overview_stepImg"></img>'
 		html += '<h3 class="overview_stepText">'+(_i + 1)+'. '+step.digest+'</h3>'
+		###debug###
+		html += "    time: #{step.time}, people: #{step.people}, start time: #{step.startTime}"
 		html += '</div>'
 		stepsList.append html
 

@@ -206,6 +206,7 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxMenuContent.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/utility.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxCooking.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/cooking.js"></script>
 
         <script>
             /* To allow cross domain access in Phonegap */
@@ -755,44 +756,44 @@
                     <!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
                     <div id="steps_container" style="border:0px 1px 0px 1px solid #E6E6E6; height:97%">
                         &nbsp;
-                        <div style="height:5%;background-color:white;border-radius:5px;">
-                            <div style=" width:100%;height:100%;border-width: 2px;border-color:#D8D8D8;border-radius:5px;box-shadow:2px 3px 2px -2px rgba(20%,20%,40%,0.5);">
-                            <div style="width:90%;height:4%;opacity:0.4;background-color:#A9F5BC;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-left:4px;margin-top:2px;">&nbsp;</div>
-                            <h4 style="position:absolute;left:10px;margin-top:2px;">Soak mushrooms</h4>
-                            <h4 style="position:absolute;right:10px;margin-top:2px;">29:30</h4>
+                        <div class="waiting_step_outer_wrapper">
+                            <div class="waiting_step_inner_wrapper">
+                                <div class="waiting_step_progress next_next_step" style="width:90%;">&nbsp;</div>
+                                <h4 class="waiting_step_name">Soak mushrooms</h4>
+                                <h4 class="waiting_step_time">29:30</h4>
                             </div>
                         </div>
-                        <div style="width:100%;height:1%;">&nbsp;</div>
-                        <div style="height:5%;background-color:white;border-radius:5px;">
-                            <div style=" width:100%;height:100%;border-width: 2px;border-radius:5px;border-color:#D8D8D8;box-shadow:2px 3px 2px -2px rgba(20%,20%,40%,0.5);">
-                                <div style="width:60%;height:4%;opacity:0.4;background-color:#A9BCF5;position:absolute;float:left;border-radius:5px;padding-left:5px;margin-top:2px;margin-left:4px;">&nbsp;</div>
-                                <h4 style="position:absolute;left:10px;margin-top:2px;">Cook rice</h4>
-                                <h4 style="position:absolute;right:10px;margin-top:2px;">44:50</h4>
+                        <div class="waiting_step_spacer">&nbsp;</div>
+                        <div class="waiting_step_outer_wrapper">
+                            <div class="waiting_step_inner_wrapper">
+                                <div class="waiting_step_progress next_step" style="width:60%;">&nbsp;</div>
+                                <h4 class="waiting_step_name">Cook rice</h4>
+                                <h4 class="waiting_step_time">44:50</h4>
                             </div> 
                         </div>          
-                        <div style="width:100%;height:1%;">&nbsp;</div>                     
-                        <div style="background-color:#E6E6E6; height:70%; border-color:#D8D8D8;width:100%;">
-                            <div style="background-color:#F2F2F2;height:95%;margin-top:3px;border-width: 2px;border-radius:5px;border-color:#D8D8D8;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);" >
-                                <h2 style="background-color:#F2F2F2;margin:3px 20px 8px 20px;text-align:center;height:6%;border-radius:3px;">
+                        <div class="waiting_step_spacer">&nbsp;</div>                     
+                        <div class="this_step_outer_wrapper">
+                            <div class="this_step_inner_wrapper">
+                                <h2 class="step_name">
                                     Saute beef
                                 </h2>
-                                <div style="border:1px;border-color:#E6E6E6;margin-top:5px;"align="center" >
-                                    <img src="img/small.jpg" style="height:65%;max-width:97%;border-radius:5px;"></img>
+                                <div class="this_step_img_wrapper" >
+                                    <img class="this_step_img" src="img/small.jpg"></img>
                                 </div>
-                                <h3 style="margin:8px 20px 3px 20px;height:auto;" >
+                                <h3 class="this_step_digest">
                                     Saute beef with sauce A.Saute beef with sauce A.Saute beef with sauce A.
                                 </h3>
                             </div>
                         </div>
-                        <div style="background-color:#E6E6E6; height:5%; border-color:#D8D8D8;width:100%;">
-                            <div style="background-color:white;height:95%;margin-top:3px;border-width: 2px;border-radius:5px;border-color:#D8D8D8;box-shadow:4px 2px 3px -2px rgba(20%,20%,40%,0.5);" >
-                                <h4 style="position:absolute;left:10px;margin-top:1%;">Next: Stirfry mushroom</h4>
-                                <h4 style="position:absolute;right:10px;margin-top:1%;">2:30</h4>
+                        <div class="next_step_outer_wrapper">
+                            <div class="next_step_inner_wrapper">
+                                <h4 class="next_step_name">Next: Stirfry mushroom</h4>
+                                <h4 class="next_step_time">2:30</h4>
                             </div> 
                         </div>
-                        <div style="width:100%;height:1%;">&nbsp;</div>
-                       <div class="bottom_btn_holder" style="height:6%;margin-bottom:5px;">
-                            <a class="button" style="width:99%;background-color:#58ACFA;opacity:.8;" href="#Finish">Next </a>
+                        <div class="step_spacer">&nbsp;</div>
+                       <div class="bottom_btn_holder step_next_btn_wrapper">
+                            <a class="button step_next_btn" style="background-color:#58ACFA;" href="#Finish">Next </a>
                         </div> 
                     </div>
                     
