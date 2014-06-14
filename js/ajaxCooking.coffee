@@ -72,4 +72,3 @@ getScheduledRecipe = (recipeIds)->
 				undefined # avoid implicit rv
 	)
 	undefined
-	
