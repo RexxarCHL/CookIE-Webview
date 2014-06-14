@@ -705,7 +705,7 @@
                     </div>            
                 </div><!-- #Ingredients !-->
 
-                <!-- COOKING !-->
+                <!-- COOKING OVERVIEW !-->
 				<div id="Cooking" class="panel" title="Overview" style="background-color:#D8D8D8" data-load="loadedPanel" data-unload="unloadedPanel" data-footer='none'>
                     <div style="background-color:#F2F2F2">
                         <h2 style="margin-left:5%;">Total Time: </h2>
@@ -723,8 +723,8 @@
                     </div> 
                 </div><!-- #Cooking !-->
 			
-                <!-- STEP !-->
-                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-footer='none'>
+                <!-- COOKING STEP !-->
+                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-load="cookingStarted" data-footer='none'>
                     <!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
                     <div id="steps_container" style="border:0px 1px 0px 1px solid #E6E6E6; height:97%">
                         &nbsp;
@@ -743,10 +743,11 @@
                                 <h4 class="waiting_step_time">44:50</h4>
                             </div> 
                         </div>          
-                        <div class="waiting_step_spacer">&nbsp;</div>                     
+                        <div class="waiting_step_spacer">&nbsp;</div>
+
                         <div class="this_step_outer_wrapper">
                             <div class="this_step_inner_wrapper">
-                                <h2 class="step_name">
+                                <h2 class="this_step_recipe_name">
                                     Saute beef
                                 </h2>
                                 <div class="this_step_img_wrapper" >

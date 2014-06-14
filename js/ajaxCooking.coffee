@@ -65,6 +65,7 @@ getScheduledRecipe = (recipeIds)->
 
 				scope = $('#Cooking')
 				window.cookingData = data
+				window.currentStep = 0
 				appendSteps scope, data
 
 				undefined # avoid implicit rv
