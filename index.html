@@ -196,6 +196,7 @@
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <link rel="stylesheet" type="text/css" href="css/temp.css"  />
         <script type="text/javascript" charset="utf-8" src="./js/globalVariables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/clone.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxSearchResult2.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularMenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxPopularRecipe.js"></script>
@@ -724,23 +725,23 @@
                 </div><!-- #Cooking !-->
 			
                 <!-- COOKING STEP !-->
-                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-load="cookingStarted" data-footer='none'>
+                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-load="cookingStarted" data-unload="cookingEnded" data-footer='none'>
                     <!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
                     <div id="steps_container" style="border:0px 1px 0px 1px solid #E6E6E6; height:97%">
                         &nbsp;
                         <div class="waiting_step_outer_wrapper">
-                            <div class="waiting_step_inner_wrapper">
-                                <div class="waiting_step_progress next_next_step" style="width:90%;">&nbsp;</div>
-                                <h4 class="waiting_step_name">Soak mushrooms</h4>
-                                <h4 class="waiting_step_time">29:30</h4>
+                            <div id="NextNextWaitingStep" class="waiting_step_inner_wrapper">
+                                <div id="ProgressBar" class="waiting_step_progress next_next_step">&nbsp;</div>
+                                <h4 id="ProgressName" class="waiting_step_name">Next next waiting step</h4>
+                                <h4 id="ProgressRemainTime" class="waiting_step_time">00:00:00</h4>
                             </div>
                         </div>
                         <div class="waiting_step_spacer">&nbsp;</div>
                         <div class="waiting_step_outer_wrapper">
-                            <div class="waiting_step_inner_wrapper">
-                                <div class="waiting_step_progress next_step" style="width:60%;">&nbsp;</div>
-                                <h4 class="waiting_step_name">Cook rice</h4>
-                                <h4 class="waiting_step_time">44:50</h4>
+                            <div id="NextWaitingStep" class="waiting_step_inner_wrapper">
+                                <div id="ProgressBar" class="waiting_step_progress next_step">&nbsp;</div>
+                                <h4 id="ProgressName" class="waiting_step_name">Next waiting step</h4>
+                                <h4 id="ProgressRemainTime" class="waiting_step_time">00:00:00</h4>
                             </div> 
                         </div>          
                         <div class="waiting_step_spacer">&nbsp;</div>
@@ -759,10 +760,10 @@
                             </div>
                         </div>
                         <div class="next_step_outer_wrapper">
-                            <div class="next_step_inner_wrapper">
-                                <div class="next_step_progress" style="width:60%;">&nbsp;</div>
-                                <h4 class="next_step_name">Next: Stirfry mushroom</h4>
-                                <h4 class="next_step_time">2:30</h4>
+                            <div id="NextStep" class="next_step_inner_wrapper">
+                                <div id="ProgressBar" class="next_step_progress">&nbsp;</div>
+                                <h4 id="ProgressName" class="next_step_name">Next: Stirfry mushroom</h4>
+                                <h4 id="ProgressRemainTime" class="next_step_time">2:30</h4>
                             </div> 
                         </div>
                         <div class="step_spacer">&nbsp;</div>

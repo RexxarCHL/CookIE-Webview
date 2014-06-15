@@ -2,11 +2,17 @@
 class Step
 	constructor: (@stepNum, @startTime, @duration, @recipeName, @digest, @people)->
 		@finishTime = @startTime + @duration
-		@percentage = 0
+		@timeElapsed = 0
+		@percentage = ""
 		undefined
 
-	@calculatePercentage: (currentTime)->
-		@percentage = Math.ceil (@endTime - currentTime) / @duration * 100
+	calculateRemainTime: ->
+		@remainTime = @duration - @timeElapsed
+
+	calculatePercentage: ->
+		remainTime = this.calculateRemainTime()
+		@percentage = Math.floor(remainTime / @duration * 100)
+		@percentage + "%"
 
 ### Function definitions ###
 # on-panel-load function for #Step aka cooking step
@@ -24,18 +30,58 @@ cookingStarted = ->
 	$("#Step").attr "data-title", "Step #{currentStepNum+1} (#{finishPercentage}%)"
 	loadStep(currentStepNum)
 
+	setTimeout ->
+		timer()
+	, 1000
+
 	undefined # avoid implicit rv
 
+cookingEnded = ->
+	stopTimer()
+
+### Timer: for clocking the cook process ###
+timer = ->
+	# clock tick
+	window.currentTime = window.currentTime + 1
+	window.waitingStepQueue.forEach (step)->
+		step.timeElapsed += 1
+		step.calculateRemainTime()
+	
+	# update progress bar
+	checkProgress()
+	showTwoUrgentSteps()
+
+	#start another timer
+	startTimer()
+
+	undefined # avoid implicit rv
+
+startTimer = ->
+	# clear the any previous timer
+	clearTimeout window.lastId
+
+	# reserve next clock tick
+	window.lastId = setTimeout ->
+			timer()
+		, 1000
+
+stopTimer = ->
+	# clear previous timer
+	clearTimeout window.lastId
+
+### Steps ###
+# load step: load step #[stepNum]
 loadStep = (stepNum)->
 	stepsLen = window.cookingData.steps.length
 	if stepNum >= stepsLen
+		# end reached
 		console.log "finished"
 		$.ui.loadContent "Finish"
 		return undefined
 
 	console.log "load step##{stepNum}"
 	thisStep = window.cookingData.steps[stepNum]
-	window.currentStep = new Step(stepNum, parseInt(thisStep.startTime), convertTimeToSeconds(thisStep.time), thisStep.recipeName, thisStep.digest, thisStep.people)
+	window.currentStep = new Step(stepNum, parseInt(thisStep.startTime), convertTimeToSeconds(thisStep.time), thisStep.recipeName, thisStep.stepName, thisStep.people)
 	window.currentStepNum = stepNum
 
 	finishPercentage = Math.ceil (stepNum+1) / stepsLen * 100
@@ -61,6 +107,7 @@ loadStep = (stepNum)->
 		scope.find(".next_step_name").html "Final Step Reached"
 		scope.find(".next_step_time").html "00:00"
 		scope.find(".step_next_btn").html "Finish "
+
 	scope.find(".step_next_btn").unbind 'click'
 	scope.find(".step_next_btn").click ->
 		checkNextStep()
@@ -69,37 +116,128 @@ loadStep = (stepNum)->
 	undefined # avoid implicit rv
 
 checkNextStep = ->
-	## TODO CHECK START TIME OF NEXT STEP AND COMPARE TO CURRENT STEP
 	currentTime = window.currentTime
 	thisStep = window.currentStep
 	thisStepFinishTime = thisStep.finishTime
+	
+	if (nextStep = window.cookingData.steps[thisStep.stepNum+1])?
+		if (timeDiff = nextStep.startTime - thisStepFinishTime) > 0
+			# next step start time > this step finish time:
+			#  there is a step in the waiting queue and we must wait for it to finish
+			ans = confirm "wait!!!"
+			if ans is no
+				window.waitingStepQueue.forEach (step)->
+					step.timeElapsed += timeDiff
+					step.calculateRemainTime()
+				window.currentTime = nextStep.startTime
+				loadStep thisStep.stepNum+1
+			return undefined
+	else
+		console.log "finished"
+		$.ui.loadContent "Finish"
+		return undefined
+
 	if thisStepFinishTime - currentTime <= 30
 		console.log "<=30, time=#{thisStepFinishTime}"
 		window.currentTime = thisStepFinishTime
-	else if thisStep.people is false
-		console.log ">30 but people=false, endtime=#{thisStepFinishTime}"
-		pushStepToWaitingQueue thisStep, currentTime
-	else
-		console.log ">30, currentTime=#{currentTime}, time=#{thisStepFinishTime}"
-		ans = confirm "Steps waiting. Continue?"
+	else if thisStep.people is true
+		console.log ">30 and people=true, currentTime=#{currentTime}, time=#{thisStepFinishTime}"
+		ans = confirm "This step may take you longer. Skip anyways?"
 		if ans is yes
-			pushStepToWaitingQueue thisStep, currentTime
 			window.currentTime = thisStepFinishTime
 		else
 			return undefined
+	else
+		console.log ">30, endtime=#{thisStepFinishTime}"
+		pushStepToWaitingQueue thisStep, currentTime
+		window.currentTime = currentTime + 30
 
+	checkProgress()
 	loadStep(thisStep.stepNum+1)
-	# avoid implicit rv
+	undefined # avoid implicit rv
 
 checkProgress = ->
+	### Check waiting queue status ###
+	queueClone = clone window.waitingStepQueue
+	queue = window.waitingStepQueue
+	queueLen = queueClone.length
+	queueClone.forEach (waitingStep)->
+		if waitingStep.remainTime <= 0
+			### Finished ###
+			# pop the step out of the queue
+			step = queue.pop()
+			# alert the user
+			alert "Step finished: #{step.digest}"
 
+	# show current time elapse on next step progress bar
+	thisStep = window.currentStep
+	currentTime = window.currentTime
+	remainTime = thisStep.finishTime-currentTime
+	if remainTime < 0
+		stopTimer()
+
+		ans = confirm "Timeout! Extend time?"
+		if ans is yes
+			window.currentTime = currentTime - thisStep.duration
+		else
+			loadStep window.currentStepNum+1
+		
+		startTimer()
+	
+	nextStep = $("#NextStep")
+	nextStep.find("#ProgressBar").css3Animate
+			width: "#{100 - Math.ceil((remainTime/thisStep.duration)*100)}%"
+			time: '100ms'
+	nextStep.find("#ProgressRemainTime").html parseSecondsToTime remainTime
+
+	undefined # avoid implicit rv
 
 pushStepToWaitingQueue = (step, currentTime)->
 	console.log "push #{step.stepNum}: #{step.digest} into queue"
 	window.waitingStepQueue.push step
+	window.waitingStepQueue.forEach (waitingStep)->
+		waitingStep.calculateRemainTime()
 	window.waitingStepQueue.sort (a,b)->
-		a.endTime - b.endTime
-	showMostUrgentTwoSteps
+		b.remainTime - a.remainTime
+	console.log window.waitingStepQueue
+	showTwoUrgentSteps()
 	#checkProgress
+	undefined # avoid implicit rv
 
-showMostUrgentTwoSteps = ->
+showTwoUrgentSteps = ->
+	console.log "show two urgent steps"
+	waitingQueue = window.waitingStepQueue
+	queueLen = waitingQueue.length
+	nextStep = waitingQueue[queueLen-1]
+	nextNextStep = waitingQueue[queueLen-2]
+	updateProgressBar $("#NextNextWaitingStep"), nextNextStep
+	updateProgressBar $("#NextWaitingStep"), nextStep
+
+	###
+	if nextStep? and nextNextStep?
+		console.log "enough steps. steps:#{nextStep.stepNum}, #{nextNextStep.stepNum}"
+	else if nextStep?
+		console.log "not enough steps. step:#{nextStep.stepNum}"
+	else
+		console.log "no step waiting"
+	###
+
+	undefined # avoid implicit rv
+
+updateProgressBar = (scope, step)->
+	progressBar = scope.find "#ProgressBar"
+	progressName = scope.find "#ProgressName"
+	progressRemainTime = scope.find "#ProgressRemainTime"
+	if not step?
+		### step = null: empty progress bar ###
+		progressBar.css3Animate 
+			width: '0%'
+			time: '500ms'
+		progressName.html "No step waiting"
+		progressRemainTime.html ""
+	else
+		progressBar.css3Animate
+			width: "#{step.calculatePercentage()}%"
+			time: '500ms'
+		progressName.html step.digest
+		progressRemainTime.html parseSecondsToTime step.remainTime
