@@ -122,6 +122,17 @@ parseTimeToMinutes = (time)->
 	time = time.split ":"
 	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
 
-parseTimeToSeconds = (time)->
+convertTimeToSeconds = (time)->
 	time = time.split ":"
 	time = parseInt(time[0])*3600 + parseInt(time[1])*60 + parseInt(time[2])
+
+parseSecondsToTime = (seconds)->
+	hour = Math.floor seconds/3600
+	seconds %= 3600
+	hour = if hour<10 then "0"+hour else hour
+	min = Math.floor seconds/60
+	seconds %= 60
+	min = if min<10 then "0"+min else min
+	seconds = if seconds<10 then "0"+seconds else seconds
+
+	"#{hour}:#{min}:#{seconds}"

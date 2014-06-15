@@ -78,7 +78,7 @@ getScheduledRecipe = function(recipeIds) {
       console.log(data);
       scope = $('#Cooking');
       window.cookingData = data;
-      window.currentStep = 0;
+      window.currentStepNum = 0;
       appendSteps(scope, data);
       return void 0;
     },
