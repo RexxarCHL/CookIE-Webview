@@ -132,13 +132,15 @@ findChosenRecipeId = ->
 createNewMenu = (recipeIds, listTitle, isPrivate)->
 	console.log "create new menu for ##{recipeIds} with title=#{listTitle} and privacy=#{isPrivate}"
 	
-	recipeIds = JSON.stringify(recipeIds)
 	data = 
 		'list_name': listTitle
-		'description': null
+		'description': ""
 		'privacy': isPrivate
 		'recipes': recipeIds
+		'user_id': 2
+	data = JSON.stringify data
 
+	console.log data
 	$.ajax(
 		type: 'POST'
 		url: 'http://54.178.135.71:8080/CookIEServer/recipelist'
