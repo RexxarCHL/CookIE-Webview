@@ -1,7 +1,7 @@
 getCookingIngredientList = (recipeIds)->
-	if window.cookingData isnt undefined
+	if window.cookingData?
 		ans = confirm "You have a cooking in progress. Resume?"
-		if ans is yes then $.ui.loadContent("Step") else window.cookingData = undefined
+		if ans is yes then $.ui.loadContent("Step") else window.cookingData = null
 
 	data = ''
 	recipeIds = JSON.parse(recipeIds)
@@ -72,7 +72,9 @@ getScheduledRecipe = (recipeIds)->
 			error: (data, status)->
 				console.log '[ERROR] fetching #'+recipeIds
 				console.log data
-
+				$.ui.hideMask()
+				alert "ERROR"
+				$.ui.loadContent "main_Popular_Recipes"
 				undefined # avoid implicit rv
 	)
 	undefined

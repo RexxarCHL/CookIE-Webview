@@ -2,3 +2,7 @@
 window.lastId = -1;
 
 window.mode = 0;
+
+window.cookingData = null;
+
+window.currentStep = null;

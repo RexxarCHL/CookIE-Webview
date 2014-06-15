@@ -3,12 +3,12 @@ var appendSteps, getCookingIngredientList, getScheduledRecipe, loadIngredientLis
 
 getCookingIngredientList = function(recipeIds) {
   var ans, data, id, _i, _len;
-  if (window.cookingData !== void 0) {
+  if (window.cookingData != null) {
     ans = confirm("You have a cooking in progress. Resume?");
     if (ans === true) {
       $.ui.loadContent("Step");
     } else {
-      window.cookingData = void 0;
+      window.cookingData = null;
     }
   }
   data = '';
@@ -85,6 +85,9 @@ getScheduledRecipe = function(recipeIds) {
     error: function(data, status) {
       console.log('[ERROR] fetching #' + recipeIds);
       console.log(data);
+      $.ui.hideMask();
+      alert("ERROR");
+      $.ui.loadContent("main_Popular_Recipes");
       return void 0;
     }
   });

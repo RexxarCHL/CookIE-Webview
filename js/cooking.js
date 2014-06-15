@@ -4,10 +4,11 @@
 var Step, cookingStarted, loadStep;
 
 Step = (function() {
-  function Step(startTime, duration, percentage, digest) {
+  function Step(startTime, duration, percentage, recipeName, digest) {
     this.startTime = startTime;
     this.duration = duration;
     this.percentage = percentage;
+    this.recipeName = recipeName;
     this.digest = digest;
     this.endTime = this.startTime + this.duration;
     void 0;
@@ -26,25 +27,35 @@ Step = (function() {
 
 cookingStarted = function() {
   var cookingData, currentStep, finishPercentage;
-  if (window.cookingData === void 0) {
+  if (window.cookingData == null) {
     return void 0;
   }
   cookingData = window.cookingData;
   currentStep = window.currentStep;
-  finishPercentage = Math.ceil(currentStep / cookingData.steps.length * 100);
+  finishPercentage = Math.ceil((currentStep + 1) / window.cookingData.steps.length * 100);
+  window.currentTime = 0;
   console.log("cooking started");
-  $.ui.setTitle("Step " + currentStep + " (" + finishPercentage + "%)");
-  return loadStep(currentStep);
+  $("#Step").attr("data-title", "Step " + (currentStep + 1) + " (" + finishPercentage + "%)");
+  loadStep(currentStep);
+  return void 0;
 };
 
 loadStep = function(currentStep) {
-  var nextStep, scope, thisStep;
+  var finishPercentage, nextStep, scope, thisStep;
+  if (currentStep >= window.cookingData.steps.length) {
+    console.log("finished");
+    $.ui.loadContent("Finish");
+    return void 0;
+  }
   console.log("load step#" + currentStep);
+  window.currentStep = currentStep;
   thisStep = window.cookingData.steps[currentStep];
+  finishPercentage = Math.ceil((currentStep + 1) / window.cookingData.steps.length * 100);
   scope = $("#Step");
+  $.ui.setTitle("Step " + (currentStep + 1) + " (" + finishPercentage + "%)");
   scope.find(".this_step_recipe_name").html(thisStep.recipeName);
-  if (thisStep.imageURL !== void 0) {
-    console.log("img");
+  if (thisStep.imageURL != null) {
+    console.log("img:" + thisStep.imageURL);
     scope.find(".this_step_img").attr("src", thisStep.imageURL);
     scope.find(".this_step_img_wrapper").show();
   } else {
@@ -53,6 +64,16 @@ loadStep = function(currentStep) {
   }
   scope.find(".this_step_digest").html(thisStep.digest);
   nextStep = window.cookingData.steps[currentStep + 1];
-  scope.find(".next_step_name").html(nextStep.stepName);
-  return scope.find(".next_step_time").html(nextStep.time);
+  if (nextStep != null) {
+    scope.find(".next_step_name").html(nextStep.stepName);
+    scope.find(".next_step_time").html(nextStep.time);
+  } else {
+    scope.find(".next_step_name").html("Final Step Reached");
+    scope.find(".next_step_time").html("00:00");
+    scope.find(".step_next_btn").html("Finish ");
+  }
+  scope.find(".step_next_btn").unbind('click');
+  return scope.find(".step_next_btn").click(function() {
+    return loadStep(currentStep + 1);
+  });
 };
