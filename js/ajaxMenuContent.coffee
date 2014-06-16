@@ -65,7 +65,7 @@ loadMenuContent = (scope, menu)->
 	scope.find("#Results").show()
 	undefined #avoid implicit rv
 
-kitchenMenuAjaxd = 0
+
 deleteThisMenu = ->
 	menuId = $('#Collection_MenuContent').find('.menuContent_imgHolder').attr 'data-menu-id'
 	console.log "delete menu ##{menuId} from kitchen"
@@ -90,11 +90,7 @@ deleteThisMenu = ->
 			console.log "[SUCCESS] deleting menu ##{menuId}"
 			console.log data
 			
-			scope = $("#main_Kitchen_Menus")
-			scope.find('#Results').html ""
-			scope.find("#infinite").text "Reloading..."
-			kitchenMenuAjaxd = 0
-			getKitchenMenus(kitchenMenuAjaxd)
+			reloadKitchenMenus()
 			$.ui.loadContent '#main_Kitchen_Menus'
 			undefined # avoid implicit rv
 		error: (resp)->

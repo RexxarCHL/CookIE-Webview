@@ -80,7 +80,6 @@ utilityTrash = ->
 	utilBtn.click -> deleteSelectedRecipes()
 	undefined
 
-kitchenRecipesAjaxd = 0 #DEBUG
 deleteSelectedRecipes = ->
 	selectedId = findChosenRecipeId()
 	if selectedId.length is 0 then return undefined
@@ -108,11 +107,7 @@ deleteSelectedRecipes = ->
 			console.log "[SUCCESS] deleting recipes #"+selectedId
 			console.log data
 			
-			scope = $("#main_Kitchen_Recipes")
-			scope.find("#Results").html ""
-			scope.find("#infinite").text "Reloading..."
-			kitchenRecipesAjaxd = 0
-			getKitchenRecipes(kitchenRecipesAjaxd)
+			reloadKitchenRecipes()
 			undefined # avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR] deleting recipes #"+selectedId
@@ -120,6 +115,22 @@ deleteSelectedRecipes = ->
 
 			undefined # avoid implicit rv
 	)
+
+kitchenRecipesAjaxd = 0 #DEBUG
+reloadKitchenRecipes = ->
+	scope = $("#main_Kitchen_Recipes")
+	scope.find("#Results").html ""
+	scope.find("#infinite").text "Reloading..."
+	kitchenRecipesAjaxd = 0
+	getKitchenRecipes(kitchenRecipesAjaxd)
+
+kitchenMenuAjaxd = 0
+reloadKitchenMenus = ->
+	scope = $("#main_Kitchen_Menus")
+	scope.find('#Results').html ""
+	scope.find("#infinite").text "Reloading..."
+	kitchenMenuAjaxd = 0
+	getKitchenMenus(kitchenMenuAjaxd)
 
 findChosenRecipeId = ->
 	recipeSelectedId = []
@@ -163,7 +174,35 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 			undefined # avoid implicit rv
 	)
 
-	undefined
+	### add this newly created menu to kitchen ###
+	data = 
+		user_id: window.user_id
+		token: window.token
+		type: 'list'
+		list_id: newId
+	data = JSON.stringify data
+
+	$.ajax(
+		type: 'POST'
+		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+		contentType: 'application/json'
+		data: data
+		timeout: 10000
+		success: (data)->
+			console.log "[SUCCESS] add menu ##{menuId} to kitchen"
+			console.log data
+			alert "Done!"
+			reloadKitchenMenus()
+			undefined # avoid implicit rv
+		error: (resp)->
+			console.log "[ERROR] add menu ##{menuId} to kitchen"
+			console.log resp
+			if resp.status is 404
+				alert "Oops! The menu is already in Kitchen!"
+			undefined # avoid implicit rv
+	)
+
+	undefined # avoid implicit rv
 
 addThisRecipeToKitchen = ->
 	recipeId = $('#RecipeContent').find('#RecipeImg').attr 'data-recipe-id'
@@ -185,9 +224,11 @@ addThisRecipeToKitchen = ->
 		success: (data)->
 			console.log "[SUCCESS] add #{recipeId} to kitchen"
 			console.log data
+			alert "Done!"
+			reloadKitchenRecipes()
 			undefined # avoid implicit rv
 		error: (resp)->
-			console.log "[ERROR] add #{recipeId} to kitche"
+			console.log "[ERROR] add #{recipeId} to kitchen"
 			console.log resp
 			if resp.status is 404
 				alert "Oops! The recipe is already in Kitchen!"
