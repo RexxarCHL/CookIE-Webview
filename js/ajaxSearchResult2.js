@@ -103,7 +103,7 @@ search = function(query, times) {
         return;
       }
       if (type) {
-        appendMenuResult(scope, data);
+        appendPopularMenuResult(scope, data);
       } else {
         appendRecipeResult(scope, data);
       }

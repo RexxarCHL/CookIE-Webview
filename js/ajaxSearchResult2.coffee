@@ -98,7 +98,7 @@ search = (query, times) ->
 				searchAjaxd--;
 				return
 
-			if type then appendMenuResult(scope, data)
+			if type then appendPopularMenuResult(scope, data)
 			else appendRecipeResult(scope, data)
 			return #avoid implicit return values by Coffeescript
 		error: (data, status)->
