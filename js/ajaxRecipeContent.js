@@ -17,15 +17,12 @@ getRecipeContent = function(recipeId) {
       console.log(data);
       scope = $("#RecipeContent");
       setTimeout(loadRecipeContent(scope, data), 1000);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch recipe #" + recipeId);
       console.log(data);
-      return void 0;
     }
   });
-  return void 0;
 };
 
 loadRecipeContent = function(scope, recipe) {
@@ -63,5 +60,4 @@ loadRecipeContent = function(scope, recipe) {
   imgList = scope.find("#RecipePhotos");
   scope.find("#Loading").hide();
   scope.find("#Results").show();
-  return void 0;
 };

@@ -1,7 +1,7 @@
 kitchenRecipeAjaxd = 0
 $(document).ready ->
 	addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, ->getKitchenRecipes(kitchenRecipeAjaxd, self))
-	undefined #avoid implicit return values by Coffeescript
+	return #avoid implicit return values by Coffeescript
 
 getKitchenRecipes = (times) ->
 	$.ajax(
@@ -30,18 +30,18 @@ getKitchenRecipes = (times) ->
 			if data.length is 0
 				$("#main_Kitchen_Recipes").find("#infinite").text "No more recipes"
 				kitchenRecipeAjaxd--
-				return undefined
+				return
 
 			scope = $("#main_Kitchen_Recipes")
 			appendRecipeResult(scope, data)
 			
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen recipes: " + status
 			console.log data
 			$("#main_Kitchen_Recipes").find("#infinite").text "Load More"
 			$('#main_Kitchen_Recipes').scroller().clearInfinite();
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 	)
-	undefined #avoid implicit return values by Coffeescript
+	return #avoid implicit return values by Coffeescript
 	

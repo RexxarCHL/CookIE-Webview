@@ -13,9 +13,7 @@ $(document).ready(function() {
   });
   addInfiniteScroll($("#main_Category"), 1000, function() {
     getSingleCategory(singleCatAjaxd, singleCatId);
-    return void 0;
   });
-  return void 0;
 });
 
 getAllCategory = function(times) {
@@ -38,11 +36,10 @@ getAllCategory = function(times) {
       if (data.length === 0) {
         $("#main_AllCategories").find("#infinite").text("No more categories");
         allCatAjaxd--;
-        return void 0;
+        return;
       }
       $("#main_AllCategories").find("#infinite").text("Load more");
       appendAllCategoryResult(data);
-      return void 0;
     },
     error: function(data) {
       var scrollerList;
@@ -50,10 +47,8 @@ getAllCategory = function(times) {
       scrollerList = $("#main_AllCategories").scroller();
       scrollerList.clearInfinite();
       $("#main_AllCategories").find("#infinite").text("Error. Try Again?");
-      return void 0;
     }
   });
-  return void 0;
 };
 
 appendAllCategoryResult = function(data) {
@@ -87,7 +82,6 @@ appendAllCategoryResult = function(data) {
       return getSingleCategory(singleCatAjaxd, singleCatId);
     });
   });
-  return void 0;
 };
 
 getSingleCategory = function(times, tagId) {
@@ -110,19 +104,16 @@ getSingleCategory = function(times, tagId) {
       if (data.recipes.length === 0) {
         $("#main_Category").find("#infinite").html("No more recipes.");
         singleCatAjaxd--;
-        return void 0;
+        return;
       }
       $.ui.setTitle(data.tag.tagName);
       scope = $('#main_Category');
       scope.find("#Results").html("");
       appendRecipeResult(scope, data.recipes);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch cat #" + tagId);
       $("#main_Category").find("#infinite").html("Error. Try Again?");
-      return void 0;
     }
   });
-  return void 0;
 };

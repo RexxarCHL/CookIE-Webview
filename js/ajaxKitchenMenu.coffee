@@ -1,7 +1,7 @@
 kitchenMenuAjaxd = 0
 $(document).ready ->
 	addInfiniteScroll($('#main_Kitchen_Menus'), 1000, ->getKitchenMenus(kitchenMenuAjaxd))
-	undefined #avoid implicit return values by Coffeescript
+	return #avoid implicit return values by Coffeescript
 
 getKitchenMenus = (times) ->
 	$.ajax(
@@ -30,18 +30,18 @@ getKitchenMenus = (times) ->
 			if data.length is 0
 				$("#main_Kitchen_Menus").find("#infinite").text "No more lists"
 				kitchenMenuAjaxd--
-				return undefined
+				return
 
 			scope = $("#main_Kitchen_Menus")
 			appendKitchenMenuResult(scope, data)
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]fetch kitchen menu: " + status
 			$("#main_Kitchen_Menus").find("#infinite").text "Load More"
 			$('#main_Kitchen_Menus').scroller().clearInfinite()
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 	)
-	undefined #avoid implicit return values by Coffeescript
+	return #avoid implicit return values by Coffeescript
 	
 appendKitchenMenuResult = (scope, data)->
 	console.log "append menu for scope: " + scope[0].id
@@ -83,7 +83,7 @@ appendKitchenMenuResult = (scope, data)->
 				$("#Collection_MenuContent").find("#Results").hide()
 				$("#Collection_MenuContent").find("#Loading").show()
 				getMenuContent($("#Collection_MenuContent"), id)
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 
 		scope.find("#Menu"+id).find("#Cook")[0].onclick = do(id)->
 			-> # closure
@@ -91,9 +91,9 @@ appendKitchenMenuResult = (scope, data)->
 				$("#Ingredients").find("#Loading").show()
 				$.ui.loadContent("#Ingredients")
 				getCookingIngredientList scope.find("#Menu#{id}").attr("data-recipe-ids")
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 
 
 
 	scope.find("#infinite").text "Load More"
-	undefined #avoid implicit return values
+	return #avoid implicit return values

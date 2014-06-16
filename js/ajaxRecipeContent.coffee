@@ -16,14 +16,14 @@ getRecipeContent = (recipeId)->
 
 			scope = $("#RecipeContent")
 			setTimeout(loadRecipeContent(scope, data), 1000)
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR]fetch recipe #"+recipeId
 			console.log data
 
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 	)
-	undefined #avoid implicit rv
+	return #avoid implicit rv
 
 loadRecipeContent = (scope, recipe)->
 	$.ui.setTitle recipe.recipeName
@@ -67,4 +67,4 @@ loadRecipeContent = (scope, recipe)->
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
 
-	undefined #avoid implicit rv
+	return #avoid implicit rv

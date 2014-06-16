@@ -4,7 +4,7 @@ class Step
 		@finishTime = @startTime + @duration
 		@timeElapsed = 0
 		@percentage = ""
-		undefined
+		return
 
 	calculateRemainTime: ->
 		@remainTime = @duration - @timeElapsed
@@ -17,7 +17,7 @@ class Step
 ### Function definitions ###
 # on-panel-load function for #Step aka cooking step
 cookingStarted = ->
-	if not window.cookingData? then return undefined
+	if not window.cookingData? then return
 	cookingData = window.cookingData
 	currentStepNum = window.currentStepNum
 	finishPercentage = Math.ceil (currentStepNum+1) / window.cookingData.steps.length * 100
@@ -34,7 +34,7 @@ cookingStarted = ->
 		timer()
 	, 1000
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 cookingEnded = ->
 	stopTimer()
@@ -54,7 +54,7 @@ timer = ->
 	#start another timer
 	startTimer()
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 startTimer = ->
 	# clear the any previous timer
@@ -64,6 +64,7 @@ startTimer = ->
 	window.lastId = setTimeout ->
 			timer()
 		, 1000
+	return
 
 stopTimer = ->
 	# clear previous timer
@@ -77,7 +78,7 @@ loadStep = (stepNum)->
 		# end reached
 		console.log "finished"
 		$.ui.loadContent "Finish"
-		return undefined
+		return
 
 	console.log "load step##{stepNum}"
 	thisStep = window.cookingData.steps[stepNum]
@@ -111,9 +112,9 @@ loadStep = (stepNum)->
 	scope.find(".step_next_btn").unbind 'click'
 	scope.find(".step_next_btn").click ->
 		checkNextStep()
-		undefined # avoid implicit rv
+		return # avoid implicit rv
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 checkNextStep = ->
 	currentTime = window.currentTime
@@ -131,11 +132,11 @@ checkNextStep = ->
 					step.calculateRemainTime()
 				window.currentTime = nextStep.startTime
 				loadStep thisStep.stepNum+1
-			return undefined
+			return
 	else
 		console.log "finished"
 		$.ui.loadContent "Finish"
-		return undefined
+		return
 
 	if thisStepFinishTime - currentTime <= 30
 		console.log "<=30, time=#{thisStepFinishTime}"
@@ -146,7 +147,7 @@ checkNextStep = ->
 		if ans is yes
 			window.currentTime = thisStepFinishTime
 		else
-			return undefined
+			return
 	else
 		console.log ">30, endtime=#{thisStepFinishTime}"
 		pushStepToWaitingQueue thisStep, currentTime
@@ -154,7 +155,7 @@ checkNextStep = ->
 
 	checkProgress()
 	loadStep(thisStep.stepNum+1)
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 checkProgress = ->
 	### Check waiting queue status ###
@@ -190,7 +191,7 @@ checkProgress = ->
 			time: '100ms'
 	nextStep.find("#ProgressRemainTime").html parseSecondsToTime remainTime
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 pushStepToWaitingQueue = (step, currentTime)->
 	console.log "push #{step.stepNum}: #{step.digest} into queue"
@@ -202,7 +203,7 @@ pushStepToWaitingQueue = (step, currentTime)->
 	console.log window.waitingStepQueue
 	showTwoUrgentSteps()
 	#checkProgress
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 showTwoUrgentSteps = ->
 	console.log "show two urgent steps"
@@ -222,7 +223,7 @@ showTwoUrgentSteps = ->
 		console.log "no step waiting"
 	###
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 updateProgressBar = (scope, step)->
 	progressBar = scope.find "#ProgressBar"
@@ -241,3 +242,5 @@ updateProgressBar = (scope, step)->
 			time: '500ms'
 		progressName.html step.digest
 		progressRemainTime.html parseSecondsToTime step.remainTime
+
+	return

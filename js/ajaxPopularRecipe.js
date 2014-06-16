@@ -7,7 +7,6 @@ $(document).ready(function() {
   addInfiniteScroll($('#main_Popular_Recipes'), 3000, function() {
     return getPopularRecipes(recipeAjaxd);
   });
-  return void 0;
 });
 
 getPopularRecipes = function(times) {
@@ -31,11 +30,10 @@ getPopularRecipes = function(times) {
       if (data.length === 0) {
         $("#main_Popular_Recipes").find("#infinite").text("No more recipes");
         recipeAjaxd--;
-        return void 0;
+        return;
       }
       scope = $("#main_Popular_Recipes");
       appendRecipeResult(scope, data);
-      return void 0;
     },
     error: function(data, status) {
       var scrollerList;
@@ -44,8 +42,6 @@ getPopularRecipes = function(times) {
       $("#main_Popular_Recipes").find("#infinite").text("Load More");
       scrollerList = $('#main_Popular_Recipes').scroller();
       scrollerList.clearInfinite();
-      return void 0;
     }
   });
-  return void 0;
 };

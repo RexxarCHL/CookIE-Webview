@@ -7,7 +7,6 @@ $(document).ready(function() {
   addInfiniteScroll($('#main_Kitchen_Menus'), 1000, function() {
     return getKitchenMenus(kitchenMenuAjaxd);
   });
-  return void 0;
 });
 
 getKitchenMenus = function(times) {
@@ -32,20 +31,17 @@ getKitchenMenus = function(times) {
       if (data.length === 0) {
         $("#main_Kitchen_Menus").find("#infinite").text("No more lists");
         kitchenMenuAjaxd--;
-        return void 0;
+        return;
       }
       scope = $("#main_Kitchen_Menus");
       appendKitchenMenuResult(scope, data);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch kitchen menu: " + status);
       $("#main_Kitchen_Menus").find("#infinite").text("Load More");
       $('#main_Kitchen_Menus').scroller().clearInfinite();
-      return void 0;
     }
   });
-  return void 0;
 };
 
 appendKitchenMenuResult = function(scope, data) {
@@ -85,7 +81,6 @@ appendKitchenMenuResult = function(scope, data) {
         $("#Collection_MenuContent").find("#Results").hide();
         $("#Collection_MenuContent").find("#Loading").show();
         getMenuContent($("#Collection_MenuContent"), id);
-        return void 0;
       };
     })(id);
     scope.find("#Menu" + id).find("#Cook")[0].onclick = (function(id) {
@@ -94,10 +89,8 @@ appendKitchenMenuResult = function(scope, data) {
         $("#Ingredients").find("#Loading").show();
         $.ui.loadContent("#Ingredients");
         getCookingIngredientList(scope.find("#Menu" + id).attr("data-recipe-ids"));
-        return void 0;
       };
     })(id);
   }
   scope.find("#infinite").text("Load More");
-  return void 0;
 };

@@ -14,7 +14,7 @@ Step = (function() {
     this.finishTime = this.startTime + this.duration;
     this.timeElapsed = 0;
     this.percentage = "";
-    void 0;
+    return;
   }
 
   Step.prototype.calculateRemainTime = function() {
@@ -38,7 +38,7 @@ Step = (function() {
 cookingStarted = function() {
   var cookingData, currentStepNum, finishPercentage;
   if (window.cookingData == null) {
-    return void 0;
+    return;
   }
   cookingData = window.cookingData;
   currentStepNum = window.currentStepNum;
@@ -51,7 +51,6 @@ cookingStarted = function() {
   setTimeout(function() {
     return timer();
   }, 1000);
-  return void 0;
 };
 
 cookingEnded = function() {
@@ -70,12 +69,11 @@ timer = function() {
   checkProgress();
   showTwoUrgentSteps();
   startTimer();
-  return void 0;
 };
 
 startTimer = function() {
   clearTimeout(window.lastId);
-  return window.lastId = setTimeout(function() {
+  window.lastId = setTimeout(function() {
     return timer();
   }, 1000);
 };
@@ -93,7 +91,7 @@ loadStep = function(stepNum) {
   if (stepNum >= stepsLen) {
     console.log("finished");
     $.ui.loadContent("Finish");
-    return void 0;
+    return;
   }
   console.log("load step#" + stepNum);
   thisStep = window.cookingData.steps[stepNum];
@@ -122,9 +120,7 @@ loadStep = function(stepNum) {
   scope.find(".step_next_btn").unbind('click');
   scope.find(".step_next_btn").click(function() {
     checkNextStep();
-    return void 0;
   });
-  return void 0;
 };
 
 checkNextStep = function() {
@@ -143,12 +139,12 @@ checkNextStep = function() {
         window.currentTime = nextStep.startTime;
         loadStep(thisStep.stepNum + 1);
       }
-      return void 0;
+      return;
     }
   } else {
     console.log("finished");
     $.ui.loadContent("Finish");
-    return void 0;
+    return;
   }
   if (thisStepFinishTime - currentTime <= 30) {
     console.log("<=30, time=" + thisStepFinishTime);
@@ -159,7 +155,7 @@ checkNextStep = function() {
     if (ans === true) {
       window.currentTime = thisStepFinishTime;
     } else {
-      return void 0;
+      return;
     }
   } else {
     console.log(">30, endtime=" + thisStepFinishTime);
@@ -168,7 +164,6 @@ checkNextStep = function() {
   }
   checkProgress();
   loadStep(thisStep.stepNum + 1);
-  return void 0;
 };
 
 checkProgress = function() {
@@ -206,7 +201,6 @@ checkProgress = function() {
     time: '100ms'
   });
   nextStep.find("#ProgressRemainTime").html(parseSecondsToTime(remainTime));
-  return void 0;
 };
 
 pushStepToWaitingQueue = function(step, currentTime) {
@@ -220,7 +214,6 @@ pushStepToWaitingQueue = function(step, currentTime) {
   });
   console.log(window.waitingStepQueue);
   showTwoUrgentSteps();
-  return void 0;
 };
 
 showTwoUrgentSteps = function() {
@@ -241,7 +234,6 @@ showTwoUrgentSteps = function() {
   	else
   		console.log "no step waiting"
    */
-  return void 0;
 };
 
 updateProgressBar = function(scope, step) {
@@ -257,13 +249,13 @@ updateProgressBar = function(scope, step) {
       time: '500ms'
     });
     progressName.html("No step waiting");
-    return progressRemainTime.html("");
+    progressRemainTime.html("");
   } else {
     progressBar.css3Animate({
       width: "" + (step.calculatePercentage()) + "%",
       time: '500ms'
     });
     progressName.html(step.digest);
-    return progressRemainTime.html(parseSecondsToTime(step.remainTime));
+    progressRemainTime.html(parseSecondsToTime(step.remainTime));
   }
 };

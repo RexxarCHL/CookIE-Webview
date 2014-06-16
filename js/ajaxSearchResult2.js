@@ -29,18 +29,15 @@ $(document).ready(function() {
       searchAjaxd = 0;
       $("#main_Search").find("#Results").html("");
       $("#main_Search").find("#infinite").html("<i>Search for recipes, food ingredients ...</i>");
-      return void 0;
+      return;
     }
     scrollerList.clearInfinite();
     $("#main_Search").find("#infinite").text("Searching...");
     window.lastId = setTimeout(function() {
       search(query, searchAjaxd);
-      return void 0;
     }, 1500);
     lastQuery = query;
-    return void 0;
   });
-  return void 0;
 });
 
 initSelectBtn = function() {
@@ -48,7 +45,7 @@ initSelectBtn = function() {
     $(this).on("click", function(evt) {
       var other;
       if ($(this).hasClass('orange')) {
-        return void 0;
+        return;
       }
       other = $(this).siblings()[0];
       $(other).removeClass('orange');
@@ -60,7 +57,6 @@ initSelectBtn = function() {
       $("#SearchBar").trigger("keyup");
       return evt.stopPropagation();
     });
-    return void 0;
   });
 };
 
@@ -104,22 +100,19 @@ search = function(query, times) {
           $("#main_Search").find("#infinite").html("<i>No result. Try another query?</i>");
         }
         searchAjaxd--;
-        return void 0;
+        return;
       }
       if (type) {
         appendMenuResult(scope, data);
       } else {
         appendRecipeResult(scope, data);
       }
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]search: " + status);
       $("#main_Search").scroller().clearInfinite();
-      return void 0;
     }
   });
-  return void 0;
 };
 
 appendRecipeResult = function(scope, data) {
@@ -150,20 +143,18 @@ appendRecipeResult = function(scope, data) {
       return function() {
         if (window.mode) {
           $(this).toggleClass('chosen');
-          return void 0;
+          return;
         }
         $.ui.loadContent("#RecipeContent");
         $("#RecipeContent").find("#Results").hide();
         $("#RecipeContent").find("#Loading").show();
         getRecipeContent(id);
-        return void 0;
       };
     })(id);
   }
   results.find("#bottomBar").remove();
   results.append('<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>');
   scope.find("#infinite").text("Load More");
-  return void 0;
 };
 
 appendMenuResult = function(scope, data) {
@@ -203,12 +194,10 @@ appendMenuResult = function(scope, data) {
         $("#Collection").find("#Results").hide();
         $("#Collection").find("#Loading").show();
         getMenuContent(id);
-        return void 0;
       };
     })(id);
   }
   scope.find("#infinite").text("Load More");
-  return void 0;
 };
 
 addInfiniteScroll = function(scope, delay, callback) {
@@ -226,5 +215,4 @@ addInfiniteScroll = function(scope, delay, callback) {
       return callback();
     }, delay);
   });
-  return void 0;
 };

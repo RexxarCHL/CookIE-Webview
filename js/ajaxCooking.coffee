@@ -19,14 +19,14 @@ getCookingIngredientList = (recipeIds)->
 				scope = $('#Ingredients')
 				loadIngredientList(scope, data, recipeIds)
 
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 			error: (data, status)->
 				console.log '[ERROR] fetching #'+recipeIds
 				console.log data
 
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 	)
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 loadIngredientList = (scope, list, recipeIds)->
 	listContent = scope.find('#ListContent')
@@ -45,6 +45,8 @@ loadIngredientList = (scope, list, recipeIds)->
 
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
+
+	return
 
 getScheduledRecipe = (recipeIds)->
 	console.log "schedule_recipe #"+recipeIds
@@ -68,16 +70,16 @@ getScheduledRecipe = (recipeIds)->
 				window.currentStepNum = 0
 				appendSteps scope, data
 
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 			error: (data, status)->
 				console.log '[ERROR] fetching #'+recipeIds
 				console.log data
 				$.ui.hideMask()
 				alert "ERROR"
 				$.ui.loadContent "main_Popular_Recipes"
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 	)
-	undefined
+	return
 
 appendSteps = (scope, data)->
 	console.log "append steps"
@@ -92,7 +94,7 @@ appendSteps = (scope, data)->
 	html = ""
 	for step in data.steps
 		html = '<div class="overview_stepWrapper">'
-		if steps.imageURL isnt undefined
+		if steps.imageURL?
 			html += '<img src="'+steps.imageURL+'" class="overview_stepImg"></img>'
 		html += '<h3 class="overview_stepText">'+(_i + 1)+'. '+step.digest+'</h3>'
 		###debug###
@@ -101,4 +103,4 @@ appendSteps = (scope, data)->
 		stepsList.append html
 
 	$.ui.hideMask();
-	undefined
+	return

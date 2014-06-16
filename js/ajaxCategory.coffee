@@ -5,10 +5,10 @@ $(document).ready ->
 	addInfiniteScroll($("#main_AllCategories"), 1000, -> getAllCategory(allCatAjaxd))
 	addInfiniteScroll($("#main_Category"), 1000, ->
 		getSingleCategory(singleCatAjaxd, singleCatId)
-		undefined
+		return
 	)
 
-	undefined #prevent implicit rv
+	return #prevent implicit rv
 
 getAllCategory = (times) ->
 	$.ajax(
@@ -35,21 +35,21 @@ getAllCategory = (times) ->
 			if data.length is 0
 				$("#main_AllCategories").find("#infinite").text "No more categories"
 				allCatAjaxd--
-				return undefined
+				return
 
 			$("#main_AllCategories").find("#infinite").text "Load more"
 			appendAllCategoryResult(data)
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 		error: (data)->
 			console.log "[ERROR]fetch kitchen menu: " + status
 			scrollerList = $("#main_AllCategories").scroller()
 			scrollerList.clearInfinite()
 			$("#main_AllCategories").find("#infinite").text "Error. Try Again?"
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 
 	)
 
-	undefined #avoid implicit rv
+	return #avoid implicit rv
 
 appendAllCategoryResult = (data)->
 	console.log "append all category result"
@@ -77,7 +77,7 @@ appendAllCategoryResult = (data)->
 			getSingleCategory singleCatAjaxd, singleCatId
 			# this.setAttribute 'data-times', times+1
 	
-	undefined #avoid implicit rv
+	return #avoid implicit rv
 
 getSingleCategory = (times, tagId)->
 	$.ajax(
@@ -102,18 +102,18 @@ getSingleCategory = (times, tagId)->
 			if data.recipes.length is 0
 				$("#main_Category").find("#infinite").html "No more recipes."
 				singleCatAjaxd--
-				return undefined
+				return
 
 			#TODO change pageTitle
 			$.ui.setTitle data.tag.tagName
 			scope = $('#main_Category')
 			scope.find("#Results").html ""
 			appendRecipeResult(scope, data.recipes)
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR]fetch cat #"+tagId
 			$("#main_Category").find("#infinite").html "Error. Try Again?"
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 	)
 	
-	undefined #avoid implicit rv
+	return #avoid implicit rv

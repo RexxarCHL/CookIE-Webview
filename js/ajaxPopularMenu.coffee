@@ -1,7 +1,7 @@
 menuAjaxd = 0
 $(document).ready ->
 	addInfiniteScroll($('#main_Popular_Menus'), 1000, ->getPopularMenus(menuAjaxd))
-	undefined #avoid implicit return values by Coffeescript
+	return
 
 getPopularMenus = (times) ->
 	$.ajax(
@@ -27,18 +27,18 @@ getPopularMenus = (times) ->
 			if data is null or data.length is 0
 				$("#main_Popular_Menus").find("#infinite").text "No more menu"
 				menuAjaxd--
-				return undefined
+				return
 
 			scope = $("#main_Popular_Menus")
 			appendPopularMenuResult(scope, data)
-			undefined #avoid implicit return values by Coffeescript
+			return
 		error: (data, status)->
 			console.log "[ERROR]fetch popular menu: " + status
 			$("#main_Popular_Menus").find("#infinite").text "Error. Try Again?"
 			$('#main_Popular_Menus').scroller().clearInfinite()
-			undefined #avoid implicit return values by Coffeescript
+			return
 	)
-	undefined #avoid implicit return values by Coffeescript
+	return
 
 appendPopularMenuResult = (scope, data)->
 	console.log "append menu for scope: " + scope[0].id
@@ -80,7 +80,7 @@ appendPopularMenuResult = (scope, data)->
 				$("#MenuContent").find("#Results").hide()
 				$("#MenuContent").find("#Loading").show()
 				getMenuContent($("#MenuContent"), id)
-				undefined
+				return
 				
 		scope.find("#Menu"+id).find("#Cook")[0].onclick = do(id)->
 			-> # closure
@@ -88,8 +88,8 @@ appendPopularMenuResult = (scope, data)->
 				$("#Ingredients").find("#Loading").show()
 				$.ui.loadContent("#Ingredients")
 				getCookingIngredientList scope.find("#Menu#{id}").attr("data-recipe-ids")
-				undefined # avoid implicit rv
+				return # avoid implicit rv
 		#
 
 	scope.find("#infinite").text "Load More"
-	undefined #avoid implicit return values
+	return #avoid implicit return values

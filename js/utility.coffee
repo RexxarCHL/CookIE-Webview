@@ -4,9 +4,9 @@ $(document).ready ->
 	$('body').find('.popup_btn').forEach (elem)->
 		$(elem).click ->
 			utilityDetect(this)
-		undefined # avoid implicit rv
+		return # avoid implicit rv
 
-	undefined
+	return
 
 utilityDetect = (elem)->
 	console.log 'Popup #'+elem.id
@@ -22,7 +22,7 @@ utilityDetect = (elem)->
 			if $(elem).hasClass('selected') then utilityTrash()
 			else resetUtilBtn()
 		else break
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 resetUtilBtn = ->
 	$('#main_Kitchen_Recipes').find('.selected').removeClass('selected')
@@ -48,14 +48,14 @@ utilityEdit = ->
 	utilBtn.unbind 'click'
 	utilBtn.click ->
 		selectedId = findChosenRecipeId()
-		if selectedId.length is 0 then return undefined
+		if selectedId.length is 0 then return
 		$.ui.popup(
 			title: '為Menu命名'
 			message: '<input id="popupBoxInputTitle" type="text"><label>公開</label><input id="popupBoxInputPrivacy" type="checkbox" class="toggle"><label for="popupBoxInputPrivacy" data-on="私密" data-off="公開"><span></span></label><br>'
 			cancelText:"Cancel"
 			cancelCallback: ->
 				console.log "cancelled"
-				undefined
+				return
 			doneText:"Done"
 			doneCallback: (elem)->
 				console.log "Done for!"
@@ -63,12 +63,12 @@ utilityEdit = ->
 				# false:public/true:private
 				isPrivate = $(elem.container).find("#popupboxInputPrivacy")[0].checked
 				createNewMenu selectedId, listTitle, isPrivate
-				undefined
+				return
 			cancelOnly:false
 		)
 
 
-	undefined
+	return
 
 utilityTrash = ->
 	console.log 'popup trash'
@@ -80,15 +80,15 @@ utilityTrash = ->
 
 	utilBtn.unbind 'click'
 	utilBtn.click -> deleteSelectedRecipes()
-	undefined
+	return
 
 deleteSelectedRecipes = ->
 	selectedId = findChosenRecipeId()
-	if selectedId.length is 0 then return undefined
+	if selectedId.length is 0 then return
 	console.log "deleting recipes #{selectedId}"
 
 	ans = confirm "Deleteing recipes from Kitchen. Are you sure?"
-	if ans is false then return undefined
+	if ans is false then return
 
 	data = 
 		'type': 'recipe'
@@ -110,12 +110,12 @@ deleteSelectedRecipes = ->
 			console.log data
 			
 			reloadKitchenRecipes()
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR] deleting recipes #"+selectedId
 			console.log data
 
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 	)
 
 kitchenRecipesAjaxd = 0 #DEBUG
@@ -125,7 +125,7 @@ reloadKitchenRecipes = ->
 	scope.find("#infinite").text "Reloading..."
 	kitchenRecipesAjaxd = 0
 	getKitchenRecipes(kitchenRecipesAjaxd)
-	undefined
+	return
 
 kitchenMenuAjaxd = 0
 reloadKitchenMenus = ->
@@ -134,7 +134,7 @@ reloadKitchenMenus = ->
 	scope.find("#infinite").text "Reloading..."
 	kitchenMenuAjaxd = 0
 	getKitchenMenus(kitchenMenuAjaxd)
-	undefined
+	return
 
 recipeAjaxd = 0
 loadPopularRecipes = ->
@@ -143,7 +143,7 @@ loadPopularRecipes = ->
 	scope.find("#infinite").text "Reloading..."
 	recipeAjaxd = 0
 	getPopularRecipes(recipeAjaxd)
-	undefined
+	return
 
 menuAjaxd = 0
 loadPopularMenus = ->
@@ -152,7 +152,7 @@ loadPopularMenus = ->
 	scope.find("#infinite").text "Reloading..."
 	menuAjaxd = 0
 	getPopularMenus(menuAjaxd)
-	undefined
+	return
 
 findChosenRecipeId = ->
 	recipeSelectedId = []
@@ -209,22 +209,22 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 					console.log "[SUCCESS] add menu ##{newId} to kitchen"
 					console.log data
 					reloadKitchenMenus()
-					undefined # avoid implicit rv
+					return # avoid implicit rv
 				error: (resp)->
 					console.log "[ERROR] add menu ##{newId} to kitchen"
 					console.log resp
-					undefined # avoid implicit rv
+					return # avoid implicit rv
 			)
 
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR] new list #{listTitle} for recipes #{recipeIds}"
 			console.log data	
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 	)
 
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 addThisRecipeToKitchen = ->
 	recipeId = $('#RecipeContent').find('#RecipeImg').attr 'data-recipe-id'
@@ -248,16 +248,16 @@ addThisRecipeToKitchen = ->
 			console.log data
 			alert "Done!"
 			reloadKitchenRecipes()
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 		error: (resp)->
 			console.log "[ERROR] add #{recipeId} to kitchen"
 			console.log resp
 			if resp.status is 404
 				alert "Oops! The recipe is already in Kitchen!"
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 	)
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 addThisMenuToKitchen = ->
 	menuId = $('#MenuContent').find('.menuContent_imgHolder').attr 'data-menu-id'
@@ -281,19 +281,20 @@ addThisMenuToKitchen = ->
 			console.log data
 			alert "Done!"
 			reloadKitchenMenus()
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 		error: (resp)->
 			console.log "[ERROR] add menu ##{menuId} to kitchen"
 			console.log resp
 			if resp.status is 404
 				alert "Oops! The menu is already in Kitchen!"
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 	)
 
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 resetSelectedRecipe = ->
 	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
+	return
 
 parseTimeToMinutes = (time)->
 	time = time.split ":"

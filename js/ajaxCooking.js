@@ -28,15 +28,12 @@ getCookingIngredientList = function(recipeIds) {
       console.log(data);
       scope = $('#Ingredients');
       loadIngredientList(scope, data, recipeIds);
-      return void 0;
     },
     error: function(data, status) {
       console.log('[ERROR] fetching #' + recipeIds);
       console.log(data);
-      return void 0;
     }
   });
-  return void 0;
 };
 
 loadIngredientList = function(scope, list, recipeIds) {
@@ -56,7 +53,7 @@ loadIngredientList = function(scope, list, recipeIds) {
     };
   })(list));
   scope.find("#Loading").hide();
-  return scope.find("#Results").show();
+  scope.find("#Results").show();
 };
 
 getScheduledRecipe = function(recipeIds) {
@@ -80,7 +77,6 @@ getScheduledRecipe = function(recipeIds) {
       window.cookingData = data;
       window.currentStepNum = 0;
       appendSteps(scope, data);
-      return void 0;
     },
     error: function(data, status) {
       console.log('[ERROR] fetching #' + recipeIds);
@@ -88,10 +84,8 @@ getScheduledRecipe = function(recipeIds) {
       $.ui.hideMask();
       alert("ERROR");
       $.ui.loadContent("main_Popular_Recipes");
-      return void 0;
     }
   });
-  return void 0;
 };
 
 appendSteps = function(scope, data) {
@@ -106,7 +100,7 @@ appendSteps = function(scope, data) {
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     step = _ref[_i];
     html = '<div class="overview_stepWrapper">';
-    if (steps.imageURL !== void 0) {
+    if (steps.imageURL != null) {
       html += '<img src="' + steps.imageURL + '" class="overview_stepImg"></img>';
     }
     html += '<h3 class="overview_stepText">' + (_i + 1) + '. ' + step.digest + '</h3>';
@@ -117,5 +111,4 @@ appendSteps = function(scope, data) {
     stepsList.append(html);
   }
   $.ui.hideMask();
-  return void 0;
 };

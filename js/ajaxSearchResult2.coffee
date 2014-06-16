@@ -24,24 +24,23 @@ $(document).ready ->
 			searchAjaxd = 0
 			$("#main_Search").find("#Results").html ""
 			$("#main_Search").find("#infinite").html "<i>Search for recipes, food ingredients ...</i>"
-			return undefined
+			return
 
 		scrollerList.clearInfinite()
 		$("#main_Search").find("#infinite").text "Searching..."
 		window.lastId = setTimeout(->
 					search query, searchAjaxd
-					undefined #avoid implicit return value
+					return #avoid implicit return value
 				, 1500)
 		lastQuery = query
-		undefined #avoid implicit return value
+		return #avoid implicit return value
 	)
-	undefined #avoid implicit return value
+	return #avoid implicit return value
 
 initSelectBtn = ->
 	$("#SearchSelectTab").children().each(->
 		$(this).on("click", (evt)->
-			if $(this).hasClass 'orange'
-				return undefined
+			if $(this).hasClass 'orange' then return
 
 			other = $(this).siblings()[0]
 			$(other).removeClass 'orange'
@@ -54,7 +53,7 @@ initSelectBtn = ->
 
 			evt.stopPropagation()
 		)
-		undefined
+		return
 	)
 
 search = (query, times) ->
@@ -97,17 +96,17 @@ search = (query, times) ->
 				else
 					$("#main_Search").find("#infinite").html "<i>No result. Try another query?</i>"
 				searchAjaxd--;
-				return undefined
+				return
 
 			if type then appendMenuResult(scope, data)
 			else appendRecipeResult(scope, data)
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 		error: (data, status)->
 			console.log "[ERROR]search: " + status
 			$("#main_Search").scroller().clearInfinite()
-			undefined #avoid implicit return values by Coffeescript
+			return #avoid implicit return values by Coffeescript
 	)
-	undefined #avoid implicit return values by Coffeescript
+	return #avoid implicit return values by Coffeescript
 
 appendRecipeResult = (scope, data)->
 	console.log "append recipe for scope: " + scope[0].id
@@ -143,18 +142,18 @@ appendRecipeResult = (scope, data)->
 				# TODO add inspect/select in kitchen
 				if window.mode
 					$(this).toggleClass 'chosen'
-					return undefined
+					return
 
 				$.ui.loadContent("#RecipeContent")
 				$("#RecipeContent").find("#Results").hide()
 				$("#RecipeContent").find("#Loading").show()
 				getRecipeContent(id)
-				undefined
+				return
 
 	results.find("#bottomBar").remove()
 	results.append '<div id="bottomBar" style="display:block;height:0;clear:both;">&nbsp;</div>'
 	scope.find("#infinite").text "Load More"
-	undefined #avoid implicit return value
+	return #avoid implicit return value
 
 appendMenuResult = (scope, data)->
 	console.log "append menu for scope: " + scope[0].id
@@ -198,11 +197,11 @@ appendMenuResult = (scope, data)->
 				$("#Collection").find("#Results").hide()
 				$("#Collection").find("#Loading").show()
 				getMenuContent(id)
-				undefined
+				return
 		#
 
 	scope.find("#infinite").text "Load More"
-	undefined #avoid implicit return values
+	return #avoid implicit return values
 
 addInfiniteScroll = (scope, delay, callback)->
 	console.log "add infinite-scroll to scope:" + scope[0].id
@@ -219,4 +218,4 @@ addInfiniteScroll = (scope, delay, callback)->
 			callback()
 		, delay)
 	)
-	undefined #avoid implicit return values
+	return #avoid implicit return values

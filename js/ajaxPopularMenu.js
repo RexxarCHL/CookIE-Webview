@@ -7,7 +7,6 @@ $(document).ready(function() {
   addInfiniteScroll($('#main_Popular_Menus'), 1000, function() {
     return getPopularMenus(menuAjaxd);
   });
-  return void 0;
 });
 
 getPopularMenus = function(times) {
@@ -30,20 +29,17 @@ getPopularMenus = function(times) {
       if (data === null || data.length === 0) {
         $("#main_Popular_Menus").find("#infinite").text("No more menu");
         menuAjaxd--;
-        return void 0;
+        return;
       }
       scope = $("#main_Popular_Menus");
       appendPopularMenuResult(scope, data);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch popular menu: " + status);
       $("#main_Popular_Menus").find("#infinite").text("Error. Try Again?");
       $('#main_Popular_Menus').scroller().clearInfinite();
-      return void 0;
     }
   });
-  return void 0;
 };
 
 appendPopularMenuResult = function(scope, data) {
@@ -83,7 +79,6 @@ appendPopularMenuResult = function(scope, data) {
         $("#MenuContent").find("#Results").hide();
         $("#MenuContent").find("#Loading").show();
         getMenuContent($("#MenuContent"), id);
-        return void 0;
       };
     })(id);
     scope.find("#Menu" + id).find("#Cook")[0].onclick = (function(id) {
@@ -92,10 +87,8 @@ appendPopularMenuResult = function(scope, data) {
         $("#Ingredients").find("#Loading").show();
         $.ui.loadContent("#Ingredients");
         getCookingIngredientList(scope.find("#Menu" + id).attr("data-recipe-ids"));
-        return void 0;
       };
     })(id);
   }
   scope.find("#infinite").text("Load More");
-  return void 0;
 };

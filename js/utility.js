@@ -8,9 +8,7 @@ $(document).ready(function() {
     $(elem).click(function() {
       return utilityDetect(this);
     });
-    return void 0;
   });
-  return void 0;
 });
 
 utilityDetect = function(elem) {
@@ -37,7 +35,6 @@ utilityDetect = function(elem) {
     default:
       break;
   }
-  return void 0;
 };
 
 resetUtilBtn = function() {
@@ -68,7 +65,7 @@ utilityEdit = function() {
     var selectedId;
     selectedId = findChosenRecipeId();
     if (selectedId.length === 0) {
-      return void 0;
+      return;
     }
     return $.ui.popup({
       title: '為Menu命名',
@@ -76,7 +73,6 @@ utilityEdit = function() {
       cancelText: "Cancel",
       cancelCallback: function() {
         console.log("cancelled");
-        return void 0;
       },
       doneText: "Done",
       doneCallback: function(elem) {
@@ -85,12 +81,10 @@ utilityEdit = function() {
         listTitle = $(elem.container).find("#popupBoxInputTitle")[0].value;
         isPrivate = $(elem.container).find("#popupboxInputPrivacy")[0].checked;
         createNewMenu(selectedId, listTitle, isPrivate);
-        return void 0;
       },
       cancelOnly: false
     });
   });
-  return void 0;
 };
 
 utilityTrash = function() {
@@ -105,19 +99,18 @@ utilityTrash = function() {
   utilBtn.click(function() {
     return deleteSelectedRecipes();
   });
-  return void 0;
 };
 
 deleteSelectedRecipes = function() {
   var ans, data, selectedId;
   selectedId = findChosenRecipeId();
   if (selectedId.length === 0) {
-    return void 0;
+    return;
   }
   console.log("deleting recipes " + selectedId);
   ans = confirm("Deleteing recipes from Kitchen. Are you sure?");
   if (ans === false) {
-    return void 0;
+    return;
   }
   data = {
     'type': 'recipe',
@@ -137,12 +130,10 @@ deleteSelectedRecipes = function() {
       console.log("[SUCCESS] deleting recipes #" + selectedId);
       console.log(data);
       reloadKitchenRecipes();
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR] deleting recipes #" + selectedId);
       console.log(data);
-      return void 0;
     }
   });
 };
@@ -156,7 +147,6 @@ reloadKitchenRecipes = function() {
   scope.find("#infinite").text("Reloading...");
   kitchenRecipesAjaxd = 0;
   getKitchenRecipes(kitchenRecipesAjaxd);
-  return void 0;
 };
 
 kitchenMenuAjaxd = 0;
@@ -168,7 +158,6 @@ reloadKitchenMenus = function() {
   scope.find("#infinite").text("Reloading...");
   kitchenMenuAjaxd = 0;
   getKitchenMenus(kitchenMenuAjaxd);
-  return void 0;
 };
 
 recipeAjaxd = 0;
@@ -180,7 +169,6 @@ loadPopularRecipes = function() {
   scope.find("#infinite").text("Reloading...");
   recipeAjaxd = 0;
   getPopularRecipes(recipeAjaxd);
-  return void 0;
 };
 
 menuAjaxd = 0;
@@ -192,7 +180,6 @@ loadPopularMenus = function() {
   scope.find("#infinite").text("Reloading...");
   menuAjaxd = 0;
   getPopularMenus(menuAjaxd);
-  return void 0;
 };
 
 findChosenRecipeId = function() {
@@ -252,23 +239,18 @@ createNewMenu = function(recipeIds, listTitle, isPrivate) {
           console.log("[SUCCESS] add menu #" + newId + " to kitchen");
           console.log(data);
           reloadKitchenMenus();
-          return void 0;
         },
         error: function(resp) {
           console.log("[ERROR] add menu #" + newId + " to kitchen");
           console.log(resp);
-          return void 0;
         }
       });
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR] new list " + listTitle + " for recipes " + recipeIds);
       console.log(data);
-      return void 0;
     }
   });
-  return void 0;
 };
 
 addThisRecipeToKitchen = function() {
@@ -293,7 +275,6 @@ addThisRecipeToKitchen = function() {
       console.log(data);
       alert("Done!");
       reloadKitchenRecipes();
-      return void 0;
     },
     error: function(resp) {
       console.log("[ERROR] add " + recipeId + " to kitchen");
@@ -301,10 +282,8 @@ addThisRecipeToKitchen = function() {
       if (resp.status === 404) {
         alert("Oops! The recipe is already in Kitchen!");
       }
-      return void 0;
     }
   });
-  return void 0;
 };
 
 addThisMenuToKitchen = function() {
@@ -329,7 +308,6 @@ addThisMenuToKitchen = function() {
       console.log(data);
       alert("Done!");
       reloadKitchenMenus();
-      return void 0;
     },
     error: function(resp) {
       console.log("[ERROR] add menu #" + menuId + " to kitchen");
@@ -337,14 +315,12 @@ addThisMenuToKitchen = function() {
       if (resp.status === 404) {
         alert("Oops! The menu is already in Kitchen!");
       }
-      return void 0;
     }
   });
-  return void 0;
 };
 
 resetSelectedRecipe = function() {
-  return $('#main_Kitchen_Recipes').find('.chosen').removeClass('chosen');
+  $('#main_Kitchen_Recipes').find('.chosen').removeClass('chosen');
 };
 
 parseTimeToMinutes = function(time) {

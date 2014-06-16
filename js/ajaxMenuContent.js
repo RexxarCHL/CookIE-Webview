@@ -18,15 +18,12 @@ getMenuContent = function(scope, menuId) {
       console.log("[SUCCESS]fetch menu #" + menuId);
       console.log(data);
       setTimeout(loadMenuContent(scope, data), 1000);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch recipe #" + recipeId);
       console.log(data);
-      return void 0;
     }
   });
-  return void 0;
 };
 
 loadMenuContent = function(scope, menu) {
@@ -62,7 +59,6 @@ loadMenuContent = function(scope, menu) {
   }
   scope.find("#Loading").hide();
   scope.find("#Results").show();
-  return void 0;
 };
 
 deleteThisMenu = function() {
@@ -71,7 +67,7 @@ deleteThisMenu = function() {
   console.log("delete menu #" + menuId + " from kitchen");
   ans = confirm("Deleting this menu from Kitchen?");
   if (ans === false) {
-    return void 0;
+    return;
   }
   data = {
     user_id: window.user_id,
@@ -91,12 +87,10 @@ deleteThisMenu = function() {
       console.log(data);
       reloadKitchenMenus();
       $.ui.loadContent('#main_Kitchen_Menus');
-      return void 0;
     },
     error: function(resp) {
       console.log("[ERROR] deleting recipes menu #" + menuId);
       console.log(resp);
-      return void 0;
     }
   });
 };

@@ -7,7 +7,6 @@ $(document).ready(function() {
   addInfiniteScroll($('#main_Kitchen_Recipes'), 3000, function() {
     return getKitchenRecipes(kitchenRecipeAjaxd, self);
   });
-  return void 0;
 });
 
 getKitchenRecipes = function(times) {
@@ -33,19 +32,16 @@ getKitchenRecipes = function(times) {
       if (data.length === 0) {
         $("#main_Kitchen_Recipes").find("#infinite").text("No more recipes");
         kitchenRecipeAjaxd--;
-        return void 0;
+        return;
       }
       scope = $("#main_Kitchen_Recipes");
       appendRecipeResult(scope, data);
-      return void 0;
     },
     error: function(data, status) {
       console.log("[ERROR]fetch kitchen recipes: " + status);
       console.log(data);
       $("#main_Kitchen_Recipes").find("#infinite").text("Load More");
       $('#main_Kitchen_Recipes').scroller().clearInfinite();
-      return void 0;
     }
   });
-  return void 0;
 };

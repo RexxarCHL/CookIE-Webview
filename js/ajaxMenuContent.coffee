@@ -17,14 +17,14 @@ getMenuContent = (scope, menuId)->
 			console.log "[SUCCESS]fetch menu #"+menuId
 			console.log data
 			setTimeout(loadMenuContent(scope, data), 1000)
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR]fetch recipe #"+recipeId
 			console.log data
 
-			undefined #avoid implicit rv
+			return #avoid implicit rv
 	)
-	undefined # avoid implicit rv
+	return # avoid implicit rv
 
 loadMenuContent = (scope, menu)->
 	console.log "load for scope: "+scope[0].id
@@ -63,7 +63,7 @@ loadMenuContent = (scope, menu)->
 	
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
-	undefined #avoid implicit rv
+	return #avoid implicit rv
 
 
 deleteThisMenu = ->
@@ -71,8 +71,8 @@ deleteThisMenu = ->
 	console.log "delete menu ##{menuId} from kitchen"
 
 	ans = confirm "Deleting this menu from Kitchen?"
-	if ans is no then return undefined
-
+	if ans is no then return
+	
 	data = 
 		user_id: window.user_id
 		token: window.token
@@ -92,10 +92,10 @@ deleteThisMenu = ->
 			
 			reloadKitchenMenus()
 			$.ui.loadContent '#main_Kitchen_Menus'
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 		error: (resp)->
 			console.log "[ERROR] deleting recipes menu ##{menuId}"
 			console.log resp
 
-			undefined # avoid implicit rv
+			return # avoid implicit rv
 	)
