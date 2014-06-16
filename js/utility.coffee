@@ -25,9 +25,12 @@ utilityDetect = (elem)->
 resetUtilBtn = ->
 	$('#main_Kitchen_Recipes').find('.selected').removeClass('selected')
 	utilBtn = $('#kitchenUtilityBtn')
+	$('body').find('.popup_btn').removeClass 'selected'
 	utilBtn.removeClass 'trash'
 	utilBtn.removeClass 'edit'
 	utilBtn.unbind 'click'
+	utilBtn.bind 'click', ->
+		$(".popup_btn").toggle()
 	utilBtn.html 'Tap on the Cog to begin.'
 	window.mode = 0
 
@@ -39,18 +42,26 @@ utilityEdit = ->
 	utilBtn.addClass 'edit'
 	utilBtn.html 'Start Cooking.'
 
+
+	utilBtn.unbind 'click'
 	utilBtn.click ->
 		selectedId = findChosenRecipeId()
+		if selectedId.length is 0 then return undefined
 		$.ui.popup(
 			title: '為Menu命名'
-			message: '<input type="text"><label>公開</label><input id="toggle2" type="checkbox" name="toggle2" value="1" class="toggle"><label for="toggle2" data-on="私密" data-off="公開"><span></span></label><br>'
+			message: '<input id="popupBoxInputTitle" type="text"><label>公開</label><input id="popupBoxInputPrivacy" type="checkbox" class="toggle"><label for="popupBoxInputPrivacy" data-on="私密" data-off="公開"><span></span></label><br>'
 			cancelText:"Cancel"
 			cancelCallback: ->
 				console.log "cancelled"
 				undefined
 			doneText:"Done"
-			doneCallback: ->
+			doneCallback: (elem)->
 				console.log "Done for!"
+				listTitle = $(elem.container).find("#popupBoxInputTitle")[0].value
+				# false:public/true:private
+				isPrivate = $(elem.container).find("#popupboxInputPrivacy")[0].checked
+				createNewMenu selectedId, listTitle, isPrivate
+				undefined
 			cancelOnly:false
 		)
 
@@ -66,6 +77,7 @@ utilityTrash = ->
 	utilBtn.addClass 'trash'
 	utilBtn.html 'Delete selected recipe.'
 
+	utilBtn.unbind 'click'
 	utilBtn.click ->
 		selectedId = findChosenRecipeId()
 		if selectedId.length is 0 then return undefined
@@ -118,6 +130,9 @@ findChosenRecipeId = ->
 	console.log recipeSelectedId
 	return recipeSelectedId
 
+resetSelectedRecipe = ->
+	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
+
 parseTimeToMinutes = (time)->
 	time = time.split ":"
 	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
@@ -136,3 +151,40 @@ parseSecondsToTime = (seconds)->
 	seconds = if seconds<10 then "0"+seconds else seconds
 
 	"#{hour}:#{min}:#{seconds}"
+
+createNewMenu = (recipeIds, listTitle, isPrivate)->
+	console.log "create new menu for ##{recipeIds} with title=#{listTitle} and privacy=#{isPrivate}"
+
+	data = 
+		'list_name': listTitle
+		'description': ""
+		'privacy': isPrivate
+		'recipes': recipeIds
+		'user_id': window.user_id
+		'token': window.token
+	data = JSON.stringify data
+
+	console.log data
+	$.ajax(
+		type: 'POST'
+		url: 'http://54.178.135.71:8080/CookIEServer/recipelist'
+		dataType: 'application/json'
+		#crossDomain: true
+		#jsonp: false
+		data: data
+		timeout: 10000
+		success: (data)->
+			#data = JSON.parse(data)
+			console.log "[SUCCESS] new list #{listTitle} for recipes #{recipeIds}"
+			console.log data
+			newId = data.new_id
+			alert "Menu #{listTitle} successfully created"
+			resetSelectedRecipe()
+			undefined # avoid implicit rv
+		error: (data, status)->
+			console.log "[ERROR] new list #{listTitle} for recipes #{recipeIds}"
+			console.log data	
+			undefined # avoid implicit rv
+	)
+
+	undefined

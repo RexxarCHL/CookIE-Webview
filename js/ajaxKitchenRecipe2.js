@@ -16,6 +16,8 @@ getKitchenRecipes = function(times) {
     url: 'http://54.178.135.71:8080/CookIEServer/discover_recipes',
     dataType: 'application/json',
     data: {
+      'user_id': window.user_id,
+      'token': window.token,
       'type': 'favorite',
       'times': times
     },

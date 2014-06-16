@@ -12,6 +12,8 @@ getKitchenRecipes = (times) ->
 		#jsonp: false
 		dataType: 'application/json'
 		data: 
+			'user_id': window.user_id
+			'token': window.token
 			'type': 'favorite'
 			'times': times
 		timeout: 10000
