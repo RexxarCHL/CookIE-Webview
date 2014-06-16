@@ -221,10 +221,12 @@ addThisRecipeToKitchen = function() {
       console.log(data);
       return void 0;
     },
-    error: function(data, status) {
+    error: function(resp) {
       console.log("[ERROR] add " + recipeId + " to kitche");
-      console.log(data);
-      console.log(status);
+      console.log(resp);
+      if (resp.status === 404) {
+        alert("Oops! The recipe is already in Kitchen!");
+      }
       return void 0;
     }
   });

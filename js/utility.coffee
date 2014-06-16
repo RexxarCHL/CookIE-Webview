@@ -186,10 +186,11 @@ addThisRecipeToKitchen = ->
 			console.log "[SUCCESS] add #{recipeId} to kitchen"
 			console.log data
 			undefined # avoid implicit rv
-		error: (data, status)->
+		error: (resp)->
 			console.log "[ERROR] add #{recipeId} to kitche"
-			console.log data
-			console.log status
+			console.log resp
+			if resp.status is 404
+				alert "Oops! The recipe is already in Kitchen!"
 			undefined # avoid implicit rv
 	)
 
