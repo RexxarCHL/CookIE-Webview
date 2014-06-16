@@ -67,7 +67,15 @@
                     }); 
                     break;
                   case "main_Kitchen_Recipes":
+                    reloadKitchenRecipes();
+                    $('#headerBtn').attr( "class", "icon settings big" ) ;
+                    $('#headerBtn').bind("click",function(){
+                        $('.popup_btn').toggle();
+                        resetUtilBtn(); //utility.coffee
+                    });
+                    break;
                   case "main_Kitchen_Menus":
+                    reloadKitchenMenus();
                     $('#headerBtn').attr( "class", "icon settings big" ) ;
                     $('#headerBtn').bind("click",function(){
                         $('.popup_btn').toggle();
@@ -92,27 +100,46 @@
                         deleteThisMenu(); //ajaxMenuContent.coffee
                     });
                     break;
-                  case "Ingredients":
-                  case "Cooking":
-                  case "Steps":
+                  
+                  case "Step":
+                    cookingStarted();
                     $('#headerBtn').attr( "class", " " ) ;
                     break;
+
+                  case "Ingredients":
+                  case "Cooking":
+                    $('#headerBtn').attr( "class", " " ) ;
+                    break;
+
                   case "Rate":
                     $('#headerBtn').attr( "class", "icon trash big" ) ;
                     $('#headerBtn').bind("click",function(){
                         alert("href home");
                     });
-                    break;                  
+                    break;
+
+                default:
+                    console.log("Not a case");
                 }           
             }
             function unloadedPanel(what) {
                 console.log("unloaded " + what.id);
 
-                // kitchen utility btn
-                $('.popup_btn').hide();
-                $('#popup_btn_trash').removeClass('selected');
-                $('#popup_btn_edit').removeClass('selected');
-                resetUtilBtn();
+                switch(what.id){
+                    case "main_Kitchen_Recipes":
+                    case "main_Kitchen_Menus":
+                        // kitchen utility btn
+                        $('.popup_btn').hide();
+                        $('#popup_btn_trash').removeClass('selected');
+                        $('#popup_btn_edit').removeClass('selected');
+                        resetUtilBtn();
+                        break;
+                    case "Step":
+                        cookingEnded();
+                        break;
+                    default:
+                        console.log("Not a case");
+                }
 
                 $('#headerBtn').unbind();
             }
@@ -267,14 +294,13 @@
 			<div id="content">
 				<!-- POPULAR MENU !-->
 				<div title='Popular' id="main_Popular_Menus" class="panel" selected="true" data-load="loadedPanel" data-unload="unloadedPanel" data-tab="navbar_popular" data-pull-scroller='true' style="background-color:#D8D8D8;">
-
+                    <div style="background-color:#D8D8D8;">
+                            <div class="button-grouped flex" >
+                                <a class="button" href="#main_Popular_Recipes" data-transition="fade">Recipes</a>
+                                <a class="button orange" href="#main_Popular_Menus" data-transition="fade">Menus</a>
+                            </div>
+                    </div>
 					<div id="Results" style="background-color:#D8D8D8">
-						<div style="background-color:#D8D8D8;">
-							<div class="button-grouped flex" >
-								<a class="button" href="#main_Popular_Recipes" data-transition="fade">Recipes</a>
-								<a class="button orange" href="#main_Popular_Menus" data-transition="fade">Menus</a>
-							</div>
-						</div>
 						<div class="menu_wrapper">
 							<h2 class="menu_title"style="margin-left:5px;color:black;">Menu title&nbsp;&nbsp;&nbsp;<i class="icon star h5">ratings</i>&nbsp;&nbsp;<i class="icon chat h5">comments</i></h2>
 							<div class="menu_img_wrapper">
@@ -731,7 +757,7 @@
                 </div><!-- #Cooking !-->
 			
                 <!-- COOKING STEP !-->
-                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-load="cookingStarted" data-unload="cookingEnded" data-footer='none'>
+                <div id="Step" class="panel"  title="Step 8 (47%)" style="background-color:#E6E6E6;" data-load="loadedPanel" data-unload="unloadedPanel" data-footer='none'>
                     <!--<div id="steps_container" style="border:0px 1px 0px 1px solid;width:100%;margin-top:5px;height: calc(100% - 100px);height: -webkit-calc(100% - 100px);">-->
                     <div id="steps_container" style="border:0px 1px 0px 1px solid #E6E6E6; height:97%">
                         &nbsp;
@@ -788,13 +814,13 @@
                                 <div class="h5" style="margin-left:5%;">150 min -> 26 min !!</div><br>
                             
                             <div class="h6">整體評分</div>
-                            <div width="100%">
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                            </div><br>
+                            <div class="star-container" width="100%">
+                                <div id="1" class="icon star five"></div>
+                                <div id="2" class="icon star five"></div>
+                                <div id="3" class="icon star five"></div>
+                                <div id="4" class="icon star five"></div>
+                                <div id="5" class="icon star five"></div>
+                            </div><br />
                             <div class="h6">筆記/評論</div>
                                 <input type="text" placeholder="lalala"></input>
                         </div>
@@ -805,55 +831,22 @@
                 </div><!-- #Finish !-->
                 <!-- RATE !-->
                 <div title="個別評分" id="Rate" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:#D8D8D8" data-footer='none'>
-                    <br>
+                    <br />
                     <div class="rate_container">
                         <div class="rate_wrapper">
                             <img src="img/small.jpg" class="rate_img"></img>
                             <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
-                            <div style="margin-left:5%;">
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <br><br>
-                            <h3>筆記/評論</h3>
-                                <input type="text" placeholder="lalala"></input>
+                            <div class="star-container" style="margin-left:5%;">
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
                             </div>
-                        </div>
-                    </div>
-                    <div style="width:100%;height:1%;">&nbsp;</div>
-                    <div class="rate_container">
-                        <div class="rate_wrapper">
-                            <img src="img/small.jpg" class="rate_img"></img>
-                            <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
-                            <div style="margin-left:5%;">
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>  
-                            <br><br>
-                            <h3>筆記/評論</h3>
-                                <input type="text" placeholder="lalala"></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="width:100%;height:1%;">&nbsp;</div>
-                    <div class="rate_container">
-                        <div class="rate_wrapper">
-                            <img src="img/small.jpg" class="rate_img"></img>
-                            <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
-                        
-                            <div style="margin-left:5%;">
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <div class="icon star five"></div>
-                                <br><br>
+                            <br /><br />
+                            <div>
                                 <h3>筆記/評論</h3>
-                                    <input type="text" placeholder="lalala"></input>
+                                <input type="text" placeholder="lalala"></input>
                             </div>
                         </div>
                     </div>
@@ -862,18 +855,59 @@
                         <div class="rate_wrapper">
                             <img src="img/small.jpg" class="rate_img"></img>
                             <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
-                            <div style="margin-left:5%;">
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <div class="icon star five"></div>
-                            <br><br>
-                            <h3>筆記/評論</h3>
+                            <div class="star-container" style="margin-left:5%;">
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                            </div>
+                            <br /><br />
+                            <div>
+                                <h3>筆記/評論</h3>
                                 <input type="text" placeholder="lalala"></input>
                             </div>
                         </div>
                     </div>
+                    <div style="width:100%;height:1%;">&nbsp;</div>
+                    <div class="rate_container">
+                        <div class="rate_wrapper">
+                            <img src="img/small.jpg" class="rate_img"></img>
+                            <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
+                            <div class="star-container" style="margin-left:5%;">
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                            </div>
+                            <br /><br />
+                            <div>
+                                <h3>筆記/評論</h3>
+                                <input type="text" placeholder="lalala"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:1%;">&nbsp;</div>
+                    <div class="rate_container">
+                        <div class="rate_wrapper">
+                            <img src="img/small.jpg" class="rate_img"></img>
+                            <h2 class="rate_title"  style="display:inline-block;font-size:25px;">黯然消魂飯</h2><br>
+                            <div class="star-container" style="margin-left:5%;">
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                                <div class="icon star five"></div>
+                            </div>
+                            <br /><br />
+                            <div>
+                                <h3>筆記/評論</h3>
+                                <input type="text" placeholder="lalala"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:1%;">&nbsp;</div>
                     <div style="width:100%;height:1%;">&nbsp;</div>
                     <div class="bottom_btn_holder" >
                             <a class="button" style="width:99%;background-color:#58ACFA;opacity:.8;" href="#main_Popular_Recipes">Done</a>
