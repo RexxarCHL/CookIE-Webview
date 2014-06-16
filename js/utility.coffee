@@ -68,7 +68,6 @@ utilityEdit = ->
 
 	undefined
 
-kitchenRecipesAjaxd = 0 #DEBUG
 utilityTrash = ->
 	console.log 'popup trash'
 	window.mode = 1
@@ -81,6 +80,7 @@ utilityTrash = ->
 	utilBtn.click -> deleteSelectedRecipes()
 	undefined
 
+kitchenRecipesAjaxd = 0 #DEBUG
 deleteSelectedRecipes = ->
 	selectedId = findChosenRecipeId()
 	if selectedId.length is 0 then return undefined
@@ -91,7 +91,7 @@ deleteSelectedRecipes = ->
 
 	data = 
 		'type': 'recipe'
-		'recipe_id': selectedId
+		'recipes': selectedId
 		'user_id': window.user_id
 		'token': window.token
 	data = JSON.stringify(data)

@@ -91,8 +91,6 @@ utilityEdit = function() {
   return void 0;
 };
 
-kitchenRecipesAjaxd = 0;
-
 utilityTrash = function() {
   var utilBtn;
   console.log('popup trash');
@@ -108,6 +106,8 @@ utilityTrash = function() {
   return void 0;
 };
 
+kitchenRecipesAjaxd = 0;
+
 deleteSelectedRecipes = function() {
   var ans, data, selectedId;
   selectedId = findChosenRecipeId();
@@ -121,7 +121,7 @@ deleteSelectedRecipes = function() {
   }
   data = {
     'type': 'recipe',
-    'recipe_id': selectedId,
+    'recipes': selectedId,
     'user_id': window.user_id,
     'token': window.token
   };

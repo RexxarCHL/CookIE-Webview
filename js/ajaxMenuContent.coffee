@@ -33,6 +33,7 @@ loadMenuContent = (scope, menu)->
 
 	# image
 	imgHolder = scope.find ".menuContent_imgHolder"
+	imgHolder.attr 'data-menu-id', menu.listId
 	imgHolder.html "" #remove previous content
 	for recipe in menu.recipes
 		html = '<div class="menuContent_imgWrapper_left">'
@@ -63,3 +64,42 @@ loadMenuContent = (scope, menu)->
 	scope.find("#Loading").hide()
 	scope.find("#Results").show()
 	undefined #avoid implicit rv
+
+kitchenMenuAjaxd = 0
+deleteThisMenu = ->
+	menuId = $('#Collection_MenuContent').find('.menuContent_imgHolder').attr 'data-menu-id'
+	console.log "delete menu ##{menuId} from kitchen"
+
+	ans = confirm "Deleting this menu from Kitchen?"
+	if ans is no then return undefined
+
+	data = 
+		user_id: window.user_id
+		token: window.token
+		type: 'list'
+		list_id: menuId
+	data = JSON.stringify data
+	$.ajax(
+		type: 'DELETE'
+		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+		dataType: 'application/json'
+		data: data
+		timeout: 10000
+		success: (data)->
+			#data = JSON.parse(data)
+			console.log "[SUCCESS] deleting menu ##{menuId}"
+			console.log data
+			
+			scope = $("#main_Kitchen_Menus")
+			scope.find('#Results').html ""
+			scope.find("#infinite").text "Reloading..."
+			kitchenMenuAjaxd = 0
+			getKitchenMenus(kitchenMenuAjaxd)
+			$.ui.loadContent '#main_Kitchen_Menus'
+			undefined # avoid implicit rv
+		error: (resp)->
+			console.log "[ERROR] deleting recipes menu ##{menuId}"
+			console.log resp
+
+			undefined # avoid implicit rv
+	)
