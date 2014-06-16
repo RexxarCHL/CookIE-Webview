@@ -71,14 +71,14 @@
                     $('#headerBtn').attr( "class", "icon settings big" ) ;
                     $('#headerBtn').bind("click",function(){
                         $('.popup_btn').toggle();
-                        resetUtilBtn();
+                        resetUtilBtn(); //utility.coffee
                     });
                     break;
                   case "MenuContent":
                   case "RecipeContent":             
                     $('#headerBtn').attr( "class", "icon add big" ) ;
                     $('#headerBtn').bind("click",function(){
-                        alert("add to Collection");
+                        addThisRecipeToKitchen(); //utility.coffee
                     });
                     break;  
                   case "Collection_MenuContent":

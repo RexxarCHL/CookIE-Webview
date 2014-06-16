@@ -141,7 +141,7 @@ appendRecipeResult = (scope, data)->
 		scope.find("#Recipe"+id)[0].onclick = do (id)->
 			-> # closure 
 				# TODO add inspect/select in kitchen
-				if mode
+				if window.mode
 					$(this).toggleClass 'chosen'
 					return undefined
 

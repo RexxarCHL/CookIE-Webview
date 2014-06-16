@@ -78,50 +78,48 @@ utilityTrash = ->
 	utilBtn.html 'Delete selected recipe.'
 
 	utilBtn.unbind 'click'
-	utilBtn.click ->
-		selectedId = findChosenRecipeId()
-		if selectedId.length is 0 then return undefined
-
-		ans = confirm "Deleteing recipes from Kitchen. Are you sure?"
-		if ans is false then return undefined
-
-		data = 
-			'type': 'recipe'
-			'recipe_id': selectedId
-		console.log data
-		data = JSON.stringify(data)
-		console.log data
-		
-		$.ajax(
-			type: 'DELETE'
-			url: 'http://54.178.135.71:8080/CookIEServer/favorite'
-			dataType: 'application/json'
-			#crossDomain: true
-			#jsonp: false
-			data: data
-			timeout: 10000
-			success: (data)->
-				#data = JSON.parse(data)
-				console.log "[SUCCESS] deleting recipes #"+selectedId
-				console.log data
-				
-				scope = $("#main_Kitchen_Recipes")
-				scope.find("#Results").html ""
-				scope.find("#infinite").text "Reloading..."
-				kitchenRecipesAjaxd = 0
-				getKitchenRecipes(kitchenRecipesAjaxd)
-				undefined # avoid implicit rv
-			error: (data, status)->
-				console.log "[ERROR] deleting recipes #"+selectedId
-				console.log data
-
-				undefined # avoid implicit rv
-		)
-		
-
-		undefined # avoid implicit rv
-
+	utilBtn.click -> deleteSelectedRecipes()
 	undefined
+
+deleteSelectedRecipes = ->
+	selectedId = findChosenRecipeId()
+	if selectedId.length is 0 then return undefined
+	console.log "deleting recipes #{selectedId}"
+
+	ans = confirm "Deleteing recipes from Kitchen. Are you sure?"
+	if ans is false then return undefined
+
+	data = 
+		'type': 'recipe'
+		'recipe_id': selectedId
+		'user_id': window.user_id
+		'token': window.token
+	data = JSON.stringify(data)
+	console.log data
+	
+	$.ajax(
+		type: 'DELETE'
+		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+		dataType: 'application/json'
+		data: data
+		timeout: 10000
+		success: (data)->
+			#data = JSON.parse(data)
+			console.log "[SUCCESS] deleting recipes #"+selectedId
+			console.log data
+			
+			scope = $("#main_Kitchen_Recipes")
+			scope.find("#Results").html ""
+			scope.find("#infinite").text "Reloading..."
+			kitchenRecipesAjaxd = 0
+			getKitchenRecipes(kitchenRecipesAjaxd)
+			undefined # avoid implicit rv
+		error: (data, status)->
+			console.log "[ERROR] deleting recipes #"+selectedId
+			console.log data
+
+			undefined # avoid implicit rv
+	)
 
 findChosenRecipeId = ->
 	recipeSelectedId = []
@@ -129,28 +127,6 @@ findChosenRecipeId = ->
 		recipeSelectedId.push elem.getAttribute 'data-recipe-id'
 	console.log recipeSelectedId
 	return recipeSelectedId
-
-resetSelectedRecipe = ->
-	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
-
-parseTimeToMinutes = (time)->
-	time = time.split ":"
-	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
-
-convertTimeToSeconds = (time)->
-	time = time.split ":"
-	time = parseInt(time[0])*3600 + parseInt(time[1])*60 + parseInt(time[2])
-
-parseSecondsToTime = (seconds)->
-	hour = Math.floor seconds/3600
-	seconds %= 3600
-	hour = if hour<10 then "0"+hour else hour
-	min = Math.floor seconds/60
-	seconds %= 60
-	min = if min<10 then "0"+min else min
-	seconds = if seconds<10 then "0"+seconds else seconds
-
-	"#{hour}:#{min}:#{seconds}"
 
 createNewMenu = (recipeIds, listTitle, isPrivate)->
 	console.log "create new menu for ##{recipeIds} with title=#{listTitle} and privacy=#{isPrivate}"
@@ -188,3 +164,55 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 	)
 
 	undefined
+
+addThisRecipeToKitchen = ->
+	recipeId = $('#RecipeContent').find('#RecipeImg').attr 'data-recipe-id'
+	console.log "add #{recipeId} to kitchen"
+
+	data = 
+		user_id: window.user_id
+		token: window.token
+		type: 'recipe'
+		recipe_id: recipeId
+	data = JSON.stringify data
+
+	$.ajax(
+		type: 'POST'
+		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+		contentType: 'application/json'
+		data: data
+		timeout: 10000
+		success: (data)->
+			console.log "[SUCCESS] add #{recipeId} to kitchen"
+			console.log data
+			undefined # avoid implicit rv
+		error: (data, status)->
+			console.log "[ERROR] add #{recipeId} to kitche"
+			console.log data
+			console.log status
+			undefined # avoid implicit rv
+	)
+
+	undefined # avoid implicit rv
+
+resetSelectedRecipe = ->
+	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
+
+parseTimeToMinutes = (time)->
+	time = time.split ":"
+	time = parseInt(time[0])*60 + parseInt(time[1]) + parseInt(time[2])/60
+
+convertTimeToSeconds = (time)->
+	time = time.split ":"
+	time = parseInt(time[0])*3600 + parseInt(time[1])*60 + parseInt(time[2])
+
+parseSecondsToTime = (seconds)->
+	hour = Math.floor seconds/3600
+	seconds %= 3600
+	hour = if hour<10 then "0"+hour else hour
+	min = Math.floor seconds/60
+	seconds %= 60
+	min = if min<10 then "0"+min else min
+	seconds = if seconds<10 then "0"+seconds else seconds
+
+	"#{hour}:#{min}:#{seconds}"

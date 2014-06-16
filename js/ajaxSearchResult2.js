@@ -148,7 +148,7 @@ appendRecipeResult = function(scope, data) {
     count++;
     scope.find("#Recipe" + id)[0].onclick = (function(id) {
       return function() {
-        if (mode) {
+        if (window.mode) {
           $(this).toggleClass('chosen');
           return void 0;
         }
