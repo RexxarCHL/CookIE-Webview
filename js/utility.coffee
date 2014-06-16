@@ -5,7 +5,7 @@ $(document).ready ->
 		$(elem).click ->
 			utilityDetect(this)
 		return # avoid implicit rv
-
+	resetUtilBtn()
 	return
 
 utilityDetect = (elem)->

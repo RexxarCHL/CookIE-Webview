@@ -9,6 +9,7 @@ $(document).ready(function() {
       return utilityDetect(this);
     });
   });
+  resetUtilBtn();
 });
 
 utilityDetect = function(elem) {

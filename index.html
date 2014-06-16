@@ -66,6 +66,7 @@
                     alert('Databases are not supported in this browser.');
                     return;
                 }
+                console.log("Adding values: "+token+", "+userId);
                 db.transaction(function(transaction) {
                     transaction.executeSql('INSERT INTO CookieUsers(Token, ID) VALUES (?,?)',[token,userId]);
                     alert("insert!");
@@ -130,6 +131,7 @@
                     }); 
                     break;
                   case "main_Kitchen_Recipes":
+                    checkIfLogin();
                     reloadKitchenRecipes();
                     $('#headerBtn').attr( "class", "icon settings big" ) ;
                     $('#headerBtn').bind("click",function(){
@@ -138,6 +140,7 @@
                     });
                     break;
                   case "main_Kitchen_Menus":
+                    checkIfLogin();
                     reloadKitchenMenus();
                     $('#headerBtn').attr( "class", "icon settings big" ) ;
                     $('#headerBtn').bind("click",function(){
@@ -302,7 +305,7 @@
             var signUp = function(){
                 $.ui.popup({
                     title: 'Sign Up for CookIE',
-                    message: '<form><label>Username</label><input id="username" type="text" placeholder="username"><label>密碼</label><input id="password" type="text" placeholder="password"><label>性別</label><select id="gender"><option>男</option><option>女</option></select><label>年齡</label><input id="age" type="text" placeholder="age"><label>身分</label><select id="job"><option>家庭主婦</option><option>學生</option><option>上班族</option><option>待業中</option></select></form>',
+                    message: '<form><label>Username</label><input id="username" type="text" placeholder="username"><label>密碼</label><input id="password" type="password" placeholder="password"><label>性別</label><select id="gender"><option>男</option><option>女</option></select><label>年齡</label><input id="age" type="text" placeholder="age"><label>身分</label><select id="job"><option>家庭主婦</option><option>學生</option><option>上班族</option><option>待業中</option></select></form>',
                     cancelText: "Cancel",
                     cancelCallback: function() {
                         console.log("cancelled");
@@ -317,6 +320,7 @@
             var signUpServer = function(){
                 var username = $('#username').val();
                 var password = $('#password').val();
+                password = calcMD5(password);
                 var gender = $('#gender').val();
                 var age = $('#age').val();  
                 var job = $('#job').val();
@@ -338,7 +342,7 @@
                     timeout: 10000,
                     success: function(response) {
                         userid = $.parseJSON(response);
-                        token = userid['token']
+                        token = userid['token'];
                         id = userid['userId'];
                         AddValueToDB(token,id);
                         console.log(token+id);
@@ -366,6 +370,8 @@
         <script type="text/javascript" charset="utf-8" src="./js/socialsharing-plugin-demo.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/cooking.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/rating.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/user.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/md5.js"></script>
 
         <script>
             /* To allow cross domain access in Phonegap */
@@ -670,7 +676,7 @@
 					
 					<!-- fb login btn !-->
 					<div id="pluginsDemoDiv">
-                        <a class="button" onclick="socialsharingDemo()">Login</a>
+                        <a class="button" onclick="login()">Login</a>
                         <a class="button orange" id="signUpBtn">Sign Up</a>
                     </div>
 
