@@ -10,6 +10,69 @@
 			        document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
 			    }
 			})();
+            if (!window.openDatabase) {
+                alert('Databases are not supported in this browser.');
+                return;
+            }
+            var db;
+            var shortName = 'WebSqlDB';
+            var version = '1.0';
+            var displayName = 'PigSqlDB';
+            var maxSize = 655;
+            // this is called when an error happens in a transaction
+            function errorHandler(transaction, error) {
+               alert('Error: ' + error.message + ' code: ' + error.code);
+            }
+            // this is called when a successful transaction happens
+            function successCallBack() {
+               alert("DEBUGGING: success");
+            }
+            function nullHandler(){};
+            // called when the application loads
+            function onBodyLoad(){
+                //alert("DEBUGGING: we are in the onBodyLoad() function");
+                if (!window.openDatabase) {
+                    alert('Databases are not supported in this browser.');
+                    return;
+                }
+                db = openDatabase(shortName, version, displayName,maxSize);
+                db.transaction(function(tx){
+                tx.executeSql( 'CREATE TABLE IF NOT EXISTS CookieUsers(UserId INTEGER NOT NULL PRIMARY KEY, Token TEXT NOT NULL, ID INTEGER NOT NULL)',[],nullHandler,errorHandler);
+                },errorHandler,successCallBack);
+            }
+            function ListDBValues() {
+                if (!window.openDatabase) {
+                    alert('Databases are not supported in this browser.');
+                    return;
+                }
+                $('#lbUsers').html('');
+                db.transaction(function(transaction) {
+                //alert("pulling transactions");
+                transaction.executeSql('SELECT * FROM CookieUsers;', [],
+                    function(transaction, result) {
+                        if (result != null && result.rows != null) {
+                            for (var i = 0; i < result.rows.length; i++) {
+                                var row = result.rows.item(i);
+                                $('#lbUsers').append('<br>' + row.UserId + '. ' +
+                                row.Token+ ' ' + row.ID);
+                            }
+                        }
+                    },errorHandler);
+                },errorHandler,nullHandler);
+                return;
+            }
+            function AddValueToDB(token, userId) {
+                if (!window.openDatabase) {
+                    alert('Databases are not supported in this browser.');
+                    return;
+                }
+                db.transaction(function(transaction) {
+                    transaction.executeSql('INSERT INTO CookieUsers(Token, ID) VALUES (?,?)',[token,userId]);
+                    alert("insert!");
+                });
+                ListDBValues();
+                return false;
+            }
 		</script>
 
         <title>Cooking Intelligence Emulator</title>
@@ -151,6 +214,10 @@
             }
           //  $.feat.nativeTouchScroll=true;
         </script>        
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script src="js/socialsharing-plugin-demo.js"></script>
+        <!--<script src="cdv-plugin-fb-connect.js"></script>
+        <script src="facebook-js-sdk.js"></script>!-->
         <script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
         <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
         <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>          
@@ -190,6 +257,9 @@
             $.ui.splitview=false;
             $(document).ready(function(){
                 $.ui.launch();
+                $('#signUpBtn').bind('click',function(){
+                    signUp();
+                })
             });
             /* This code is used to run as soon as intel.xdk activates */
             var onDeviceReady = function () {
@@ -199,6 +269,9 @@
                 //hide splash screen
                 //intel.xdk.device.hideSplashScreen();
                 $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+                $('#signUpBtn').bind("click",function(){
+                    signUp();
+                });
             };
             document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
 
@@ -213,6 +286,7 @@
                 $(el).toggle();
 
             }
+            $.ui.useOSThemes=false;
             if($.os.android||$.os.ie||search=="android"){
                 $.ui.ready(function(){
                     $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
@@ -224,7 +298,56 @@
                             $el.addClass("light");
                     });
                 });
-            }          
+            }
+            var signUp = function(){
+                $.ui.popup({
+                    title: 'Sign Up for CookIE',
+                    message: '<form><label>Username</label><input id="username" type="text" placeholder="username"><label>密碼</label><input id="password" type="text" placeholder="password"><label>性別</label><select id="gender"><option>男</option><option>女</option></select><label>年齡</label><input id="age" type="text" placeholder="age"><label>身分</label><select id="job"><option>家庭主婦</option><option>學生</option><option>上班族</option><option>待業中</option></select></form>',
+                    cancelText: "Cancel",
+                    cancelCallback: function() {
+                        console.log("cancelled");
+                    },
+                    doneText: "Done",
+                    doneCallback: function() {
+                        signUpServer();
+                    },
+                    cancelOnly: false
+                });
+             }
+            var signUpServer = function(){
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var gender = $('#gender').val();
+                var age = $('#age').val();  
+                var job = $('#job').val();
+                data = {
+                    'user_name': username,
+                    'password':password,
+                    'gender': gender,
+                    'age': age,
+                    'job': job
+                };
+                data = JSON.stringify(data);
+                
+                //console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://54.178.135.71:8080/CookIEServer/temp_register',
+                    dataType: 'application/json',
+                    data: data,
+                    timeout: 10000,
+                    success: function(response) {
+                        userid = $.parseJSON(response);
+                        token = userid['token']
+                        id = userid['userId'];
+                        AddValueToDB(token,id);
+                        console.log(token+id);
+                    },error: function(data, status) {
+                        console.log("[ERROR] sign up  user" );
+                        console.log(data);
+                    }
+                })
+            }
         </script>
         <!-- 05/20 Rexxar || Javascript inclusion area !-->
         <link rel="stylesheet" type="text/css" href="css/temp.css"  />
@@ -240,6 +363,7 @@
         <script type="text/javascript" charset="utf-8" src="./js/ajaxMenuContent.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/utility.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/ajaxCooking.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/socialsharing-plugin-demo.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/cooking.js"></script>
 
         <script>
@@ -271,14 +395,14 @@
         </script>
 	</head>
 
-    <body>
+    <body onload="onBodyLoad()">
         <div id="afui">
             <!-- SPLASH SCREEN !-->
             <div id="splashscreen" class='ui-loader heavy'>
                 <img src="img/love.jpg">
                 <br><br>
                 <span class='icon loading spin'></span>
-                <h1>Starting app</h1>
+
             </div>
 			<!-- TOP LEFT CONRNER !-->
 			<div id="header">
@@ -537,20 +661,18 @@
 				<!-- USER !-->
 				<div title="User" id="main_User" class="panel" data-load="loadedPanel" data-unload="unloadedPanel" style="background-color:#D8D8D8"> 
 					<!-- achievement wall !-->
-					<p align="center" id="AchievementWall" style="height: 50%">
-						Achievement Wall goes here
-					</p>
+					<div align="center" id="AchievementWall" style="height: 50%">
+                        <a class="button" onClick="ListDBValues()">Refresh</a><br>
+                        <span id="lbUsers">Sign in records</span>               
+                    </div>
 					<div class="divider"> &nbsp;</div>
 					
 					<!-- fb login btn !-->
-					<a href="#FBLogin" class="button block icon cloud">Login to Facebook</a>
+					<div id="pluginsDemoDiv">
+                        <a class="button" onclick="socialsharingDemo()">Login</a>
+                        <a class="button orange" id="signUpBtn">Sign Up</a>
+                    </div>
 
-					<!-- publish/setting/contact_us btns !-->
-					<div class="button-grouped flex">
-						<a href="#Publish" class="button icon pencil">Publish</a>
-						<a href="#Settings" class="button icon settings">Settings</a>
-						<a href="#ContactUs" class="button icon mail">Contact Us</a>
-					</div>
 					<div class="divider"> &nbsp;</div>
 
 					<!-- user info area !-->
