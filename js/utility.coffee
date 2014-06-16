@@ -237,6 +237,39 @@ addThisRecipeToKitchen = ->
 
 	undefined # avoid implicit rv
 
+addThisMenuToKitchen = ->
+	menuId = $('#MenuContent').find('.menuContent_imgHolder').attr 'data-menu-id'
+	console.log "add menu ##{menuId} to kitchen"
+
+	data = 
+		user_id: window.user_id
+		token: window.token
+		type: 'list'
+		list_id: menuId
+	data = JSON.stringify data
+
+	$.ajax(
+		type: 'POST'
+		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+		contentType: 'application/json'
+		data: data
+		timeout: 10000
+		success: (data)->
+			console.log "[SUCCESS] add menu ##{menuId} to kitchen"
+			console.log data
+			alert "Done!"
+			reloadKitchenMenus()
+			undefined # avoid implicit rv
+		error: (resp)->
+			console.log "[ERROR] add menu ##{menuId} to kitchen"
+			console.log resp
+			if resp.status is 404
+				alert "Oops! The menu is already in Kitchen!"
+			undefined # avoid implicit rv
+	)
+
+	undefined # avoid implicit rv
+	
 resetSelectedRecipe = ->
 	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
 

@@ -75,6 +75,11 @@
                     });
                     break;
                   case "MenuContent":
+                    $('#headerBtn').attr( "class", "icon add big" ) ;
+                    $('#headerBtn').bind("click",function(){
+                        addThisMenuToKitchen(); //utility.coffee
+                    });
+                    break;  
                   case "RecipeContent":             
                     $('#headerBtn').attr( "class", "icon add big" ) ;
                     $('#headerBtn').bind("click",function(){
