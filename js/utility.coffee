@@ -1,4 +1,6 @@
 $(document).ready ->
+	loadPopularRecipes()
+	loadPopularMenus()
 	$('body').find('.popup_btn').forEach (elem)->
 		$(elem).click ->
 			utilityDetect(this)
@@ -123,6 +125,7 @@ reloadKitchenRecipes = ->
 	scope.find("#infinite").text "Reloading..."
 	kitchenRecipesAjaxd = 0
 	getKitchenRecipes(kitchenRecipesAjaxd)
+	undefined
 
 kitchenMenuAjaxd = 0
 reloadKitchenMenus = ->
@@ -131,6 +134,25 @@ reloadKitchenMenus = ->
 	scope.find("#infinite").text "Reloading..."
 	kitchenMenuAjaxd = 0
 	getKitchenMenus(kitchenMenuAjaxd)
+	undefined
+
+recipeAjaxd = 0
+loadPopularRecipes = ->
+	scope = $('#main_Popular_Recipes')
+	scope.find('#Results').html ""
+	scope.find("#infinite").text "Reloading..."
+	recipeAjaxd = 0
+	getPopularRecipes(recipeAjaxd)
+	undefined
+
+menuAjaxd = 0
+loadPopularMenus = ->
+	scope = $('#main_Popular_Menus')
+	scope.find('#Results').html ""
+	scope.find("#infinite").text "Reloading..."
+	menuAjaxd = 0
+	getPopularMenus(menuAjaxd)
+	undefined
 
 findChosenRecipeId = ->
 	recipeSelectedId = []
@@ -143,12 +165,12 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 	console.log "create new menu for ##{recipeIds} with title=#{listTitle} and privacy=#{isPrivate}"
 
 	data = 
-		'list_name': listTitle
-		'description': ""
-		'privacy': isPrivate
-		'recipes': recipeIds
-		'user_id': window.user_id
-		'token': window.token
+		list_name: listTitle
+		description: ""
+		privacy: isPrivate
+		recipes: recipeIds
+		user_id: window.user_id
+		token: window.token
 	data = JSON.stringify data
 
 	console.log data
@@ -161,12 +183,39 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 		data: data
 		timeout: 10000
 		success: (data)->
-			#data = JSON.parse(data)
+			data = JSON.parse(data)
 			console.log "[SUCCESS] new list #{listTitle} for recipes #{recipeIds}"
 			console.log data
 			newId = data.new_id
 			alert "Menu #{listTitle} successfully created"
 			resetSelectedRecipe()
+
+			### add this newly created menu to kitchen ###
+			console.log "secretly add this new list to kitchen"
+			data = 
+				user_id: window.user_id
+				token: window.token
+				type: 'list'
+				list_id: newId
+			data = JSON.stringify data
+
+			$.ajax(
+				type: 'POST'
+				url: 'http://54.178.135.71:8080/CookIEServer/favorite'
+				contentType: 'application/json'
+				data: data
+				timeout: 10000
+				success: (data)->
+					console.log "[SUCCESS] add menu ##{newId} to kitchen"
+					console.log data
+					reloadKitchenMenus()
+					undefined # avoid implicit rv
+				error: (resp)->
+					console.log "[ERROR] add menu ##{newId} to kitchen"
+					console.log resp
+					undefined # avoid implicit rv
+			)
+
 			undefined # avoid implicit rv
 		error: (data, status)->
 			console.log "[ERROR] new list #{listTitle} for recipes #{recipeIds}"
@@ -174,33 +223,6 @@ createNewMenu = (recipeIds, listTitle, isPrivate)->
 			undefined # avoid implicit rv
 	)
 
-	### add this newly created menu to kitchen ###
-	data = 
-		user_id: window.user_id
-		token: window.token
-		type: 'list'
-		list_id: newId
-	data = JSON.stringify data
-
-	$.ajax(
-		type: 'POST'
-		url: 'http://54.178.135.71:8080/CookIEServer/favorite'
-		contentType: 'application/json'
-		data: data
-		timeout: 10000
-		success: (data)->
-			console.log "[SUCCESS] add menu ##{menuId} to kitchen"
-			console.log data
-			alert "Done!"
-			reloadKitchenMenus()
-			undefined # avoid implicit rv
-		error: (resp)->
-			console.log "[ERROR] add menu ##{menuId} to kitchen"
-			console.log resp
-			if resp.status is 404
-				alert "Oops! The menu is already in Kitchen!"
-			undefined # avoid implicit rv
-	)
 
 	undefined # avoid implicit rv
 
@@ -269,7 +291,7 @@ addThisMenuToKitchen = ->
 	)
 
 	undefined # avoid implicit rv
-	
+
 resetSelectedRecipe = ->
 	$('#main_Kitchen_Recipes').find('.chosen').removeClass 'chosen'
 
